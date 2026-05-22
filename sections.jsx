@@ -13,6 +13,10 @@ function Hero({ videoOn }) {
       {videoOn && (
         <video
           autoPlay muted loop playsInline preload="auto"
+          webkit-playsinline="true"
+          x5-playsinline="true"
+          x5-video-player-type="h5"
+          x5-video-player-fullscreen="false"
           style={{
             position: 'absolute', inset: 0, width: '100%', height: '100%',
             objectFit: 'cover', opacity: .55,
@@ -251,6 +255,10 @@ function Leak() {
     }}>
       <video
         autoPlay muted loop playsInline preload="auto"
+          webkit-playsinline="true"
+          x5-playsinline="true"
+          x5-video-player-type="h5"
+          x5-video-player-fullscreen="false"
         style={{
           position: 'absolute', inset: 0,
           width: '100%', height: '100%',

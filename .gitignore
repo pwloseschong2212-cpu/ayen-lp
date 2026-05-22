@@ -1,0 +1,29 @@
+# Source materials from Claude Design handoff (not needed for deployment)
+uploads/
+
+# Older versions of about-photo (only about-photo.png is in use)
+assets/about-photo1.jpg
+assets/about-photo2.jpg
+assets/about-photo3.jpg
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+
+# Vercel
+.vercel/
+
+# Misc
+.env
+.env.local

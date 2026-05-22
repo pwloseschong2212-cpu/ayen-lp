@@ -1,0 +1,396 @@
+/* global React, ReactDOM */
+const { useState, useEffect, useRef, useMemo } = React;
+
+// ─────────────────────────────────────────────────────────────────────────
+// Scroll reveal: tag any element with data-reveal, gets .in when in viewport
+// ─────────────────────────────────────────────────────────────────────────
+function useReveal() {
+  useEffect(() => {
+    const els = document.querySelectorAll('[data-reveal]:not(.in)');
+    if (!els.length) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  });
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// Nav
+// ─────────────────────────────────────────────────────────────────────────
+function Nav() {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [t, setT] = useState(new Date());
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 80);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    const id = setInterval(() => setT(new Date()), 1000 * 30);
+    return () => { window.removeEventListener('scroll', onScroll); clearInterval(id); };
+  }, []);
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [open]);
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') setOpen(false); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
+  const time = t.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+  const links = [
+    ['Work',     '#work'],
+    ['Approach', '#approach'],
+    ['About',    '#about'],
+    ['Contact',  '#contact'],
+  ];
+  return (
+    <React.Fragment>
+      <nav className={"nav " + (scrolled ? 'scrolled' : '')}>
+        <div className="nav-brand">
+          <span className="dot"></span>
+          <span>Ayen</span>
+          <span style={{ color: 'var(--fg-faint)', marginLeft: 8, fontSize: 13 }}>
+            / Landing&nbsp;Pages
+          </span>
+        </div>
+        <div className="nav-links">
+          {links.map(([l, h]) => <a key={l} href={h}>{l}</a>)}
+        </div>
+        <div className="nav-meta">
+          <span style={{ color: 'var(--teal)' }}>●</span>
+          <span>Available · 2026</span>
+          <span style={{ opacity: .6 }}>{time} GMT+8</span>
+        </div>
+        <button
+          aria-label="Toggle menu"
+          className={"burger " + (open ? 'open' : '')}
+          onClick={() => setOpen((v) => !v)}>
+          <span></span><span></span>
+        </button>
+      </nav>
+
+      <div className={"mobile-menu " + (open ? 'open' : '')}>
+        <nav>
+          {links.map(([l, h], i) => (
+            <a key={l} href={h} onClick={() => setOpen(false)}>
+              <span>{l}</span>
+              <span className="idx">/ {String(i+1).padStart(2,'0')}</span>
+            </a>
+          ))}
+        </nav>
+        <div className="mm-foot">
+          <span className="pill">Available · 2026</span>
+          <span style={{ opacity: .6 }}>{time} GMT+8 — Singapore</span>
+          <span style={{ opacity: .6 }}>hello@ayen.studio</span>
+        </div>
+      </div>
+    </React.Fragment>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// Progress rail (right side)
+// ─────────────────────────────────────────────────────────────────────────
+function ProgressRail() {
+  const [p, setP] = useState(0);
+  useEffect(() => {
+    const on = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setP(max > 0 ? window.scrollY / max : 0);
+    };
+    window.addEventListener('scroll', on, { passive: true });
+    on();
+    return () => window.removeEventListener('scroll', on);
+  }, []);
+  const sections = [
+    'Hero', 'Problem', 'Leak', 'Diagnosis', 'Belief',
+    'System', 'Work', 'About', 'Contact'
+  ];
+  return (
+    <div className="progress-rail" style={{
+      position: 'fixed', right: 22, top: '50%', transform: 'translateY(-50%)',
+      zIndex: 60, display: 'flex', flexDirection: 'column', gap: 14,
+      pointerEvents: 'none'
+    }}>
+      {sections.map((s, i) => {
+        const seg = i / (sections.length - 1);
+        const active = Math.abs(p - seg) < 1 / (sections.length * 2);
+        return (
+          <div key={s} style={{
+            display: 'flex', alignItems: 'center', gap: 10,
+            justifyContent: 'flex-end',
+            opacity: active ? 1 : .35,
+            transition: 'opacity 300ms'
+          }}>
+            <span className="mono" style={{
+              fontSize: 9.5, letterSpacing: '.18em',
+              textTransform: 'uppercase', color: 'var(--fg-dim)',
+              opacity: active ? 1 : 0,
+              transition: 'opacity 240ms'
+            }}>{String(i+1).padStart(2,'0')} · {s}</span>
+            <span style={{
+              width: active ? 22 : 12, height: 1,
+              background: active ? 'var(--teal)' : 'var(--line)',
+              transition: 'width 240ms, background 240ms',
+              boxShadow: active ? '0 0 8px var(--teal)' : 'none'
+            }}></span>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// Footer
+// ─────────────────────────────────────────────────────────────────────────
+function Footer() {
+  return (
+    <footer style={{
+      borderTop: '1px solid var(--line-soft)',
+      padding: '56px 56px 40px',
+      display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 40,
+      fontSize: 13, color: 'var(--fg-dim)'
+    }}>
+      <div>
+        <div className="nav-brand" style={{ fontSize: 22, marginBottom: 16 }}>
+          <span className="dot"></span>
+          <span>Ayen</span>
+        </div>
+        <p style={{ maxWidth: '34ch', lineHeight: 1.6, margin: 0 }}>
+          A practice for landing pages that translate attention into action.
+        </p>
+      </div>
+      <div>
+        <div className="mono" style={{ fontSize: 10.5, letterSpacing: '.16em', textTransform: 'uppercase', color: 'var(--fg-faint)', marginBottom: 14 }}>Work</div>
+        <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <li>Selected Pages</li>
+          <li>Process</li>
+          <li>Conversion Audit</li>
+        </ul>
+      </div>
+      <div>
+        <div className="mono" style={{ fontSize: 10.5, letterSpacing: '.16em', textTransform: 'uppercase', color: 'var(--fg-faint)', marginBottom: 14 }}>Contact</div>
+        <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <li>hello@ayen.studio</li>
+          <li>@ayen on x</li>
+          <li>Book a call →</li>
+        </ul>
+      </div>
+      <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <div className="mono" style={{ fontSize: 10.5, color: 'var(--fg-faint)' }}>
+          © 2026 / All rights reserved
+        </div>
+        <div className="mono" style={{ fontSize: 10.5, color: 'var(--teal)' }}>
+          v1.4.0 — last deploy 0418
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// OperatorCursor — cinematic teal crosshair + corner brackets
+//   replaces the native pointer on mouse devices
+// ─────────────────────────────────────────────────────────────────────────
+function OperatorCursor() {
+  const dotRef    = useRef(null);
+  const frameRef  = useRef(null);
+  const labelRef  = useRef(null);
+  const [hover, setHover]   = useState(false);
+  const [active, setActive] = useState(false);
+  const [hidden, setHidden] = useState(false);
+
+  // touch-only devices: no cursor (CSS already keeps native pointer untouched there)
+  const isTouch = typeof window !== 'undefined' &&
+    window.matchMedia && !window.matchMedia('(pointer: fine)').matches;
+
+  useEffect(() => {
+    if (isTouch) return;
+
+    let raf = null;
+    const onMove = (e) => {
+      const x = e.clientX, y = e.clientY;
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        if (dotRef.current)   dotRef.current.style.transform   = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+        if (frameRef.current) frameRef.current.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+        if (labelRef.current) labelRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+        raf = null;
+      });
+    };
+    const onOver = (e) => {
+      const t = e.target;
+      if (!t || !t.closest) return;
+      const interactive = t.closest('a, button, [role="button"], .btn, [data-cursor-hover]');
+      setHover(!!interactive);
+    };
+    const onDown  = () => setActive(true);
+    const onUp    = () => setActive(false);
+    const onLeave = () => setHidden(true);
+    const onEnter = () => setHidden(false);
+
+    window.addEventListener('mousemove', onMove, { passive: true });
+    window.addEventListener('mouseover', onOver, { passive: true });
+    window.addEventListener('mousedown', onDown, { passive: true });
+    window.addEventListener('mouseup',   onUp,   { passive: true });
+    document.documentElement.addEventListener('mouseleave', onLeave);
+    document.documentElement.addEventListener('mouseenter', onEnter);
+
+    return () => {
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseover', onOver);
+      window.removeEventListener('mousedown', onDown);
+      window.removeEventListener('mouseup',   onUp);
+      document.documentElement.removeEventListener('mouseleave', onLeave);
+      document.documentElement.removeEventListener('mouseenter', onEnter);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, [isTouch]);
+
+  if (isTouch) return null;
+
+  const frameSize = hover ? 56 : 32;
+  const bracketLen = 7;
+
+  return (
+    <React.Fragment>
+      {/* center dot — exact pixel-perfect cursor position */}
+      <div ref={dotRef} style={{
+        position: 'fixed', left: 0, top: 0,
+        width: active ? 4 : 6, height: active ? 4 : 6,
+        borderRadius: '50%',
+        background: 'var(--teal)',
+        boxShadow: '0 0 8px var(--teal), 0 0 16px rgba(94,234,212,0.6)',
+        pointerEvents: 'none',
+        zIndex: 99999,
+        opacity: hidden ? 0 : 1,
+        transition: 'width 180ms ease, height 180ms ease, opacity 200ms',
+        willChange: 'transform'
+      }} />
+
+      {/* viewfinder frame — crosshair + 4 corner brackets */}
+      <div ref={frameRef} style={{
+        position: 'fixed', left: 0, top: 0,
+        width: frameSize, height: frameSize,
+        pointerEvents: 'none',
+        zIndex: 99998,
+        opacity: hidden ? 0 : (hover ? 1 : 0.55),
+        transition: 'width 260ms cubic-bezier(.2,.7,.1,1), height 260ms cubic-bezier(.2,.7,.1,1), opacity 220ms',
+        willChange: 'transform'
+      }}>
+        {/* crosshair: horizontal + vertical hairlines (skip center for the dot) */}
+        <div style={{
+          position: 'absolute', left: 0, right: 0, top: '50%',
+          height: 1, background: 'var(--teal)',
+          transform: 'translateY(-50%)',
+          opacity: 0.5
+        }} />
+        <div style={{
+          position: 'absolute', top: 0, bottom: 0, left: '50%',
+          width: 1, background: 'var(--teal)',
+          transform: 'translateX(-50%)',
+          opacity: 0.5
+        }} />
+
+        {/* 4 corner brackets */}
+        <div style={{ position: 'absolute', top: 0, left: 0,
+          width: bracketLen, height: bracketLen,
+          borderTop: '1px solid var(--teal)', borderLeft: '1px solid var(--teal)' }} />
+        <div style={{ position: 'absolute', top: 0, right: 0,
+          width: bracketLen, height: bracketLen,
+          borderTop: '1px solid var(--teal)', borderRight: '1px solid var(--teal)' }} />
+        <div style={{ position: 'absolute', bottom: 0, left: 0,
+          width: bracketLen, height: bracketLen,
+          borderBottom: '1px solid var(--teal)', borderLeft: '1px solid var(--teal)' }} />
+        <div style={{ position: 'absolute', bottom: 0, right: 0,
+          width: bracketLen, height: bracketLen,
+          borderBottom: '1px solid var(--teal)', borderRight: '1px solid var(--teal)' }} />
+      </div>
+
+      {/* FOCUS label appears under crosshair when over interactive element */}
+      <div ref={labelRef} style={{
+        position: 'fixed', left: 0, top: 0,
+        marginTop: 44, marginLeft: -32,
+        width: 64, textAlign: 'center',
+        pointerEvents: 'none',
+        zIndex: 99999,
+        opacity: hover && !hidden ? 1 : 0,
+        transition: 'opacity 220ms',
+        fontFamily: 'var(--f-mono)',
+        fontSize: 9.5, color: 'var(--teal)',
+        letterSpacing: '.28em', textTransform: 'uppercase',
+        textShadow: '0 0 6px rgba(94,234,212,0.6)',
+        willChange: 'transform'
+      }}>
+        Focus
+      </div>
+    </React.Fragment>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// App
+// ─────────────────────────────────────────────────────────────────────────
+function App() {
+  const [t, setTweak] = useTweaks(window.TWEAK_DEFAULTS);
+  useReveal();
+
+  // apply tweak side-effects
+  useEffect(() => {
+    document.documentElement.style.setProperty(
+      '--teal',
+      t.accent === 'green' ? 'oklch(0.92 0.20 145)' :
+      t.accent === 'amber' ? 'oklch(0.86 0.16 80)'  :
+      t.accent === 'magenta' ? 'oklch(0.78 0.20 340)' :
+      'oklch(0.86 0.16 180)'
+    );
+    document.querySelector('.grain').style.display = t.grainOn ? 'block' : 'none';
+    document.querySelector('.scanlines').style.display = t.scanlinesOn ? 'block' : 'none';
+  }, [t.accent, t.grainOn, t.scanlinesOn]);
+
+  return (
+    <React.Fragment>
+      <OperatorCursor />
+      <Nav />
+      <ProgressRail />
+
+      <main>
+        <Hero       videoOn={t.videoOn} />
+        <Problem    />
+        <Leak       />
+        <Diagnosis  />
+        <Belief     />
+        <System     />
+        <Work       />
+        <About      />
+        <Contact    />
+      </main>
+
+      <Footer />
+
+      <TweaksPanel title="Tweaks">
+        <TweakSection label="Atmosphere" />
+        <TweakRadio  label="Accent" value={t.accent}
+                     options={['teal','green','amber','magenta']}
+                     onChange={(v) => setTweak('accent', v)} />
+        <TweakToggle label="Hero video"     value={t.videoOn}
+                     onChange={(v) => setTweak('videoOn', v)} />
+        <TweakToggle label="Film grain"     value={t.grainOn}
+                     onChange={(v) => setTweak('grainOn', v)} />
+        <TweakToggle label="Scanlines"      value={t.scanlinesOn}
+                     onChange={(v) => setTweak('scanlinesOn', v)} />
+      </TweaksPanel>
+    </React.Fragment>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);

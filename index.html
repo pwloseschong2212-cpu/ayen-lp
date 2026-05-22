@@ -409,8 +409,13 @@
     .system-row { flex-wrap: wrap !important; gap: 22px 8px !important; }
     .system-row > div { flex: 0 0 calc(33.33% - 8px) !important; min-width: 80px !important; }
 
-    /* hero brackets in tighter from edges */
-    .hero-bracket { width: 22px !important; height: 22px !important; }
+    /* hero brackets in tighter from edges (className is .hero-corner, fix selector + reposition) */
+    .hero-corner { width: 20px !important; height: 20px !important; }
+    .hero-corner.left  { left: 20px !important; }
+    .hero-corner.right { right: 20px !important; }
+
+    /* hide hero eyebrow on mobile (too cramped above the title) */
+    [data-hero-eyebrow] { display: none !important; }
 
     /* footer collapses */
     footer { grid-template-columns: 1fr 1fr !important; gap: 32px !important; padding: 40px 24px !important; }
@@ -424,10 +429,8 @@
     /* hero scroll hint hide on small */
     .hero-scroll-hint { display: none !important; }
 
-    /* hero corner-brackets tighter */
-    .hero-corner { top: 80px !important; bottom: 80px !important; }
-    .hero-corner.left  { left: 24px !important; }
-    .hero-corner.right { right: 24px !important; }
+    /* hero corner-brackets — removed broken combined top+bottom rule (top would always win,
+       piling all 4 brackets at the same y). Mobile left/right handled by .hero-corner block above. */
 
     /* hero buttons stack */
     .hero-cta-row { flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; }

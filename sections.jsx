@@ -45,7 +45,7 @@ function Hero({ videoOn }) {
         position: 'absolute', bottom: '8vh', left: 0, right: 0, zIndex: 4
       }}>
         <div style={{ maxWidth: '78%' }}>
-          <div className="eyebrow" data-reveal style={{ marginBottom: 24 }}>
+          <div className="eyebrow" data-reveal data-hero-eyebrow style={{ marginBottom: 24 }}>
             Ayen — Operator&apos;s Portfolio / 2026
           </div>
           <h1 data-reveal style={{

@@ -279,7 +279,7 @@ function Leak() {
         position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2
       }}>
         {[
-          { l: 'Interested', y: '36%', c: 'var(--teal)'  },
+          { l: 'Interested', y: '42%', c: 'var(--teal)'  },
           { l: 'Confused',   y: '56%', c: 'var(--teal)'  },
           { l: 'Hesitant',   y: '74%', c: 'var(--amber)' },
           { l: 'Gone',       y: '90%', c: 'var(--red)'   }

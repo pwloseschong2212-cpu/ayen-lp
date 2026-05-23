@@ -279,11 +279,10 @@ function Leak() {
         position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2
       }}>
         {[
-          { l: 'Interested', y: '30%', c: 'var(--teal)',  glow: 'var(--teal)'  },
-          { l: 'Confused',   y: '50%', c: 'var(--teal)',  glow: 'var(--teal)'  },
-          { l: 'Hesitant',   y: '70%', c: 'var(--amber)', glow: 'var(--amber)' },
-          // GONE: brighter red + dark outline so it pops on the red funnel bottom
-          { l: 'Gone',       y: '90%', c: 'oklch(0.82 0.22 25)', glow: 'var(--red)', stroke: true }
+          { l: 'Interested', y: '36%', c: 'var(--teal)'  },
+          { l: 'Confused',   y: '56%', c: 'var(--teal)'  },
+          { l: 'Hesitant',   y: '74%', c: 'var(--amber)' },
+          { l: 'Gone',       y: '90%', c: 'var(--red)'   }
         ].map((s) => (
           <div key={s.l} className="mono" style={{
             position: 'absolute',
@@ -293,10 +292,8 @@ function Leak() {
             letterSpacing: '.22em',
             textTransform: 'uppercase',
             color: s.c,
-            textShadow: s.stroke
-              ? `0 0 14px ${s.glow}, 0 1px 0 rgba(0,0,0,0.8), 0 -1px 0 rgba(0,0,0,0.8), 1px 0 0 rgba(0,0,0,0.8), -1px 0 0 rgba(0,0,0,0.8)`
-              : `0 0 12px ${s.glow}`,
-            opacity: s.stroke ? 1 : 0.85,
+            textShadow: `0 0 12px ${s.c}`,
+            opacity: 0.85,
             whiteSpace: 'nowrap'
           }}>{s.l}</div>
         ))}

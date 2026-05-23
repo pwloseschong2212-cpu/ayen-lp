@@ -7,55 +7,59 @@
 const WORK = [
   {
     n: '/01',
-    name: 'HALO',
-    kind: 'B2B SaaS — Productivity OS',
+    name: 'ELEVATE',
+    kind: 'Online Course — Business Transformation',
     year: '2025',
-    tags: ['Messaging', 'Hero', 'Conversion Flow'],
-    headline: 'Quiet software for loud minds.',
-    sub: 'A landing page that opens with a feeling, not a feature list. Trust built before scroll #2.',
+    tags: ['Course Funnel', 'Hero', 'Authority'],
+    headline: 'Build a business that changes your life.',
+    sub: 'A cinematic course page that sells the transformation, not the curriculum. Authority earned in the first frame.',
     metric: '+148%',
     metricLabel: 'qualified signups',
-    palette: { bg: '#0b1011', fg: '#e8f4f1', accent: 'oklch(0.86 0.16 180)' },
-    type: 'editorial'
+    palette: { bg: '#0e0c08', fg: '#f4ecd8', accent: 'oklch(0.85 0.12 80)' },
+    type: 'editorial',
+    image: 'assets/work-elevate.jpg'
   },
   {
     n: '/02',
-    name: 'AXIS · CAPITAL',
-    kind: 'Fintech — Wealth Onboarding',
+    name: 'OBSIDIAN',
+    kind: 'B2B SaaS — Operations Platform',
     year: '2025',
-    tags: ['Trust', 'Funnel', 'Proof'],
-    headline: 'Capital that moves at your pace.',
-    sub: 'Replaced a 6-step form with a story. Each section answered the next objection.',
+    tags: ['Product Demo', 'Funnel', 'Enterprise'],
+    headline: "Run your business. We'll handle the complexity.",
+    sub: 'A dashboard that sells itself. Replaced feature lists with a single screen that did the talking.',
     metric: '−63%',
-    metricLabel: 'time-to-first-deposit',
-    palette: { bg: '#0e1216', fg: '#f4f6f9', accent: 'oklch(0.92 0.20 145)' },
-    type: 'corporate'
+    metricLabel: 'time-to-demo-booked',
+    palette: { bg: '#0a0b14', fg: '#eef0ff', accent: 'oklch(0.72 0.18 280)' },
+    type: 'corporate',
+    image: 'assets/work-obsidian.jpg'
   },
   {
     n: '/03',
-    name: 'NIGHTCALL',
-    kind: 'AI Studio — Generative Audio',
+    name: 'NORTH STUDIO',
+    kind: 'Creator — Lead Magnet Funnel',
     year: '2026',
-    tags: ['Brand', 'Immersive', 'Launch'],
-    headline: 'Sound, summoned.',
-    sub: 'A poster of a page. Brand mood as the first conversion lever.',
+    tags: ['Opt-in', 'Editorial', 'Trust'],
+    headline: 'Content people actually care about.',
+    sub: 'A free guide page that felt earned, not pushed. Email signup that read like an invitation.',
     metric: '4.2×',
-    metricLabel: 'demo conversion lift',
-    palette: { bg: '#0a0d12', fg: '#f1ecf8', accent: 'oklch(0.78 0.20 340)' },
-    type: 'cinematic'
+    metricLabel: 'opt-in conversion lift',
+    palette: { bg: '#f5f1ea', fg: '#1a1814', accent: 'oklch(0.40 0.05 60)' },
+    type: 'cinematic',
+    image: 'assets/work-northstudio.jpg'
   },
   {
     n: '/04',
-    name: 'SOLO KIT',
-    kind: 'Creator Product — Launch Toolkit',
+    name: 'ASCEND VISION',
+    kind: 'High-Ticket Coaching — Application Funnel',
     year: '2024',
-    tags: ['Copy', 'Offer', 'Pricing'],
-    headline: 'Ship your launch on a Sunday.',
-    sub: 'Re-wrote the offer, then the page wrote itself. Friction got cut, not the value.',
+    tags: ['Positioning', 'Qualifier', 'Premium'],
+    headline: "Clients don't come from luck. They come from positioning.",
+    sub: 'An application funnel that filtered tire-kickers and made premium pricing feel obvious.',
     metric: '+39%',
-    metricLabel: 'checkout completion',
-    palette: { bg: '#10100c', fg: '#f5f1e8', accent: 'oklch(0.86 0.16 80)' },
-    type: 'product'
+    metricLabel: 'application-to-call rate',
+    palette: { bg: '#0a0d1a', fg: '#eef0f8', accent: 'oklch(0.70 0.18 265)' },
+    type: 'product',
+    image: 'assets/work-ascendvision.jpg'
   }
 ];
 
@@ -223,7 +227,7 @@ function Work() {
 // ─────────────────────────────────────────────────────────────────────────
 // Stylized mockups — render as little fake landing-page frames
 // ─────────────────────────────────────────────────────────────────────────
-function CaseMockup({ type, palette, name, headline }) {
+function CaseMockup({ type, palette, name, headline, image }) {
   const wrapRef = React.useRef(null);
   const innerRef = React.useRef(null);
   const [hover, setHover] = React.useState(false);
@@ -354,10 +358,25 @@ function CaseMockup({ type, palette, name, headline }) {
           position: 'absolute', top: 32, left: 0, right: 0, bottom: 0,
           transform: 'translateZ(6px)'
         }}>
-          {type === 'editorial'  && <MockEditorial palette={palette} name={name} headline={headline} />}
-          {type === 'corporate'  && <MockCorporate palette={palette} name={name} headline={headline} />}
-          {type === 'cinematic'  && <MockCinematic palette={palette} name={name} headline={headline} />}
-          {type === 'product'    && <MockProduct palette={palette} name={name} headline={headline} />}
+          {image ? (
+            <img
+              src={image}
+              alt={`${name} — ${headline}`}
+              loading="lazy"
+              style={{
+                width: '100%', height: '100%',
+                objectFit: 'cover', objectPosition: 'top center',
+                display: 'block'
+              }}
+            />
+          ) : (
+            <>
+              {type === 'editorial'  && <MockEditorial palette={palette} name={name} headline={headline} />}
+              {type === 'corporate'  && <MockCorporate palette={palette} name={name} headline={headline} />}
+              {type === 'cinematic'  && <MockCinematic palette={palette} name={name} headline={headline} />}
+              {type === 'product'    && <MockProduct palette={palette} name={name} headline={headline} />}
+            </>
+          )}
         </div>
 
         {/* sheen overlay (no view-live label) — closest layer */}
@@ -632,23 +651,47 @@ function LayoutSticky() {
   const [active, setActive] = React.useState(0);
   const copyRefs = React.useRef([]);
 
-  React.useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      let best = null, bestRatio = 0;
-      entries.forEach(e => {
-        if (e.isIntersecting && e.intersectionRatio > bestRatio) {
-          bestRatio = e.intersectionRatio;
-          best = e.target;
-        }
-      });
-      if (best) {
-        const idx = copyRefs.current.indexOf(best);
-        if (idx >= 0) setActive(idx);
-      }
-    }, { threshold: [0.2, 0.4, 0.6, 0.8], rootMargin: '-35% 0px -35% 0px' });
+  const activeRef = React.useRef(0);
+  React.useEffect(() => { activeRef.current = active; }, [active]);
 
-    copyRefs.current.forEach(el => el && observer.observe(el));
-    return () => observer.disconnect();
+  React.useEffect(() => {
+    let raf = null;
+    const update = () => {
+      raf = null;
+      const vh = window.innerHeight;
+      const advanceLine = vh * 0.5;   // next block center reaches center → swap forward
+      const retreatLine = vh * 0.9;   // current block center reaches near-bottom → swap back
+      let idx = activeRef.current;
+
+      // forward: advance while next block has reached center
+      while (idx < copyRefs.current.length - 1) {
+        const next = copyRefs.current[idx + 1];
+        if (!next) break;
+        const r = next.getBoundingClientRect();
+        if (r.top + r.height / 2 <= advanceLine) idx++;
+        else break;
+      }
+      // backward: retreat while current block has scrolled near bottom
+      while (idx > 0) {
+        const cur = copyRefs.current[idx];
+        if (!cur) break;
+        const r = cur.getBoundingClientRect();
+        if (r.top + r.height / 2 > retreatLine) idx--;
+        else break;
+      }
+      if (idx !== activeRef.current) setActive(idx);
+    };
+    const onScroll = () => {
+      if (raf == null) raf = requestAnimationFrame(update);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (raf != null) cancelAnimationFrame(raf);
+    };
   }, []);
 
   const w = WORK[active];
@@ -693,6 +736,7 @@ function LayoutSticky() {
             key={w.name}
             type={w.type} palette={w.palette}
             name={w.name} headline={w.headline}
+            image={w.image}
           />
         </div>
 
@@ -737,6 +781,7 @@ function LayoutSticky() {
                 <CaseMockup
                   type={c.type} palette={c.palette}
                   name={c.name} headline={c.headline}
+                  image={c.image}
                 />
               </div>
 

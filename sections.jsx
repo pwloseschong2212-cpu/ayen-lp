@@ -51,7 +51,7 @@ function Hero({ videoOn }) {
           <h1 data-reveal style={{
             margin: '0 0 28px', maxWidth: '20ch',
             fontFamily: 'var(--f-display)', fontWeight: 400,
-            fontSize: 'clamp(34px, 4.4vw, 68px)',
+            fontSize: 'clamp(38px, 4.4vw, 68px)',
             lineHeight: 1, letterSpacing: '-0.035em'
           }}>
             Attention<br/>
@@ -135,7 +135,7 @@ function Problem() {
   return (
     <section className="pad-y-xl" style={{ position: 'relative' }}>
       <div className="container">
-        <div className="eyebrow" data-reveal style={{ marginBottom: 60 }}>
+        <div className="eyebrow" data-reveal style={{ marginBottom: 'clamp(32px, 5vw, 60px)' }}>
           02 — The Problem
         </div>
 
@@ -306,7 +306,7 @@ function Diagnosis() {
           alignItems: 'end', marginBottom: 80
         }}>
           <div>
-            <div className="eyebrow" data-reveal style={{ marginBottom: 60 }}>04 — Diagnosis</div>
+            <div className="eyebrow" data-reveal style={{ marginBottom: 'clamp(32px, 5vw, 60px)' }}>04 — Diagnosis</div>
             <h2 className="display-lg" data-reveal style={{ margin: 0 }}>
               The same five symptoms,<br/>
               over <span className="serif" style={{ color: 'var(--teal)' }}>And over.</span>
@@ -403,7 +403,7 @@ function DiagCard({ n, t, d, tx }) {
       }}>{t}</div>
       <p style={{
         margin: '6px 0 0', color: 'var(--fg-dim)',
-        fontSize: 14, lineHeight: 1.55, maxWidth: '36ch'
+        fontSize: 'clamp(14px, 1.05vw, 16px)', lineHeight: 1.55, maxWidth: '36ch'
       }}>{d}</p>
       <div style={{ flex: 1 }} />
       <div className="mono" style={{
@@ -436,7 +436,7 @@ function Belief() {
       }}></div>
 
       <div className="container" style={{ position: 'relative' }}>
-        <div className="eyebrow" data-reveal style={{ marginBottom: 60 }}>05 — Core Belief</div>
+        <div className="eyebrow" data-reveal style={{ marginBottom: 'clamp(32px, 5vw, 60px)' }}>05 — Core Belief</div>
 
         {/* setup — single statement, dim */}
         <div data-reveal style={{
@@ -465,7 +465,7 @@ function Belief() {
           '--rd': '240ms',
           margin: 0,
           fontFamily: 'var(--f-display)', fontWeight: 400,
-          fontSize: 'clamp(44px, 10.5vw, 156px)',
+          fontSize: 'clamp(56px, 10.5vw, 156px)',
           lineHeight: 1, letterSpacing: '-0.05em'
         }}>
           <span className="shimmer">Sales Conversation.</span>
@@ -585,7 +585,7 @@ function System() {
 
       <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         {/* eyebrow — centered */}
-        <div style={{ textAlign: 'center', marginBottom: 60 }}>
+        <div style={{ textAlign: 'center', marginBottom: 'clamp(32px, 5vw, 60px)' }}>
           <div className="eyebrow" data-reveal>
             06 — What I Actually Do
           </div>
@@ -671,7 +671,7 @@ function System() {
                   borderBottom: '1px solid var(--line-soft)',
                   padding: '14px 0'
                 }}>
-                  <span style={{ fontSize: 16, flexShrink: 0 }}>{k}</span>
+                  <span style={{ fontSize: 'clamp(15px, 1.2vw, 17px)', flexShrink: 0 }}>{k}</span>
                   <span className="mono" style={{
                     fontSize: 12, color: 'var(--fg-dim)',
                     textAlign: 'right',
@@ -816,7 +816,7 @@ function About() {
   return (
     <section className="pad-y-xl" id="about">
       <div className="container">
-        <div className="eyebrow" data-reveal style={{ marginBottom: 60 }}>08 — About</div>
+        <div className="eyebrow" data-reveal style={{ marginBottom: 'clamp(32px, 5vw, 60px)' }}>08 — About</div>
 
         <div className="rgrid" style={{
           display: 'grid',
@@ -931,9 +931,8 @@ function About() {
 // ─────────────────────────────────────────────────────────────────────────
 function Contact() {
   return (
-    <section id="contact" style={{
+    <section id="contact" className="pad-y-xl" style={{
       position: 'relative', minHeight: '100vh',
-      padding: 'clamp(180px, 24vw, 280px) 0 120px',
       display: 'flex', flexDirection: 'column', justifyContent: 'center',
       overflow: 'hidden'
     }}>
@@ -965,12 +964,15 @@ function Contact() {
 
       <div className="container" style={{ position: 'relative', textAlign: 'center' }}>
         <div className="eyebrow" data-reveal style={{
-          marginBottom: 60, justifyContent: 'center', display: 'inline-flex'
+          marginBottom: 'clamp(32px, 5vw, 60px)', justifyContent: 'center', display: 'inline-flex'
         }}>09 — From here, action</div>
 
-        <h2 className="display-xxl" data-reveal style={{
+        <h2 data-reveal style={{
           margin: '0 auto', maxWidth: '18ch',
-          textAlign: 'center'
+          textAlign: 'center',
+          fontFamily: 'var(--f-display)', fontWeight: 400,
+          fontSize: 'clamp(60px, 8.8vw, 148px)',
+          lineHeight: 0.92, letterSpacing: '-0.045em'
         }}>
           Clarity changes <br/>how people <span className="serif" style={{ color: 'var(--teal)' }}>Respond.</span>
         </h2>
@@ -979,7 +981,7 @@ function Contact() {
           <ul style={{
             listStyle: 'none', padding: 0, margin: 0,
             display: 'flex', justifyContent: 'center', gap: 40, flexWrap: 'wrap',
-            fontSize: 'clamp(18px, 1.4vw, 22px)', color: 'var(--fg-dim)'
+            fontSize: 'clamp(26px, 2vw, 32px)', color: 'var(--fg-dim)'
           }}>
             <li>Clear <span className="serif" style={{ color: 'var(--teal)' }}>Message.</span></li>
             <li>Clear <span className="serif" style={{ color: 'var(--teal)' }}>Trust.</span></li>

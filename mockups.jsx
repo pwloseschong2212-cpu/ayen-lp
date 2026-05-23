@@ -169,7 +169,7 @@ function Work() {
             <div key={word} data-reveal style={{
               '--rd': `${120 + i * 120}ms`,
               fontFamily: 'var(--f-display)', fontWeight: 400,
-              fontSize: 'clamp(40px, 9.5vw, 132px)',
+              fontSize: 'clamp(48px, 9.5vw, 132px)',
               lineHeight: 1, letterSpacing: '-0.05em',
               color: 'var(--fg)'
             }}>

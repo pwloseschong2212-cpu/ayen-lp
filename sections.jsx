@@ -273,6 +273,31 @@ function Leak() {
         position: 'absolute', inset: 0, pointerEvents: 'none',
         background: 'linear-gradient(180deg, var(--bg) 0%, transparent 14%, transparent 86%, var(--bg) 100%)'
       }}></div>
+
+      {/* funnel stage labels — track the video's color decay (teal → amber → red) */}
+      <div style={{
+        position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2
+      }}>
+        {[
+          { l: 'Interested', y: '22%', c: 'var(--teal)'  },
+          { l: 'Confused',   y: '44%', c: 'var(--teal)'  },
+          { l: 'Hesitant',   y: '60%', c: 'var(--amber)' },
+          { l: 'Gone',       y: '76%', c: 'var(--red)'   }
+        ].map((s) => (
+          <div key={s.l} className="mono" style={{
+            position: 'absolute',
+            top: s.y, left: '50%',
+            transform: 'translate(-50%, -50%)',
+            fontSize: 'clamp(11px, 1.3vw, 16px)',
+            letterSpacing: '.22em',
+            textTransform: 'uppercase',
+            color: s.c,
+            textShadow: `0 0 12px ${s.c}`,
+            opacity: 0.85,
+            whiteSpace: 'nowrap'
+          }}>{s.l}</div>
+        ))}
+      </div>
     </section>
   );
 }

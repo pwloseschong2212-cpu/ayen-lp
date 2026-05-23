@@ -1054,10 +1054,10 @@ function Contact() {
           marginTop: 80,
           display: 'flex', justifyContent: 'center', gap: 14, flexWrap: 'wrap', alignItems: 'center'
         }}>
-          <a className="btn btn-primary" href="mailto:ayenchongdesign.studio@gmail.com">
+          <a className="btn btn-primary" href="https://m.me/ayenchong.design" target="_blank" rel="noopener noreferrer">
             Let&apos;s Build Yours <span className="arrow"></span>
           </a>
-          <a className="btn btn-ghost" href="#">Book a 30-min call</a>
+          <a className="btn btn-ghost" href="#work">View Work</a>
         </div>
 
         <div data-reveal style={{

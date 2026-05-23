@@ -1053,7 +1053,7 @@ function Contact() {
           marginTop: 80,
           display: 'flex', justifyContent: 'center', gap: 14, flexWrap: 'wrap', alignItems: 'center'
         }}>
-          <a className="btn btn-primary" href="mailto:hello@ayen.studio">
+          <a className="btn btn-primary" href="mailto:ayenchongdesign.studio@gmail.com">
             Let&apos;s Build Yours <span className="arrow"></span>
           </a>
           <a className="btn btn-ghost" href="#">Book a 30-min call</a>

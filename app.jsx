@@ -191,42 +191,100 @@ function Footer() {
   return (
     <footer style={{
       borderTop: '1px solid var(--line-soft)',
-      padding: '56px 56px 40px',
-      display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 40,
-      fontSize: 13, color: 'var(--fg-dim)'
+      padding: '36px 56px 28px',
+      color: 'var(--fg-dim)'
     }}>
-      <div>
-        <div className="nav-brand" style={{ fontSize: 22, marginBottom: 16 }}>
+      <style>{`
+        .footer-social-wrap {
+          display: inline-flex; flex-direction: column;
+          align-items: center; gap: 6px;
+          text-decoration: none;
+        }
+        .footer-social-label {
+          font-family: var(--f-mono);
+          font-size: 9.5px;
+          letter-spacing: .18em;
+          text-transform: uppercase;
+          color: var(--fg-faint);
+          transition: color 240ms ease;
+        }
+        .footer-social-wrap:hover .footer-social-label { color: var(--teal); }
+        .footer-social {
+          position: relative;
+          width: 38px; height: 38px;
+          display: inline-flex; align-items: center; justify-content: center;
+          color: var(--fg-faint);
+          clip-path: polygon(9px 0, calc(100% - 9px) 0, 100% 9px, 100% calc(100% - 9px), calc(100% - 9px) 100%, 9px 100%, 0 calc(100% - 9px), 0 9px);
+          background:
+            linear-gradient(135deg, rgba(94,234,212,0.03), rgba(94,234,212,0)) padding-box,
+            linear-gradient(135deg, rgba(94,234,212,0.28), rgba(94,234,212,0.05)) border-box;
+          border: 1px solid transparent;
+          transition: color 240ms ease, background 240ms ease, transform 240ms ease, box-shadow 240ms ease;
+        }
+        .footer-social svg { width: 16px; height: 16px; display: block; }
+        .footer-social:hover {
+          color: var(--teal);
+          transform: translateY(-1px);
+          background:
+            linear-gradient(135deg, rgba(94,234,212,0.10), rgba(94,234,212,0.02)) padding-box,
+            linear-gradient(135deg, var(--teal), rgba(94,234,212,0.25)) border-box;
+          box-shadow: 0 0 16px -4px rgba(94,234,212,0.4);
+        }
+      `}</style>
+
+      {/* top row: brand + social */}
+      <div style={{
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        gap: 24, flexWrap: 'wrap', marginBottom: 28
+      }}>
+        <div className="nav-brand" style={{ fontSize: 18 }}>
           <span className="dot"></span>
           <span>Ayen</span>
         </div>
-        <p style={{ maxWidth: '34ch', lineHeight: 1.6, margin: 0 }}>
-          A practice for landing pages that translate attention into action.
-        </p>
-      </div>
-      <div>
-        <div className="mono" style={{ fontSize: 11, letterSpacing: '.18em', textTransform: 'uppercase', color: 'var(--fg-faint)', marginBottom: 14 }}>Work</div>
-        <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
-          <li>Selected Pages</li>
-          <li>Process</li>
-          <li>Conversion Audit</li>
-        </ul>
-      </div>
-      <div>
-        <div className="mono" style={{ fontSize: 11, letterSpacing: '.18em', textTransform: 'uppercase', color: 'var(--fg-faint)', marginBottom: 14 }}>Contact</div>
-        <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
-          <li>hello@ayen.studio</li>
-          <li>@ayen on x</li>
-          <li>Book a call →</li>
-        </ul>
-      </div>
-      <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-        <div className="mono" style={{ fontSize: 11, color: 'var(--fg-faint)' }}>
-          © 2026 / All rights reserved
+
+        <div style={{ display: 'flex', gap: 18, alignItems: 'flex-start' }}>
+          <a className="footer-social-wrap" href="mailto:ayenchongdesign.studio@gmail.com" aria-label="Email">
+            <span className="footer-social">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="square">
+                <rect x="3" y="5" width="18" height="14"/>
+                <polyline points="3 7 12 13 21 7"/>
+              </svg>
+            </span>
+            <span className="footer-social-label">Gmail</span>
+          </a>
+          <a className="footer-social-wrap" href="https://www.instagram.com/ayenchong.exe/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <span className="footer-social">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="square">
+                <rect x="3" y="3" width="18" height="18" rx="0"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="0.9" fill="currentColor" stroke="none"/>
+              </svg>
+            </span>
+            <span className="footer-social-label">Instagram</span>
+          </a>
+          <a className="footer-social-wrap" href="https://www.facebook.com/ayenchong.design/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <span className="footer-social">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="square">
+                <path d="M15 4h-3a3 3 0 0 0-3 3v3H6v4h3v6h4v-6h3l1-4h-4V7a1 1 0 0 1 1-1h3V4z"/>
+              </svg>
+            </span>
+            <span className="footer-social-label">Facebook</span>
+          </a>
         </div>
-        <div className="mono" style={{ fontSize: 11, color: 'var(--teal)' }}>
-          v1.4.0 — last deploy 0418
-        </div>
+      </div>
+
+      {/* hairline divider */}
+      <div style={{ height: 1, background: 'var(--line-soft)', marginBottom: 18 }}></div>
+
+      {/* bottom row: copyright + tagline */}
+      <div className="mono" style={{
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        gap: 24, flexWrap: 'wrap',
+        fontSize: 11, letterSpacing: '.14em', textTransform: 'uppercase',
+        color: 'var(--fg-faint)'
+      }}>
+        <div>© 2026 Ayen Chong · All rights reserved</div>
+        <div>Attention → Action</div>
       </div>
     </footer>
   );

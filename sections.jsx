@@ -253,15 +253,18 @@ function Problem() {
 // ─────────────────────────────────────────────────────────────────────────
 function Leak() {
   const sectionRef = useRef(null);
-  const [loadVideo, setLoadVideo] = useState(false);
+  const videoRef = useRef(null);
 
-  // lazy-load funnel video only when section is about to enter viewport
+  // lazy-load funnel video by toggling preload + src, not by inserting DOM (prevents reflow jump)
   useEffect(() => {
-    if (!sectionRef.current) return;
+    if (!sectionRef.current || !videoRef.current) return;
     const obs = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
-        if (e.isIntersecting) {
-          setLoadVideo(true);
+        if (e.isIntersecting && videoRef.current && !videoRef.current.src) {
+          videoRef.current.src = 'assets/funnel.mp4';
+          videoRef.current.load();
+          const p = videoRef.current.play();
+          if (p && typeof p.catch === 'function') p.catch(() => {});
           obs.disconnect();
         }
       });
@@ -276,22 +279,20 @@ function Leak() {
       width: '100%', overflow: 'hidden',
       background: 'var(--bg)'
     }}>
-      {loadVideo && (
-        <video
-          autoPlay muted loop playsInline preload="auto"
-          webkit-playsinline="true"
-          x5-playsinline="true"
-          x5-video-player-type="h5"
-          x5-video-player-fullscreen="false"
-          style={{
-            position: 'absolute', inset: 0,
-            width: '100%', height: '100%',
-            objectFit: 'cover',
-            objectPosition: 'center'
-          }}>
-          <source src="assets/funnel.mp4" type="video/mp4" />
-        </video>
-      )}
+      <video
+        ref={videoRef}
+        autoPlay muted loop playsInline preload="none"
+        webkit-playsinline="true"
+        x5-playsinline="true"
+        x5-video-player-type="h5"
+        x5-video-player-fullscreen="false"
+        style={{
+          position: 'absolute', inset: 0,
+          width: '100%', height: '100%',
+          objectFit: 'cover',
+          objectPosition: 'center'
+        }}>
+      </video>
 
       {/* top + bottom fade for smooth transition into/out of neighbouring sections */}
       <div style={{

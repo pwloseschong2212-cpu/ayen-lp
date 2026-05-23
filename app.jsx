@@ -344,6 +344,42 @@ function App() {
   const [t, setTweak] = useTweaks(window.TWEAK_DEFAULTS);
   useReveal();
 
+  // WeChat (X5 webview) blocks <video autoplay> even when muted.
+  // Force play on first touch / click, and listen for WeChat's
+  // WeixinJSBridgeReady event which fires when the in-app browser is ready.
+  useEffect(() => {
+    const playAll = () => {
+      document.querySelectorAll('video').forEach((v) => {
+        const p = v.play();
+        if (p && typeof p.catch === 'function') p.catch(() => {});
+      });
+    };
+
+    // try immediately (works in normal browsers)
+    playAll();
+
+    // WeChat-specific bridge ready event
+    const onBridgeReady = () => playAll();
+    if (typeof window.WeixinJSBridge !== 'undefined') {
+      playAll();
+    } else {
+      document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+    }
+
+    // any user interaction unlocks autoplay on most mobile browsers
+    const onceOpts = { once: true, passive: true };
+    document.addEventListener('touchstart', playAll, onceOpts);
+    document.addEventListener('touchend',   playAll, onceOpts);
+    document.addEventListener('click',      playAll, onceOpts);
+
+    return () => {
+      document.removeEventListener('WeixinJSBridgeReady', onBridgeReady);
+      document.removeEventListener('touchstart', playAll);
+      document.removeEventListener('touchend',   playAll);
+      document.removeEventListener('click',      playAll);
+    };
+  }, []);
+
   // apply tweak side-effects
   useEffect(() => {
     document.documentElement.style.setProperty(

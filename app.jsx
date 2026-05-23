@@ -28,8 +28,17 @@ function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [t, setT] = useState(new Date());
+  const progressRef = useRef(null);
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 80);
+      // update the scroll progress bar
+      if (progressRef.current) {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+        progressRef.current.style.transform = `scaleX(${pct / 100})`;
+      }
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
     const id = setInterval(() => setT(new Date()), 1000 * 30);
@@ -75,6 +84,24 @@ function Nav() {
           onClick={() => setOpen((v) => !v)}>
           <span></span><span></span>
         </button>
+
+        {/* scroll-progress bar pinned to the nav bottom edge */}
+        <div style={{
+          position: 'absolute',
+          left: 0, right: 0, bottom: 0,
+          height: 2,
+          background: 'rgba(94,234,212,0.12)',
+          pointerEvents: 'none'
+        }}>
+          <div ref={progressRef} style={{
+            height: '100%',
+            background: 'linear-gradient(to right, var(--teal), rgba(94,234,212,0.8))',
+            boxShadow: '0 0 8px var(--teal)',
+            transformOrigin: 'left center',
+            transform: 'scaleX(0)',
+            transition: 'transform 80ms linear'
+          }}></div>
+        </div>
       </nav>
 
       <div className={"mobile-menu " + (open ? 'open' : '')}>

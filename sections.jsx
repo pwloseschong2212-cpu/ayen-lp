@@ -5,7 +5,7 @@
 function Hero({ videoOn }) {
   return (
     <section style={{
-      position: 'relative', height: '100dvh', minHeight: 680,
+      position: 'relative', height: '100svh', minHeight: 680,
       width: '100%', overflow: 'hidden',
       background: 'var(--bg-2)'
     }}>
@@ -272,7 +272,7 @@ function Leak() {
 
   return (
     <section ref={sectionRef} data-funnel-section style={{
-      position: 'relative', height: '100dvh', minHeight: 600,
+      position: 'relative', height: '100svh', minHeight: 600,
       width: '100%', overflow: 'hidden',
       background: 'var(--bg)'
     }}>
@@ -473,7 +473,7 @@ function DiagCard({ n, t, d, tx }) {
 function Belief() {
   return (
     <section className="pad-y-xl" style={{
-      minHeight: '100dvh',
+      minHeight: '100svh',
       display: 'flex', flexDirection: 'column', justifyContent: 'center',
       position: 'relative',
       background: 'linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 50%, var(--bg) 100%)'
@@ -982,7 +982,7 @@ function About() {
 function Contact() {
   return (
     <section id="contact" className="pad-y-xl" style={{
-      position: 'relative', minHeight: '100dvh',
+      position: 'relative', minHeight: '100svh',
       display: 'flex', flexDirection: 'column', justifyContent: 'center',
       overflow: 'hidden'
     }}>

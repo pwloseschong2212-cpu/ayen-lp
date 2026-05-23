@@ -12,7 +12,8 @@ function Hero({ videoOn }) {
       {/* video bg */}
       {videoOn && (
         <video
-          autoPlay muted loop playsInline preload="auto"
+          autoPlay muted loop playsInline preload="metadata"
+          poster="assets/hero-poster.jpg"
           webkit-playsinline="true"
           x5-playsinline="true"
           x5-video-player-type="h5"
@@ -247,26 +248,46 @@ function Problem() {
 // SECTION 3 — THE LEAK   (fullscreen funnel video, zero text)
 // ─────────────────────────────────────────────────────────────────────────
 function Leak() {
+  const sectionRef = useRef(null);
+  const [loadVideo, setLoadVideo] = useState(false);
+
+  // lazy-load funnel video only when section is about to enter viewport
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          setLoadVideo(true);
+          obs.disconnect();
+        }
+      });
+    }, { rootMargin: '400px 0px' });
+    obs.observe(sectionRef.current);
+    return () => obs.disconnect();
+  }, []);
+
   return (
-    <section data-funnel-section style={{
+    <section ref={sectionRef} data-funnel-section style={{
       position: 'relative', height: '100vh', minHeight: 600,
       width: '100%', overflow: 'hidden',
       background: 'var(--bg)'
     }}>
-      <video
-        autoPlay muted loop playsInline preload="auto"
+      {loadVideo && (
+        <video
+          autoPlay muted loop playsInline preload="auto"
           webkit-playsinline="true"
           x5-playsinline="true"
           x5-video-player-type="h5"
           x5-video-player-fullscreen="false"
-        style={{
-          position: 'absolute', inset: 0,
-          width: '100%', height: '100%',
-          objectFit: 'cover',
-          objectPosition: 'center'
-        }}>
-        <source src="assets/funnel.mp4" type="video/mp4" />
-      </video>
+          style={{
+            position: 'absolute', inset: 0,
+            width: '100%', height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center'
+          }}>
+          <source src="assets/funnel.mp4" type="video/mp4" />
+        </video>
+      )}
 
       {/* top + bottom fade for smooth transition into/out of neighbouring sections */}
       <div style={{
@@ -279,12 +300,12 @@ function Leak() {
         position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2
       }}>
         {[
-          { l: 'Interested', y: '42%', c: 'var(--teal)'  },
-          { l: 'Confused',   y: '56%', c: 'var(--teal)'  },
-          { l: 'Hesitant',   y: '74%', c: 'var(--amber)' },
-          { l: 'Gone',       y: '90%', c: 'var(--red)'   }
+          { l: 'Interested', y: '39%',   c: 'var(--teal)'  },
+          { l: 'Confused',   y: '59%',   c: 'var(--teal)'  },
+          { l: 'Hesitant',   y: '75.5%', c: 'var(--amber)' },
+          { l: 'Gone',       y: '87.5%', c: 'var(--red)'   }
         ].map((s) => (
-          <div key={s.l} className="mono" style={{
+          <div key={s.l} className="mono" data-funnel-label={s.l} style={{
             position: 'absolute',
             top: s.y, left: '50%',
             transform: 'translate(-50%, -50%)',

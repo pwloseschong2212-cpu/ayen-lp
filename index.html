@@ -39,6 +39,7 @@
 
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; background: var(--bg); color: var(--fg); }
+  html { scroll-padding-top: 80px; }
   body {
     font-family: var(--f-display);
     font-weight: 400;
@@ -48,6 +49,16 @@
     cursor: default;
   }
   ::selection { background: var(--teal); color: var(--bg); }
+
+  /* respect users who prefer reduced motion (vestibular disorders, motion sensitivity) */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 
   /* hide native cursor on mouse devices — OperatorCursor (custom crosshair) takes over */
   @media (pointer: fine) {
@@ -442,11 +453,33 @@
 
     /* ── Section 7 sticky pin: hide desktop sticky (mockup + marker), let each case render its own inline mockup ── */
     [data-sticky-mockup] { display: none !important; }
-    [data-sticky-copy]   { min-height: auto !important; padding-block: 40px !important; opacity: 1 !important; }
+    [data-sticky-copy]   {
+      min-height: auto !important;
+      padding-block: 0 !important;
+      justify-content: flex-start !important;
+      opacity: 1 !important;
+    }
     [data-sticky-mobile-mockup] { display: block !important; margin-bottom: 24px !important; }
 
-    /* ── Section 8 about: second portrait fixed aspect ratio (flex:1 stretches weird on mobile) ── */
-    [data-about-photo] { flex: 0 0 auto !important; aspect-ratio: 16 / 10 !important; min-height: 0 !important; }
+    /* mobile chapter card — big /XX marker, hidden on desktop, visible on mobile */
+    [data-sticky-mobile-marker] { display: block !important; }
+    /* small inline marker — desktop only, hidden on mobile */
+    [data-sticky-small-marker]  { display: none !important; }
+
+    /* gradient hairline separator between cases (only between, not before first) */
+    [data-sticky-copy]:not(:first-child)::before {
+      content: '';
+      display: block;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--teal), transparent);
+      opacity: 0.45;
+      width: 60%;
+      max-width: 240px;
+      margin: clamp(80px, 14vw, 120px) auto clamp(56px, 10vw, 96px);
+    }
+
+    /* ── Section 8 about: second portrait — match image's natural ratio (~2.08:1) so 5 chibi all visible ── */
+    [data-about-photo] { flex: 0 0 auto !important; aspect-ratio: 21 / 10 !important; min-height: 0 !important; }
 
     /* ── Section 2 punchline: force precise wrap point between "alone" and "does not pay." on mobile ── */
     [data-punchline-line] { white-space: normal !important; }
@@ -454,6 +487,12 @@
 
     /* ── Section 3 funnel section: shrink ~10% on mobile so cover crops less of the funnel ── */
     [data-funnel-section] { height: 90vh !important; min-height: 540px !important; }
+
+    /* ── Section 3 funnel labels: mobile-specific positions (desktop uses inline top) ── */
+    [data-funnel-label="Interested"] { top: 40% !important; }
+    [data-funnel-label="Confused"]   { top: 57.5% !important; }
+    [data-funnel-label="Hesitant"]   { top: 71.5% !important; }
+    [data-funnel-label="Gone"]       { top: 85.5% !important; }
 
     /* ── Section 4 Diagnosis pull-quote: inline + smaller on mobile (absolute float looks weird in single column) ── */
     [data-pullquote-mark] {

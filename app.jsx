@@ -233,6 +233,51 @@ function Footer() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────
+// BackToTop — floating button bottom-right, appears after 1 viewport scroll
+// ─────────────────────────────────────────────────────────────────────────
+function BackToTop() {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    let raf = null;
+    const update = () => {
+      raf = null;
+      setShow(window.scrollY > window.innerHeight);
+    };
+    const onScroll = () => { if (raf == null) raf = requestAnimationFrame(update); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    update();
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (raf != null) cancelAnimationFrame(raf);
+    };
+  }, []);
+  return (
+    <button
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      aria-label="Back to top"
+      style={{
+        position: 'fixed',
+        bottom: 24, right: 24,
+        zIndex: 90,
+        width: 48, height: 48,
+        borderRadius: '50%',
+        background: 'rgba(13,18,22,0.7)',
+        backdropFilter: 'blur(14px)',
+        WebkitBackdropFilter: 'blur(14px)',
+        border: '1px solid var(--teal)',
+        color: 'var(--teal)',
+        fontFamily: 'var(--f-mono)',
+        fontSize: 16, lineHeight: 1,
+        opacity: show ? 1 : 0,
+        pointerEvents: show ? 'auto' : 'none',
+        transform: show ? 'translateY(0)' : 'translateY(8px)',
+        transition: 'opacity 280ms ease, transform 320ms cubic-bezier(.2,.7,.1,1)',
+        boxShadow: '0 0 24px -4px rgba(94,234,212,0.5), inset 0 0 0 1px rgba(94,234,212,0.15)'
+      }}>↑</button>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────
 // OperatorCursor — cinematic teal crosshair + corner brackets
 //   replaces the native pointer on mouse devices
 // ─────────────────────────────────────────────────────────────────────────
@@ -431,6 +476,7 @@ function App() {
   return (
     <React.Fragment>
       <OperatorCursor />
+      <BackToTop />
       <Nav />
       <ProgressRail />
 

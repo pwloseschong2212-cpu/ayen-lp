@@ -236,12 +236,30 @@ function Work() {
 // ─────────────────────────────────────────────────────────────────────────
 function CaseMockup({ type, palette, name, headline }) {
   const wrapRef = React.useRef(null);
+  const innerRef = React.useRef(null);
   const [hover, setHover] = React.useState(false);
-  const [tilt, setTilt] = React.useState({ x: 0, y: 0 });
-  const [parallaxY, setParallaxY] = React.useState(0);
-  const [scrollBlur, setScrollBlur] = React.useState(0);
 
-  // SCROLL PARALLAX + MOTION BLUR
+  // shared transform state (refs, not React state — avoids re-render storm during scroll)
+  const tiltRef     = React.useRef({ x: 0, y: 0 });
+  const parallaxRef = React.useRef(0);
+  const blurRef     = React.useRef(0);
+  const rafRef      = React.useRef(null);
+
+  // apply current transform/filter directly to DOM (no React re-render)
+  const applyTransform = React.useCallback(() => {
+    rafRef.current = null;
+    const el = innerRef.current;
+    if (!el) return;
+    const { x, y } = tiltRef.current;
+    el.style.transform = `rotateX(${x}deg) rotateY(${y}deg) translateY(${parallaxRef.current}px)`;
+    el.style.filter = blurRef.current > 0.05 ? `blur(${blurRef.current.toFixed(2)}px)` : 'none';
+  }, []);
+
+  const schedule = React.useCallback(() => {
+    if (rafRef.current == null) rafRef.current = requestAnimationFrame(applyTransform);
+  }, [applyTransform]);
+
+  // SCROLL PARALLAX + MOTION BLUR (now ref-based, no React re-render)
   React.useEffect(() => {
     let lastY = window.scrollY, lastT = Date.now();
     let blurTimer = null;
@@ -249,42 +267,47 @@ function CaseMockup({ type, palette, name, headline }) {
       if (!wrapRef.current) return;
       const r = wrapRef.current.getBoundingClientRect();
       const vh = window.innerHeight;
-      // progress: -1 entering top, 0 centered, +1 exiting bottom
       const center = r.top + r.height / 2;
       const progress = (center - vh / 2) / (vh / 2 + r.height / 2);
-      // mockup drifts UP as you scroll DOWN past it (parallax)
-      setParallaxY(Math.max(-60, Math.min(60, progress * -30)));
+      parallaxRef.current = Math.max(-60, Math.min(60, progress * -30));
 
-      // motion blur from scroll velocity
       const now = Date.now();
       const dy = Math.abs(window.scrollY - lastY);
       const dt = now - lastT;
       lastY = window.scrollY; lastT = now;
       if (dt > 0) {
         const v = dy / dt;
-        setScrollBlur(Math.min(v * 0.45, 3));
+        blurRef.current = Math.min(v * 0.45, 3);
       }
       clearTimeout(blurTimer);
-      blurTimer = setTimeout(() => setScrollBlur(0), 120);
+      blurTimer = setTimeout(() => { blurRef.current = 0; schedule(); }, 120);
+
+      schedule();
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
     return () => {
       window.removeEventListener('scroll', onScroll);
       clearTimeout(blurTimer);
+      if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
     };
-  }, []);
+  }, [schedule]);
 
-  // MOUSE TILT
+  // MOUSE TILT — also ref-based + rAF-scheduled
   const onMove = (e) => {
     if (!wrapRef.current) return;
     const r = wrapRef.current.getBoundingClientRect();
     const dx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
     const dy = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
-    setTilt({ x: dy * -3.2, y: dx * 3.2 });
+    tiltRef.current = { x: dy * -3.2, y: dx * 3.2 };
+    schedule();
   };
   const onEnter = () => setHover(true);
-  const onLeave = () => { setHover(false); setTilt({ x: 0, y: 0 }); };
+  const onLeave = () => {
+    setHover(false);
+    tiltRef.current = { x: 0, y: 0 };
+    schedule();
+  };
 
   return (
     <div
@@ -297,7 +320,7 @@ function CaseMockup({ type, palette, name, headline }) {
         width: '100%',
         cursor: 'default'
       }}>
-      <div style={{
+      <div ref={innerRef} style={{
         position: 'relative',
         aspectRatio: '16 / 10',
         width: '100%',
@@ -309,9 +332,7 @@ function CaseMockup({ type, palette, name, headline }) {
         boxShadow: hover
           ? '0 70px 160px -40px rgba(0,0,0,0.85), 0 0 0 1px rgba(94,234,212,0.18), 0 0 120px -30px rgba(94,234,212,0.32), 0 30px 60px -20px rgba(0,0,0,0.5)'
           : '0 40px 100px -30px rgba(0,0,0,0.75), 0 0 0 1px rgba(255,255,255,0.04), 0 20px 50px -20px rgba(0,0,0,0.4)',
-        transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) translateY(${parallaxY}px)`,
-        filter: scrollBlur > 0.05 ? `blur(${scrollBlur.toFixed(2)}px)` : 'none',
-        transition: 'box-shadow 320ms ease, filter 140ms ease',
+        transition: 'box-shadow 320ms ease',
         transformStyle: 'preserve-3d',
         willChange: 'transform, filter'
       }}>
@@ -350,37 +371,15 @@ function CaseMockup({ type, palette, name, headline }) {
           {type === 'product'    && <MockProduct palette={palette} name={name} headline={headline} />}
         </div>
 
-        {/* sheen + hover overlay — closest layer (translateZ highest) */}
+        {/* sheen overlay (no view-live label) — closest layer */}
         <div style={{
           position: 'absolute', inset: 0, pointerEvents: 'none',
           background: hover
             ? 'linear-gradient(135deg, rgba(94,234,212,0.08), transparent 50%)'
             : 'linear-gradient(135deg, rgba(255,255,255,0.04), transparent 30%)',
           transition: 'background 320ms ease',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
           transform: 'translateZ(40px)'
-        }}>
-          <div style={{
-            opacity: hover ? 1 : 0,
-            transform: hover ? 'translateY(0) scale(1)' : 'translateY(8px) scale(0.96)',
-            transition: 'opacity 280ms ease, transform 360ms cubic-bezier(.2,.7,.1,1)',
-            padding: '14px 26px',
-            borderRadius: 999,
-            background: 'rgba(10,14,18,0.7)',
-            backdropFilter: 'blur(14px)',
-            WebkitBackdropFilter: 'blur(14px)',
-            border: '1px solid var(--teal)',
-            color: 'var(--teal)',
-            fontFamily: 'var(--f-mono)',
-            fontSize: 11,
-            letterSpacing: '.24em',
-            textTransform: 'uppercase',
-            boxShadow: '0 0 36px -2px rgba(94,234,212,0.55), 0 0 0 1px rgba(94,234,212,0.3) inset',
-            display: 'flex', alignItems: 'center', gap: 12
-          }}>
-            View Live <span style={{ fontSize: 12 }}>→</span>
-          </div>
-        </div>
+        }}></div>
       </div>
     </div>
   );
@@ -722,6 +721,28 @@ function LayoutSticky() {
                 opacity: active === i ? 1 : 0.35,
                 transition: 'opacity 400ms ease'
               }}>
+              {/* mobile chapter card — big /XX marker, hidden on desktop */}
+              <div data-sticky-mobile-marker style={{ display: 'none', marginBottom: 28 }}>
+                <div style={{
+                  fontFamily: 'var(--f-mono)',
+                  fontSize: 'clamp(56px, 16vw, 88px)',
+                  color: 'var(--teal)',
+                  lineHeight: 1,
+                  letterSpacing: '.02em',
+                  textShadow: '0 0 24px rgba(94,234,212,0.22)',
+                  marginBottom: 14
+                }}>{c.n}</div>
+                <div className="mono" style={{
+                  fontSize: 11, color: 'var(--fg-dim)',
+                  letterSpacing: '.22em', textTransform: 'uppercase',
+                  marginBottom: 4
+                }}>{c.kind}</div>
+                <div className="mono" style={{
+                  fontSize: 10, color: 'var(--fg-faint)',
+                  letterSpacing: '.18em'
+                }}>{c.year} · {String(i+1).padStart(2,'0')} / {String(WORK.length).padStart(2,'0')}</div>
+              </div>
+
               {/* inline mockup for mobile (hidden on desktop) */}
               <div data-sticky-mobile-mockup style={{ display: 'none', marginBottom: 24 }}>
                 <CaseMockup
@@ -730,7 +751,8 @@ function LayoutSticky() {
                 />
               </div>
 
-              <div className="mono" style={{
+              {/* desktop small marker — hidden on mobile (chapter card replaces) */}
+              <div className="mono" data-sticky-small-marker style={{
                 fontSize: 11, color: 'var(--teal)',
                 letterSpacing: '.22em', marginBottom: 18
               }}>{c.n} · {String(i+1).padStart(2,'0')} / {String(WORK.length).padStart(2,'0')}</div>
@@ -744,23 +766,8 @@ function LayoutSticky() {
                 lineHeight: 1.55, color: 'var(--fg-dim)',
                 margin: '0 0 30px', maxWidth: '38ch'
               }}>{c.sub}</p>
-              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 32 }}>
+              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                 {c.tags.map(t => <span key={t} className="chip">{t}</span>)}
-              </div>
-              <div style={{
-                display: 'flex', alignItems: 'baseline', gap: 16,
-                paddingTop: 22, borderTop: '1px solid var(--line-soft)',
-                flexWrap: 'wrap'
-              }}>
-                <div style={{
-                  fontFamily: 'var(--f-display)', fontWeight: 400,
-                  fontSize: 'clamp(32px, 3.4vw, 52px)',
-                  color: 'var(--teal)', lineHeight: 1
-                }}>{c.metric}</div>
-                <div className="mono" style={{
-                  fontSize: 11, color: 'var(--fg-dim)',
-                  letterSpacing: '.18em', textTransform: 'uppercase'
-                }}>{c.metricLabel}</div>
               </div>
             </div>
           ))}

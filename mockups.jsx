@@ -719,7 +719,7 @@ function LayoutSticky() {
               ref={el => copyRefs.current[i] = el}
               data-sticky-copy
               style={{
-                minHeight: '80svh',
+                minHeight: 'calc(var(--app-vh, 1svh) * 80)',
                 display: 'flex', flexDirection: 'column',
                 justifyContent: 'center',
                 paddingBlock: 40,

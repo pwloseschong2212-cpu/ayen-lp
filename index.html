@@ -572,6 +572,23 @@
 
   <div id="root"></div>
 
+  <!-- lock viewport height on load (fixes IG/FB in-app browser jumps) -->
+  <script>
+    (function() {
+      var locked = false;
+      function lockVh() {
+        if (locked) return;
+        document.documentElement.style.setProperty('--app-vh', (window.innerHeight * 0.01) + 'px');
+        locked = true;
+      }
+      lockVh();
+      window.addEventListener('orientationchange', function() {
+        locked = false;
+        setTimeout(lockVh, 120);
+      });
+    })();
+  </script>
+
   <!-- defaults persisted between sessions -->
   <script>
     window.TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{

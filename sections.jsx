@@ -135,7 +135,7 @@ function Problem() {
   return (
     <section className="pad-y-xl" style={{ position: 'relative' }}>
       <div className="container">
-        <div className="eyebrow" data-reveal style={{ marginBottom: 64 }}>
+        <div className="eyebrow" data-reveal style={{ marginBottom: 60 }}>
           02 — The Problem
         </div>
 
@@ -306,7 +306,7 @@ function Diagnosis() {
           alignItems: 'end', marginBottom: 80
         }}>
           <div>
-            <div className="eyebrow" data-reveal style={{ marginBottom: 28 }}>04 — Diagnosis</div>
+            <div className="eyebrow" data-reveal style={{ marginBottom: 60 }}>04 — Diagnosis</div>
             <h2 className="display-lg" data-reveal style={{ margin: 0 }}>
               The same five symptoms,<br/>
               over <span className="serif" style={{ color: 'var(--teal)' }}>And over.</span>
@@ -437,7 +437,7 @@ function Belief() {
       }}></div>
 
       <div className="container" style={{ position: 'relative' }}>
-        <div className="eyebrow" data-reveal style={{ marginBottom: 64 }}>05 — Core Belief</div>
+        <div className="eyebrow" data-reveal style={{ marginBottom: 60 }}>05 — Core Belief</div>
 
         {/* setup — single statement, dim */}
         <div data-reveal style={{
@@ -586,7 +586,7 @@ function System() {
 
       <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         {/* eyebrow — centered */}
-        <div style={{ textAlign: 'center', marginBottom: 36 }}>
+        <div style={{ textAlign: 'center', marginBottom: 60 }}>
           <div className="eyebrow" data-reveal>
             06 — What I Actually Do
           </div>
@@ -966,7 +966,7 @@ function Contact() {
 
       <div className="container" style={{ position: 'relative', textAlign: 'center' }}>
         <div className="eyebrow" data-reveal style={{
-          marginBottom: 56, justifyContent: 'center', display: 'inline-flex'
+          marginBottom: 60, justifyContent: 'center', display: 'inline-flex'
         }}>09 — From here, action</div>
 
         <h2 className="display-xxl" data-reveal style={{

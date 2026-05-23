@@ -166,7 +166,7 @@ function ProgressRail() {
             transition: 'opacity 300ms'
           }}>
             <span className="mono" style={{
-              fontSize: 9.5, letterSpacing: '.18em',
+              fontSize: 10, letterSpacing: '.18em',
               textTransform: 'uppercase', color: 'var(--fg-dim)',
               opacity: active ? 1 : 0,
               transition: 'opacity 240ms'
@@ -205,7 +205,7 @@ function Footer() {
         </p>
       </div>
       <div>
-        <div className="mono" style={{ fontSize: 10.5, letterSpacing: '.16em', textTransform: 'uppercase', color: 'var(--fg-faint)', marginBottom: 14 }}>Work</div>
+        <div className="mono" style={{ fontSize: 11, letterSpacing: '.18em', textTransform: 'uppercase', color: 'var(--fg-faint)', marginBottom: 14 }}>Work</div>
         <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
           <li>Selected Pages</li>
           <li>Process</li>
@@ -213,7 +213,7 @@ function Footer() {
         </ul>
       </div>
       <div>
-        <div className="mono" style={{ fontSize: 10.5, letterSpacing: '.16em', textTransform: 'uppercase', color: 'var(--fg-faint)', marginBottom: 14 }}>Contact</div>
+        <div className="mono" style={{ fontSize: 11, letterSpacing: '.18em', textTransform: 'uppercase', color: 'var(--fg-faint)', marginBottom: 14 }}>Contact</div>
         <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
           <li>hello@ayen.studio</li>
           <li>@ayen on x</li>
@@ -221,10 +221,10 @@ function Footer() {
         </ul>
       </div>
       <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-        <div className="mono" style={{ fontSize: 10.5, color: 'var(--fg-faint)' }}>
+        <div className="mono" style={{ fontSize: 11, color: 'var(--fg-faint)' }}>
           © 2026 / All rights reserved
         </div>
-        <div className="mono" style={{ fontSize: 10.5, color: 'var(--teal)' }}>
+        <div className="mono" style={{ fontSize: 11, color: 'var(--teal)' }}>
           v1.4.0 — last deploy 0418
         </div>
       </div>

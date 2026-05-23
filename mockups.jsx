@@ -81,9 +81,8 @@ function Work() {
   ];
 
   return (
-    <section id="work" style={{
+    <section id="work" className="pad-y-xl" style={{
       position: 'relative',
-      paddingBlock: 'clamp(140px, 18vw, 220px)',
       borderTop: '1px solid var(--line-soft)',
       overflow: 'clip'
     }}>
@@ -152,7 +151,7 @@ function Work() {
           </div>
           <div className="mono" data-reveal style={{
             '--rd': '80ms',
-            fontSize: 10.5, letterSpacing: '.22em',
+            fontSize: 11, letterSpacing: '.22em',
             textTransform: 'uppercase',
             display: 'flex', alignItems: 'center', gap: 14,
             color: 'var(--teal)'
@@ -171,7 +170,7 @@ function Work() {
               '--rd': `${120 + i * 120}ms`,
               fontFamily: 'var(--f-display)', fontWeight: 400,
               fontSize: 'clamp(40px, 9.5vw, 132px)',
-              lineHeight: 0.98, letterSpacing: '-0.05em',
+              lineHeight: 1, letterSpacing: '-0.05em',
               color: 'var(--fg)'
             }}>
               {word}<span className="serif" style={{ color: 'var(--teal)' }}>.</span>
@@ -212,7 +211,7 @@ function Work() {
           display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14
         }}>
           <span className="mono" style={{
-            fontSize: 10.5, letterSpacing: '.28em',
+            fontSize: 11, letterSpacing: '.22em',
             color: 'var(--fg-faint)', textTransform: 'uppercase'
           }}>↓ enter gallery</span>
           <div style={{
@@ -693,7 +692,7 @@ function LayoutSticky() {
             }}>{w.n}</span>
             <div>
               <div className="mono" style={{
-                fontSize: 10.5, color: 'var(--fg-dim)',
+                fontSize: 11, color: 'var(--fg-dim)',
                 letterSpacing: '.22em', textTransform: 'uppercase'
               }}>{w.kind}</div>
               <div className="mono" style={{
@@ -759,8 +758,8 @@ function LayoutSticky() {
                   color: 'var(--teal)', lineHeight: 1
                 }}>{c.metric}</div>
                 <div className="mono" style={{
-                  fontSize: 10.5, color: 'var(--fg-dim)',
-                  letterSpacing: '.16em', textTransform: 'uppercase'
+                  fontSize: 11, color: 'var(--fg-dim)',
+                  letterSpacing: '.18em', textTransform: 'uppercase'
                 }}>{c.metricLabel}</div>
               </div>
             </div>

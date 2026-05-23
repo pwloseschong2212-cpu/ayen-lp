@@ -52,7 +52,7 @@ function Hero({ videoOn }) {
             margin: '0 0 28px', maxWidth: '20ch',
             fontFamily: 'var(--f-display)', fontWeight: 400,
             fontSize: 'clamp(34px, 4.4vw, 68px)',
-            lineHeight: 1.02, letterSpacing: '-0.035em'
+            lineHeight: 1, letterSpacing: '-0.035em'
           }}>
             Attention<br/>
             <span className="serif" style={{ color: 'var(--teal)' }}>Means nothing</span><br/>
@@ -71,7 +71,7 @@ function Hero({ videoOn }) {
             </a>
           </div>
           <div className="mono" data-reveal style={{
-            '--rd': '340ms', marginTop: 28, fontSize: 11, letterSpacing: '.16em',
+            '--rd': '340ms', marginTop: 28, fontSize: 11, letterSpacing: '.18em',
             color: 'var(--fg-faint)', textTransform: 'uppercase',
             display: 'flex', alignItems: 'center', gap: 10
           }}>
@@ -88,7 +88,7 @@ function Hero({ videoOn }) {
         display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10,
         color: 'var(--fg-faint)'
       }}>
-        <span style={{ fontSize: 9.5, letterSpacing: '.24em' }}>SCROLL</span>
+        <span style={{ fontSize: 10, letterSpacing: '.22em' }}>SCROLL</span>
         <div style={{
           width: 1, height: 40,
           background: 'linear-gradient(to bottom, var(--teal), transparent)',
@@ -151,7 +151,7 @@ function Problem() {
               margin: 0, maxWidth: '18ch',
               fontFamily: 'var(--f-display)', fontWeight: 400,
               fontSize: 'clamp(36px, 5.4vw, 84px)',
-              lineHeight: 0.96, letterSpacing: '-0.04em'
+              lineHeight: 1, letterSpacing: '-0.04em'
             }}>
               You may already have <span className="serif" style={{ color: 'var(--teal)' }}>Attention.</span>
             </h2>
@@ -176,7 +176,7 @@ function Problem() {
               '--rd': '340ms',
               marginTop: 28,
               fontSize: 'clamp(17px, 1.4vw, 22px)',
-              lineHeight: 1.45, color: 'var(--fg-faint)',
+              lineHeight: 1.4, color: 'var(--fg-faint)',
               maxWidth: '32ch',
               fontStyle: 'italic'
             }}>
@@ -403,11 +403,11 @@ function DiagCard({ n, t, d, tx }) {
       }}>{t}</div>
       <p style={{
         margin: '6px 0 0', color: 'var(--fg-dim)',
-        fontSize: 14.5, lineHeight: 1.55, maxWidth: '36ch'
+        fontSize: 14, lineHeight: 1.55, maxWidth: '36ch'
       }}>{d}</p>
       <div style={{ flex: 1 }} />
       <div className="mono" style={{
-        fontSize: 10.5, letterSpacing: '.14em',
+        fontSize: 11, letterSpacing: '.14em',
         color: hover ? 'var(--teal)' : 'var(--fg-faint)',
         borderTop: '1px solid var(--line-soft)',
         paddingTop: 14,
@@ -422,10 +422,9 @@ function DiagCard({ n, t, d, tx }) {
 // ─────────────────────────────────────────────────────────────────────────
 function Belief() {
   return (
-    <section style={{
+    <section className="pad-y-xl" style={{
       minHeight: '100vh',
       display: 'flex', flexDirection: 'column', justifyContent: 'center',
-      padding: 'clamp(160px, 20vw, 240px) 0',
       position: 'relative',
       background: 'linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 50%, var(--bg) 100%)'
     }}>
@@ -444,7 +443,7 @@ function Belief() {
           '--rd': '80ms',
           fontFamily: 'var(--f-display)', fontWeight: 400,
           fontSize: 'clamp(22px, 2.4vw, 40px)',
-          lineHeight: 1.2, letterSpacing: '-0.025em',
+          lineHeight: 1.15, letterSpacing: '-0.025em',
           color: 'var(--fg-dim)',
           maxWidth: '40ch',
           marginBottom: 36
@@ -467,7 +466,7 @@ function Belief() {
           margin: 0,
           fontFamily: 'var(--f-display)', fontWeight: 400,
           fontSize: 'clamp(44px, 10.5vw, 156px)',
-          lineHeight: 0.96, letterSpacing: '-0.05em'
+          lineHeight: 1, letterSpacing: '-0.05em'
         }}>
           <span className="shimmer">Sales Conversation.</span>
         </h2>
@@ -483,7 +482,7 @@ function Belief() {
           {/* LEFT — 4 questions */}
           <div data-reveal style={{ '--rd': '120ms' }}>
             <div className="mono" style={{
-              fontSize: 10.5, letterSpacing: '.2em',
+              fontSize: 11, letterSpacing: '.18em',
               textTransform: 'uppercase', color: 'var(--teal)',
               marginBottom: 28
             }}>// the four questions a page must answer</div>
@@ -500,7 +499,7 @@ function Belief() {
                 }}>
                   <span className="mono" style={{
                     fontSize: 11, color: 'var(--teal)',
-                    fontStyle: 'normal', letterSpacing: '.16em',
+                    fontStyle: 'normal', letterSpacing: '.18em',
                     minWidth: 26
                   }}>{String(i+1).padStart(2, '0')}</span>
                   &ldquo;{q}&rdquo;
@@ -528,7 +527,7 @@ function Belief() {
             <div style={{
               fontFamily: 'var(--f-display)', fontWeight: 400,
               fontSize: 'clamp(28px, 3.2vw, 52px)',
-              lineHeight: 1.1, letterSpacing: '-0.03em',
+              lineHeight: 1.15, letterSpacing: '-0.03em',
               color: 'var(--fg)',
               maxWidth: '18ch',
               position: 'relative'
@@ -599,7 +598,7 @@ function System() {
           textAlign: 'center',
           fontFamily: 'var(--f-display)', fontWeight: 400,
           fontSize: 'clamp(36px, 5.4vw, 88px)',
-          lineHeight: 0.95, letterSpacing: '-0.04em'
+          lineHeight: 1, letterSpacing: '-0.04em'
         }}>
           I design <span className="serif" style={{ color: 'var(--teal)' }}>The path</span> from
           <br/>Attention to Action
@@ -650,7 +649,7 @@ function System() {
             display: 'flex', flexDirection: 'column'
           }}>
             <div className="mono" style={{
-              fontSize: 10.5, letterSpacing: '.18em', textTransform: 'uppercase',
+              fontSize: 11, letterSpacing: '.18em', textTransform: 'uppercase',
               color: 'var(--fg-faint)', marginBottom: 18
             }}>// the stack</div>
             <ul style={{
@@ -691,7 +690,7 @@ function System() {
           margin: 'clamp(80px, 10vw, 120px) auto 0',
           maxWidth: '58ch',
           fontSize: 'clamp(22px, 2.2vw, 34px)',
-          lineHeight: 1.35, letterSpacing: '-0.02em',
+          lineHeight: 1.4, letterSpacing: '-0.02em',
           color: 'var(--fg)',
           textAlign: 'center'
         }}>
@@ -739,7 +738,7 @@ function SystemNode({ l, d, k, i, total }) {
         textAlign: 'center'
       }}>{l}</div>
       <div className="mono" style={{
-        fontSize: 9.5, color: 'var(--fg-faint)',
+        fontSize: 10, color: 'var(--fg-faint)',
         letterSpacing: '.1em', textAlign: 'center',
         maxWidth: 90, lineHeight: 1.4
       }}>{d}</div>
@@ -765,7 +764,7 @@ function SystemRow({ l, d, k, i, total }) {
       <span className="mono" style={{
         fontSize: 11,
         color: isCore ? 'var(--teal)' : 'var(--fg-faint)',
-        letterSpacing: '.2em',
+        letterSpacing: '.18em',
         textAlign: 'right'
       }}>{String(i+1).padStart(2, '0')}</span>
 
@@ -788,7 +787,7 @@ function SystemRow({ l, d, k, i, total }) {
       <div>
         <div style={{
           fontSize: isCore ? 'clamp(24px, 2.4vw, 34px)' : 'clamp(17px, 1.4vw, 21px)',
-          letterSpacing: '-0.02em', lineHeight: 1.1,
+          letterSpacing: '-0.02em', lineHeight: 1.15,
           color: 'var(--fg)', marginBottom: 4,
           display: 'flex', alignItems: 'baseline', gap: 14, flexWrap: 'wrap'
         }}>
@@ -796,14 +795,14 @@ function SystemRow({ l, d, k, i, total }) {
           {isCore && (
             <span className="mono" style={{
               fontSize: 10, color: 'var(--teal)',
-              letterSpacing: '.2em', textTransform: 'uppercase'
+              letterSpacing: '.18em', textTransform: 'uppercase'
             }}>// core</span>
           )}
         </div>
         <div className="mono" style={{
           fontSize: 11,
           color: isCore ? 'var(--fg-dim)' : 'var(--fg-faint)',
-          letterSpacing: '.06em'
+          letterSpacing: '.14em'
         }}>{d}</div>
       </div>
     </div>
@@ -865,7 +864,7 @@ function About() {
             <div data-reveal style={{ '--rd': '120ms' }}>
               <p style={{
                 fontSize: 'clamp(18px, 1.4vw, 22px)',
-                lineHeight: 1.5, color: 'var(--fg-dim)',
+                lineHeight: 1.55, color: 'var(--fg-dim)',
                 maxWidth: '50ch', margin: '0 0 16px'
               }}>
                 I study how businesses get attention,
@@ -873,7 +872,7 @@ function About() {
               </p>
               <p style={{
                 fontSize: 'clamp(18px, 1.4vw, 22px)',
-                lineHeight: 1.5, color: 'var(--fg-dim)',
+                lineHeight: 1.55, color: 'var(--fg-dim)',
                 maxWidth: '50ch', margin: '0 0 16px'
               }}>
                 That is how I approach landing pages.

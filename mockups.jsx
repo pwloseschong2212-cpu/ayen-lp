@@ -259,7 +259,7 @@ function CaseMockup({ type, palette, name, headline, image }) {
     const onScroll = () => {
       if (!wrapRef.current) return;
       const r = wrapRef.current.getBoundingClientRect();
-      const vh = window.innerHeight;
+      const vh = window.__lockedVh || window.innerHeight;
       const center = r.top + r.height / 2;
       const progress = (center - vh / 2) / (vh / 2 + r.height / 2);
       parallaxRef.current = Math.max(-60, Math.min(60, progress * -30));
@@ -634,7 +634,7 @@ function LayoutSticky() {
     let raf = null;
     const update = () => {
       raf = null;
-      const vh = window.innerHeight;
+      const vh = window.__lockedVh || window.innerHeight;
       const advanceLine = vh * 0.5;   // next block center reaches center → swap forward
       const retreatLine = vh * 0.9;   // current block center reaches near-bottom → swap back
       let idx = activeRef.current;

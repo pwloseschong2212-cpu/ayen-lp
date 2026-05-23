@@ -580,7 +580,9 @@
       var locked = false;
       function lockVh() {
         if (locked) return;
-        document.documentElement.style.setProperty('--app-vh', (window.innerHeight * 0.01) + 'px');
+        var h = window.innerHeight;
+        document.documentElement.style.setProperty('--app-vh', (h * 0.01) + 'px');
+        window.__lockedVh = h;
         locked = true;
       }
       lockVh();

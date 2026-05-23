@@ -35,7 +35,7 @@ function Nav() {
       raf = null;
       setScrolled(window.scrollY > 80);
       if (progressRef.current) {
-        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const max = document.documentElement.scrollHeight - (window.__lockedVh || window.innerHeight);
         const pct = max > 0 ? window.scrollY / max : 0;
         progressRef.current.style.transform = `scaleX(${pct})`;
       }
@@ -138,7 +138,7 @@ function ProgressRail() {
   const [p, setP] = useState(0);
   useEffect(() => {
     const on = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const max = document.documentElement.scrollHeight - (window.__lockedVh || window.innerHeight);
       setP(max > 0 ? window.scrollY / max : 0);
     };
     window.addEventListener('scroll', on, { passive: true });
@@ -299,7 +299,7 @@ function BackToTop() {
     let raf = null;
     const update = () => {
       raf = null;
-      setShow(window.scrollY > window.innerHeight);
+      setShow(window.scrollY > (window.__lockedVh || window.innerHeight));
     };
     const onScroll = () => { if (raf == null) raf = requestAnimationFrame(update); };
     window.addEventListener('scroll', onScroll, { passive: true });

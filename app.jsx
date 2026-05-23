@@ -30,19 +30,27 @@ function Nav() {
   const [t, setT] = useState(new Date());
   const progressRef = useRef(null);
   useEffect(() => {
-    const onScroll = () => {
+    let raf = null;
+    const update = () => {
+      raf = null;
       setScrolled(window.scrollY > 80);
-      // update the scroll progress bar
       if (progressRef.current) {
         const max = document.documentElement.scrollHeight - window.innerHeight;
-        const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
-        progressRef.current.style.transform = `scaleX(${pct / 100})`;
+        const pct = max > 0 ? window.scrollY / max : 0;
+        progressRef.current.style.transform = `scaleX(${pct})`;
       }
     };
+    const onScroll = () => {
+      if (raf == null) raf = requestAnimationFrame(update);
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    update();
     const id = setInterval(() => setT(new Date()), 1000 * 30);
-    return () => { window.removeEventListener('scroll', onScroll); clearInterval(id); };
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      clearInterval(id);
+      if (raf != null) cancelAnimationFrame(raf);
+    };
   }, []);
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
@@ -99,7 +107,7 @@ function Nav() {
             boxShadow: '0 0 8px var(--teal)',
             transformOrigin: 'left center',
             transform: 'scaleX(0)',
-            transition: 'transform 80ms linear'
+            willChange: 'transform'
           }}></div>
         </div>
       </nav>

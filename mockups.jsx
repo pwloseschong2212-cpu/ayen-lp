@@ -8,7 +8,7 @@ const WORK = [
   {
     n: '/01',
     name: 'ELEVATE',
-    kind: 'Online Course — Business Transformation',
+    kind: 'Course Funnel',
     year: '2025',
     tags: ['Course Funnel', 'Hero', 'Authority'],
     headline: 'Build a business that changes your life.',
@@ -22,7 +22,7 @@ const WORK = [
   {
     n: '/02',
     name: 'OBSIDIAN',
-    kind: 'B2B SaaS — Operations Platform',
+    kind: 'SaaS Demo Funnel',
     year: '2025',
     tags: ['Product Demo', 'Funnel', 'Enterprise'],
     headline: "Run your business. We'll handle the complexity.",
@@ -36,7 +36,7 @@ const WORK = [
   {
     n: '/03',
     name: 'NORTH STUDIO',
-    kind: 'Creator — Lead Magnet Funnel',
+    kind: 'Lead Magnet Funnel',
     year: '2026',
     tags: ['Opt-in', 'Editorial', 'Trust'],
     headline: 'Content people actually care about.',
@@ -50,7 +50,7 @@ const WORK = [
   {
     n: '/04',
     name: 'ASCEND VISION',
-    kind: 'High-Ticket Coaching — Application Funnel',
+    kind: 'Application Funnel',
     year: '2024',
     tags: ['Positioning', 'Qualifier', 'Premium'],
     headline: "Clients don't come from luck. They come from positioning.",
@@ -329,33 +329,9 @@ function CaseMockup({ type, palette, name, headline, image }) {
         transformStyle: 'preserve-3d',
         willChange: 'transform, filter'
       }}>
-        {/* browser chrome — closer layer (translateZ positive) */}
+        {/* contents — fills full mockup, no browser chrome */}
         <div style={{
-          position: 'relative',
-          height: 32, borderBottom: '1px solid rgba(255,255,255,0.06)',
-          display: 'flex', alignItems: 'center', padding: '0 16px', gap: 14,
-          background: 'rgba(255,255,255,0.03)',
-          transform: 'translateZ(24px)'
-        }}>
-          <div style={{ display: 'flex', gap: 6 }}>
-            <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'rgba(255,255,255,0.15)' }}></span>
-            <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'rgba(255,255,255,0.15)' }}></span>
-            <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'rgba(255,255,255,0.15)' }}></span>
-          </div>
-          <div style={{
-            flex: 1, height: 16, borderRadius: 4,
-            background: 'rgba(255,255,255,0.04)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontFamily: 'var(--f-mono)', fontSize: 9,
-            color: 'rgba(255,255,255,0.5)', letterSpacing: '.08em'
-          }}>
-            {name.toLowerCase().replace(/[\s·]+/g, '')}.com
-          </div>
-        </div>
-
-        {/* contents — middle layer (default depth) */}
-        <div style={{
-          position: 'absolute', top: 32, left: 0, right: 0, bottom: 0,
+          position: 'absolute', inset: 0,
           transform: 'translateZ(6px)'
         }}>
           {image ? (
@@ -723,13 +699,9 @@ function LayoutSticky() {
             }}>{w.n}</span>
             <div>
               <div className="mono" style={{
-                fontSize: 11, color: 'var(--fg-dim)',
+                fontSize: 13, color: 'var(--fg)',
                 letterSpacing: '.22em', textTransform: 'uppercase'
               }}>{w.kind}</div>
-              <div className="mono" style={{
-                fontSize: 10, color: 'var(--fg-faint)',
-                letterSpacing: '.18em', marginTop: 4
-              }}>{w.year}</div>
             </div>
           </div>
           <CaseMockup
@@ -766,14 +738,9 @@ function LayoutSticky() {
                   marginBottom: 14
                 }}>{c.n}</div>
                 <div className="mono" style={{
-                  fontSize: 11, color: 'var(--fg-dim)',
-                  letterSpacing: '.22em', textTransform: 'uppercase',
-                  marginBottom: 4
+                  fontSize: 13, color: 'var(--fg)',
+                  letterSpacing: '.22em', textTransform: 'uppercase'
                 }}>{c.kind}</div>
-                <div className="mono" style={{
-                  fontSize: 10, color: 'var(--fg-faint)',
-                  letterSpacing: '.18em'
-                }}>{c.year} · {String(i+1).padStart(2,'0')} / {String(WORK.length).padStart(2,'0')}</div>
               </div>
 
               {/* inline mockup for mobile (hidden on desktop) */}
@@ -785,11 +752,6 @@ function LayoutSticky() {
                 />
               </div>
 
-              {/* desktop small marker — hidden on mobile (chapter card replaces) */}
-              <div className="mono" data-sticky-small-marker style={{
-                fontSize: 11, color: 'var(--teal)',
-                letterSpacing: '.22em', marginBottom: 18
-              }}>{c.n} · {String(i+1).padStart(2,'0')} / {String(WORK.length).padStart(2,'0')}</div>
               <div style={{
                 fontSize: 'clamp(32px, 4vw, 56px)',
                 letterSpacing: '-0.03em', lineHeight: 1,

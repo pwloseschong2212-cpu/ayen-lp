@@ -149,17 +149,6 @@ function Work() {
           <div className="eyebrow" data-reveal>
             07 — Selected Work
           </div>
-          <div className="mono" data-reveal style={{
-            '--rd': '80ms',
-            fontSize: 11, letterSpacing: '.22em',
-            textTransform: 'uppercase',
-            display: 'flex', alignItems: 'center', gap: 14,
-            color: 'var(--teal)'
-          }}>
-            <span>04 / Cases</span>
-            <span style={{ width: 80, height: 1, background: 'var(--teal)', opacity: 0.5 }}></span>
-            <span style={{ color: 'var(--fg-faint)' }}>2024 — 2026</span>
-          </div>
         </div>
 
 

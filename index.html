@@ -423,6 +423,10 @@
     .hero-corner { width: 20px !important; height: 20px !important; }
     .hero-corner.left  { left: 20px !important; }
     .hero-corner.right { right: 20px !important; }
+    /* mobile: pull bottom brackets in tighter so they don't collide with the
+       "LANDING PAGE DESIGN · CONVERSION FLOW · FUNNEL STRATEGY" footer text */
+    .hero-corner[data-pos="bottom"] { bottom: 24px !important; }
+    .hero-corner[data-pos="top"]    { top: 100px !important; }
 
     /* hide hero eyebrow on mobile (too cramped above the title) */
     [data-hero-eyebrow] { display: none !important; }

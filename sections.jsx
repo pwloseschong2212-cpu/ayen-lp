@@ -74,10 +74,14 @@ function Hero({ videoOn }) {
           <div className="mono" data-reveal style={{
             '--rd': '340ms', marginTop: 28, fontSize: 11, letterSpacing: '.18em',
             color: 'var(--fg-faint)', textTransform: 'uppercase',
-            display: 'flex', alignItems: 'center', gap: 10
+            display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '6px 10px'
           }}>
             <span style={{ width: 16, height: 1, background: 'var(--line)' }}></span>
-            Landing Page Design &nbsp;·&nbsp; Conversion Flow &nbsp;·&nbsp; Funnel Strategy
+            <span style={{ whiteSpace: 'nowrap' }}>Landing Page Design</span>
+            <span style={{ opacity: 0.6 }}>·</span>
+            <span style={{ whiteSpace: 'nowrap' }}>Conversion Flow</span>
+            <span style={{ opacity: 0.6 }}>·</span>
+            <span style={{ whiteSpace: 'nowrap' }}>Funnel Strategy</span>
           </div>
         </div>
       </div>
@@ -111,13 +115,13 @@ function Brackets() {
   const c = { color: 'var(--teal)', position: 'absolute', width: 28, height: 28, zIndex: 5 };
   return (
     <React.Fragment>
-      <div className="hero-corner left"  style={{ ...c, top: 88, left: 56,
+      <div className="hero-corner left"  data-pos="top"    style={{ ...c, top: 88, left: 56,
         borderTop: '1px solid', borderLeft: '1px solid' }} />
-      <div className="hero-corner right" style={{ ...c, top: 88, right: 56,
+      <div className="hero-corner right" data-pos="top"    style={{ ...c, top: 88, right: 56,
         borderTop: '1px solid', borderRight: '1px solid' }} />
-      <div className="hero-corner left"  style={{ ...c, bottom: 88, left: 56,
+      <div className="hero-corner left"  data-pos="bottom" style={{ ...c, bottom: 88, left: 56,
         borderBottom: '1px solid', borderLeft: '1px solid' }} />
-      <div className="hero-corner right" style={{ ...c, bottom: 88, right: 56,
+      <div className="hero-corner right" data-pos="bottom" style={{ ...c, bottom: 88, right: 56,
         borderBottom: '1px solid', borderRight: '1px solid' }} />
     </React.Fragment>
   );

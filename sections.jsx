@@ -60,12 +60,12 @@ function Hero({ videoOn }) {
             without action.
           </h1>
           <p className="body-l" data-reveal style={{ '--rd': '120ms', marginBottom: 36, maxWidth: '46ch' }}>
-            I design landing pages that help people look clearer,
-            feel more trustworthy, and guide visitors toward action.
+            I design landing pages and funnels that turn visitors
+            into paying clients — starting from $500.
           </p>
           <div data-reveal style={{ '--rd': '220ms', display: 'flex', gap: 14, flexWrap: 'wrap', alignItems: 'center' }} className="hero-cta-row">
-            <a className="btn btn-primary" href="#contact">
-              Let&apos;s Talk <span className="arrow"></span>
+            <a className="btn btn-primary" href="#investment">
+              See Pricing <span className="arrow"></span>
             </a>
             <a className="btn btn-ghost" href="#work">
               View Work
@@ -861,13 +861,370 @@ function SystemRow({ l, d, k, i, total }) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────
-// SECTION 8 — ABOUT   (editorial)
+// SECTION 8 — PROCESS (how we work together)
+// ─────────────────────────────────────────────────────────────────────────
+function Process() {
+  const steps = [
+    {
+      n: '01',
+      label: 'Brief',
+      duration: '~30 min chat',
+      body: 'We talk through your offer, your audience, and what success looks like. I scope the project and lock the price. No commitment yet.'
+    },
+    {
+      n: '02',
+      label: 'Design',
+      duration: '3 — 14 days',
+      body: 'I send mockups, you give feedback, we iterate. 2 rounds of revisions included. Nothing gets built until you approve.'
+    },
+    {
+      n: '03',
+      label: 'Launch',
+      duration: 'Day of ship',
+      body: 'I build it, test it, deploy it to your domain. You get a walkthrough and the keys. Live in days, not months.'
+    }
+  ];
+
+  return (
+    <section id="process" className="pad-y-xl" style={{ position: 'relative' }}>
+      <style>{`
+        .process-card {
+          position: relative;
+          padding: clamp(28px, 3vw, 40px);
+          border: 1px solid var(--line);
+          background: linear-gradient(180deg, rgba(255,255,255,0.014), rgba(255,255,255,0.005));
+          display: flex; flex-direction: column;
+          transition: border-color 320ms ease, transform 320ms ease, box-shadow 320ms ease;
+          overflow: hidden;
+        }
+        .process-card::before {
+          content: '';
+          position: absolute; top: 0; left: 0;
+          width: 36px; height: 1px;
+          background: var(--teal);
+          opacity: 0.5;
+          transition: width 320ms ease, opacity 320ms ease;
+        }
+        .process-card:hover {
+          border-color: rgba(94,234,212,0.32);
+          transform: translateY(-3px);
+          box-shadow: 0 30px 80px -30px rgba(0,0,0,0.6), 0 0 0 1px rgba(94,234,212,0.10);
+        }
+        .process-card:hover::before { width: 80px; opacity: 1; }
+        @media (max-width: 900px) {
+          .process-grid { grid-template-columns: 1fr !important; gap: 18px !important; }
+          .process-arrow { display: none !important; }
+        }
+      `}</style>
+
+      <div className="container">
+        <div className="eyebrow" data-reveal style={{ marginBottom: 'clamp(32px, 5vw, 60px)' }}>
+          08 — Process
+        </div>
+
+        <h2 className="display-lg" data-reveal style={{
+          margin: '0 0 clamp(40px, 4vw, 60px)', maxWidth: '20ch'
+        }}>
+          From message to live <br/>
+          <span className="serif" style={{ color: 'var(--teal)' }}>in 3 steps.</span>
+        </h2>
+
+        <div className="process-grid" style={{
+          display: 'grid', gridTemplateColumns: '1fr 1fr 1fr',
+          gap: 24
+        }}>
+          {steps.map((s, i) => (
+            <div key={s.n} className="process-card" data-reveal style={{ '--rd': `${i * 120}ms` }}>
+              <div style={{
+                display: 'flex', alignItems: 'baseline', justifyContent: 'space-between',
+                marginBottom: 28
+              }}>
+                <span style={{
+                  fontFamily: 'var(--f-display)', fontWeight: 400,
+                  fontSize: 'clamp(40px, 4vw, 56px)',
+                  lineHeight: 1, letterSpacing: '-0.04em',
+                  color: 'var(--teal)'
+                }}>
+                  /{s.n}
+                </span>
+                <span className="mono" style={{
+                  fontSize: 10.5, color: 'var(--fg-faint)',
+                  letterSpacing: '.18em', textTransform: 'uppercase'
+                }}>
+                  {s.duration}
+                </span>
+              </div>
+
+              <div style={{
+                fontFamily: 'var(--f-display)', fontWeight: 400,
+                fontSize: 'clamp(26px, 2.6vw, 36px)',
+                lineHeight: 1, letterSpacing: '-0.03em',
+                color: 'var(--fg)',
+                marginBottom: 20
+              }}>
+                {s.label}<span className="serif" style={{ color: 'var(--teal)' }}>.</span>
+              </div>
+
+              <p style={{
+                margin: 0,
+                fontFamily: 'var(--f-display)',
+                fontSize: 'clamp(15px, 1.15vw, 17px)',
+                lineHeight: 1.55, color: 'var(--fg-dim)',
+                letterSpacing: '-0.005em'
+              }}>
+                {s.body}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <p data-reveal style={{
+          margin: '36px 0 0',
+          fontFamily: 'var(--f-display)',
+          fontSize: 'clamp(16px, 1.3vw, 19px)',
+          lineHeight: 1.55, color: 'var(--fg-dim)',
+          letterSpacing: '-0.005em'
+        }}>
+          Total timeline · Landing Page <span style={{ color: 'var(--fg)' }}>5-7 days</span> · Funnel <span style={{ color: 'var(--fg)' }}>1-4 weeks</span>.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// SECTION 9 — INVESTMENT (services & pricing)
+// ─────────────────────────────────────────────────────────────────────────
+function Investment() {
+  const tiers = [
+    {
+      label: 'Landing Page',
+      starting: '$500',
+      original: '$1,200',
+      blurb: 'One high-converting page · launched in a week.',
+      features: [
+        { text: '1 mobile-responsive landing page', value: '$500' },
+        { text: 'Basic SEO (meta · OG · sitemap)',  value: '$200' },
+        { text: 'Analytics setup',                   value: '$150' },
+        { text: '1 CTA / form integration',          value: '$100' },
+        { text: '5-7 day turnaround',                value: '$250' }
+      ],
+      cta: 'Start a page',
+      highlight: false
+    },
+    {
+      label: 'Funnel',
+      starting: '$1,500',
+      original: '$4,800',
+      blurb: 'Multi-page conversion flow · custom-built for your offer.',
+      features: [
+        { text: '2-10 pages, designed end-to-end',   value: '$2,000' },
+        { text: 'Stripe payment + automation',       value: '$500' },
+        { text: 'Email automation setup',            value: '$800' },
+        { text: 'CRM / form-logic integration',      value: '$600' },
+        { text: 'Copywriting available',             value: '$700' },
+        { text: '1-4 week turnaround',               value: '$200' }
+      ],
+      cta: 'Get a quote',
+      highlight: true
+    }
+  ];
+
+  return (
+    <section id="investment" className="pad-y-xl" style={{ position: 'relative' }}>
+      <style>{`
+        .tier-card {
+          position: relative;
+          padding: clamp(28px, 3vw, 40px);
+          border: 1px solid var(--line);
+          background: linear-gradient(180deg, rgba(255,255,255,0.014), rgba(255,255,255,0.005));
+          display: flex; flex-direction: column;
+          transition: border-color 320ms ease, transform 320ms ease, box-shadow 320ms ease;
+          overflow: hidden;
+        }
+        .tier-card.is-highlight {
+          border-color: rgba(94,234,212,0.32);
+          background: linear-gradient(180deg, rgba(94,234,212,0.04), rgba(94,234,212,0.012));
+        }
+        .tier-card.is-highlight::before {
+          content: '';
+          position: absolute; top: 0; left: 0; right: 0; height: 1px;
+          background: linear-gradient(90deg, transparent, var(--teal), transparent);
+          opacity: 0.6;
+        }
+        .tier-card:hover {
+          border-color: var(--teal);
+          transform: translateY(-3px);
+          box-shadow: 0 30px 80px -30px rgba(0,0,0,0.6), 0 0 0 1px rgba(94,234,212,0.12);
+        }
+        @media (max-width: 900px) {
+          .tier-grid { grid-template-columns: 1fr !important; gap: 18px !important; }
+        }
+      `}</style>
+
+      <div className="container">
+        <div className="eyebrow" data-reveal style={{ marginBottom: 'clamp(32px, 5vw, 60px)' }}>
+          09 — Investment
+        </div>
+
+        <h2 className="display-lg" data-reveal style={{
+          margin: '0 0 clamp(40px, 4vw, 60px)', maxWidth: '20ch'
+        }}>
+          Honest pricing.<br/>
+          <span className="serif" style={{ color: 'var(--teal)' }}>No surprise invoices.</span>
+        </h2>
+
+        <div className="tier-grid" style={{
+          display: 'grid', gridTemplateColumns: '1fr 1fr',
+          gap: 24, marginBottom: 36
+        }}>
+          {tiers.map((t, i) => (
+            <div key={t.label} className={`tier-card ${t.highlight ? 'is-highlight' : ''}`} data-reveal style={{ '--rd': `${i * 120}ms` }}>
+              <div className="mono" style={{
+                fontSize: 11, color: t.highlight ? 'var(--teal)' : 'var(--fg-faint)',
+                letterSpacing: '.22em', textTransform: 'uppercase',
+                marginBottom: 24
+              }}>
+                {String(i + 1).padStart(2, '0')} / 02 · {t.label}
+              </div>
+
+              <div style={{ marginBottom: 14 }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 4 }}>
+                  <span className="mono" style={{ fontSize: 11, color: 'var(--fg-faint)', letterSpacing: '.14em' }}>
+                    FROM
+                  </span>
+                  <span className="mono" style={{
+                    fontSize: 14, color: 'var(--fg-faint)',
+                    textDecoration: 'line-through',
+                    textDecorationColor: 'var(--fg-faint)'
+                  }}>
+                    {t.original}
+                  </span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 12 }}>
+                  <span style={{
+                    fontFamily: 'var(--f-display)', fontWeight: 400,
+                    fontSize: 'clamp(48px, 5.4vw, 76px)',
+                    lineHeight: 1, letterSpacing: '-0.04em',
+                    color: 'var(--fg)'
+                  }}>
+                    {t.starting}
+                  </span>
+                  <span className="mono" style={{
+                    fontSize: 10, letterSpacing: '.18em',
+                    textTransform: 'uppercase',
+                    color: 'var(--teal)',
+                    padding: '4px 8px',
+                    border: '1px solid rgba(94,234,212,0.4)',
+                    borderRadius: 3
+                  }}>
+                    Launch Offer
+                  </span>
+                </div>
+              </div>
+
+              <p className="serif" style={{
+                margin: '0 0 28px',
+                fontSize: 'clamp(17px, 1.4vw, 20px)',
+                lineHeight: 1.4, color: 'var(--fg-dim)',
+                fontStyle: 'italic', maxWidth: '32ch'
+              }}>
+                {t.blurb}
+              </p>
+
+              <ul style={{
+                listStyle: 'none', padding: 0, margin: '0 0 24px',
+                display: 'flex', flexDirection: 'column', gap: 10,
+                flex: 1
+              }}>
+                {t.features.map((f) => (
+                  <li key={f.text} style={{
+                    display: 'flex', alignItems: 'flex-start', gap: 12,
+                    fontSize: 14.5, color: 'var(--fg-dim)', lineHeight: 1.45
+                  }}>
+                    <span style={{
+                      width: 5, height: 5, borderRadius: '50%',
+                      background: t.highlight ? 'var(--teal)' : 'var(--fg-faint)',
+                      marginTop: 8, flexShrink: 0
+                    }}></span>
+                    <span style={{ flex: 1 }}>{f.text}</span>
+                    <span className="mono" style={{
+                      fontSize: 14, color: 'var(--fg-dim)',
+                      textDecoration: 'line-through',
+                      textDecorationColor: 'var(--fg-faint)',
+                      letterSpacing: '.05em',
+                      flexShrink: 0
+                    }}>
+                      {f.value}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* total value summary */}
+              <div style={{
+                display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                padding: '14px 0', marginBottom: 24,
+                borderTop: '1px solid var(--line)',
+                borderBottom: '1px solid var(--line)'
+              }}>
+                <span className="mono" style={{
+                  fontSize: 11, color: 'var(--fg-faint)',
+                  letterSpacing: '.18em', textTransform: 'uppercase'
+                }}>
+                  Total value
+                </span>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
+                  <span className="mono" style={{
+                    fontSize: 13, color: 'var(--fg-faint)',
+                    textDecoration: 'line-through'
+                  }}>
+                    {t.original}
+                  </span>
+                  <span style={{
+                    fontFamily: 'var(--f-display)', fontWeight: 500,
+                    fontSize: 18, color: t.highlight ? 'var(--teal)' : 'var(--fg)'
+                  }}>
+                    {t.starting}
+                  </span>
+                </div>
+              </div>
+
+              <a
+                className={`btn ${t.highlight ? 'btn-primary' : 'btn-ghost'}`}
+                href="https://m.me/ayenchong.design"
+                target="_blank" rel="noopener noreferrer"
+                style={{ alignSelf: 'flex-start' }}
+              >
+                {t.cta} <span className="arrow"></span>
+              </a>
+            </div>
+          ))}
+        </div>
+
+        <p data-reveal style={{
+          margin: 0,
+          fontFamily: 'var(--f-display)',
+          fontSize: 'clamp(16px, 1.3vw, 19px)',
+          lineHeight: 1.55, color: 'var(--fg-dim)',
+          maxWidth: '64ch', letterSpacing: '-0.005em'
+        }}>
+          Final price depends on pages, integrations, and copy needs.<br/>
+          50% upfront · 50% on launch · 2 rounds of revisions included.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// SECTION 9 — ABOUT   (editorial)
 // ─────────────────────────────────────────────────────────────────────────
 function About() {
   return (
     <section className="pad-y-xl" id="about">
       <div className="container">
-        <div className="eyebrow" data-reveal style={{ marginBottom: 'clamp(32px, 5vw, 60px)' }}>08 — About</div>
+        <div className="eyebrow" data-reveal style={{ marginBottom: 'clamp(32px, 5vw, 60px)' }}>10 — About</div>
 
         <div className="rgrid" style={{
           display: 'grid',
@@ -1016,7 +1373,7 @@ function Contact() {
       <div className="container" style={{ position: 'relative', textAlign: 'center' }}>
         <div className="eyebrow" data-reveal style={{
           marginBottom: 'clamp(32px, 5vw, 60px)', justifyContent: 'center', display: 'inline-flex'
-        }}>09 — From here, action</div>
+        }}>11 — From here, action</div>
 
         <h2 data-reveal style={{
           margin: '0 auto', maxWidth: '18ch',

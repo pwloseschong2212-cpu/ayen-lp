@@ -64,7 +64,8 @@ function Nav() {
   const time = t.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
   const links = [
     ['Work',     '#work'],
-    ['Approach', '#approach'],
+    ['Process',  '#process'],
+    ['Pricing',  '#investment'],
     ['About',    '#about'],
     ['Contact',  '#contact'],
   ];
@@ -147,7 +148,7 @@ function ProgressRail() {
   }, []);
   const sections = [
     'Hero', 'Problem', 'Leak', 'Diagnosis', 'Belief',
-    'System', 'Work', 'About', 'Contact'
+    'System', 'Work', 'Process', 'Pricing', 'About', 'Contact'
   ];
   return (
     <div className="progress-rail" style={{
@@ -546,6 +547,8 @@ function App() {
         <Belief     />
         <System     />
         <Work       />
+        <Process    />
+        <Investment />
         <About      />
         <Contact    />
       </main>

@@ -1208,7 +1208,7 @@ function FAQ() {
     },
     {
       q: 'What if I don\'t like the design?',
-      a: 'You won\'t see anything until I think it\'s right. Then we iterate — 2 rounds of revisions included. Nothing gets built until you say go. I\'d rather you love it than rush a launch.'
+      a: 'You see a working live preview within 5 days — real animations, real interactions, on your phone too. We iterate together on the actual site, not on flat mockups. 2 revisions included. Nothing goes public until you approve.'
     },
     {
       q: 'Do you use templates or build from scratch?',

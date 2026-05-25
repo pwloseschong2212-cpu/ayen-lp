@@ -182,9 +182,7 @@ function Work() {
             opacity: 0.5,
             marginBottom: 24
           }}></div>
-          <div className="mono" style={{
-            fontSize: 11, letterSpacing: '.22em', color: 'var(--fg-faint)',
-            textTransform: 'uppercase',
+          <div className="mono-label mono-label--wide" style={{
             display: 'flex', flexWrap: 'wrap', gap: 18
           }}>
             <span>messaging</span>
@@ -203,10 +201,7 @@ function Work() {
           marginTop: 'clamp(72px, 9vw, 120px)',
           display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14
         }}>
-          <span className="mono" style={{
-            fontSize: 11, letterSpacing: '.22em',
-            color: 'var(--fg-faint)', textTransform: 'uppercase'
-          }}>↓ enter gallery</span>
+          <span className="mono-label mono-label--wide">↓ enter gallery</span>
           <div style={{
             width: 1, height: 44,
             background: 'linear-gradient(to bottom, var(--teal), transparent)'
@@ -323,7 +318,7 @@ function CaseMockup({ type, palette, name, headline, image }) {
         background: palette.bg,
         color: palette.fg,
         boxShadow: hover
-          ? '0 70px 160px -40px rgba(0,0,0,0.85), 0 0 0 1px rgba(94,234,212,0.18), 0 0 120px -30px rgba(94,234,212,0.32), 0 30px 60px -20px rgba(0,0,0,0.5)'
+          ? '0 70px 160px -40px rgba(0,0,0,0.85), 0 0 0 1px var(--teal-18), 0 0 120px -30px var(--teal-32), 0 30px 60px -20px rgba(0,0,0,0.5)'
           : '0 40px 100px -30px rgba(0,0,0,0.75), 0 0 0 1px rgba(255,255,255,0.04), 0 20px 50px -20px rgba(0,0,0,0.4)',
         transition: 'box-shadow 320ms ease',
         transformStyle: 'preserve-3d',
@@ -359,7 +354,7 @@ function CaseMockup({ type, palette, name, headline, image }) {
         <div style={{
           position: 'absolute', inset: 0, pointerEvents: 'none',
           background: hover
-            ? 'linear-gradient(135deg, rgba(94,234,212,0.08), transparent 50%)'
+            ? 'linear-gradient(135deg, var(--teal-08), transparent 50%)'
             : 'linear-gradient(135deg, rgba(255,255,255,0.04), transparent 30%)',
           transition: 'background 320ms ease',
           transform: 'translateZ(40px)'
@@ -694,14 +689,11 @@ function LayoutSticky() {
               fontSize: 'clamp(36px, 4vw, 64px)',
               color: 'var(--teal)',
               lineHeight: 1, letterSpacing: '.02em',
-              textShadow: '0 0 24px rgba(94,234,212,0.25)',
+              textShadow: '0 0 24px var(--teal-32)',
               transition: 'all 320ms ease'
             }}>{w.n}</span>
             <div>
-              <div className="mono" style={{
-                fontSize: 13, color: 'var(--fg)',
-                letterSpacing: '.22em', textTransform: 'uppercase'
-              }}>{w.kind}</div>
+              <div className="mono-label mono-label--lg mono-label--fg">{w.kind}</div>
             </div>
           </div>
           <CaseMockup
@@ -737,10 +729,7 @@ function LayoutSticky() {
                   textShadow: '0 0 24px rgba(94,234,212,0.22)',
                   marginBottom: 14
                 }}>{c.n}</div>
-                <div className="mono" style={{
-                  fontSize: 13, color: 'var(--fg)',
-                  letterSpacing: '.22em', textTransform: 'uppercase'
-                }}>{c.kind}</div>
+                <div className="mono-label mono-label--lg mono-label--fg">{c.kind}</div>
               </div>
 
               {/* inline mockup for mobile (hidden on desktop) */}

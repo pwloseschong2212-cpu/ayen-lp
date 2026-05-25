@@ -34,7 +34,7 @@ function Hero({ videoOn }) {
       }} />
       <div style={{
         position: 'absolute', inset: 0,
-        background: 'radial-gradient(ellipse 80% 60% at 70% 30%, rgba(94,234,212,0.08), transparent 60%)',
+        background: 'radial-gradient(ellipse 80% 60% at 70% 30%, var(--teal-08), transparent 60%)',
         mixBlendMode: 'screen'
       }} />
 
@@ -202,10 +202,7 @@ function Problem() {
                   opacity: 0.25 + s.v * 0.75
                 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
-                    <span className="mono" style={{
-                      fontSize: 11, color: 'var(--fg-faint)',
-                      letterSpacing: '.18em'
-                    }}>0{i+1}</span>
+                    <span className="mono-label" style={{ textTransform: 'none' }}>0{i+1}</span>
                     <span style={{
                       fontSize: 'clamp(20px, 1.8vw, 26px)',
                       letterSpacing: '-0.02em',
@@ -231,8 +228,8 @@ function Problem() {
                           : '0 0 14px var(--teal)'
                       }}></div>
                     </div>
-                    <span className="mono" style={{
-                      fontSize: 11, color: 'var(--fg-faint)',
+                    <span className="mono-label" style={{
+                      textTransform: 'none', letterSpacing: '.01em',
                       minWidth: 40, textAlign: 'right'
                     }}>
                       {(s.v * 100).toFixed(0)}%
@@ -421,7 +418,7 @@ function DiagCard({ n, t, d, tx }) {
         gap: 14, overflow: 'hidden',
         borderColor: hover ? 'rgba(94,234,212,0.45)' : 'var(--glass-bd)',
         boxShadow: hover
-          ? '0 0 40px -10px rgba(94,234,212,0.4), inset 0 0 30px -10px rgba(94,234,212,0.2)'
+          ? '0 0 40px -10px var(--teal-40), inset 0 0 30px -10px rgba(94,234,212,0.2)'
           : 'none',
         transition: 'all 360ms cubic-bezier(.2,.7,.1,1)',
         transform: hover ? 'translateY(-3px)' : 'translateY(0)'
@@ -431,18 +428,16 @@ function DiagCard({ n, t, d, tx }) {
       {hover && (
         <div style={{
           position: 'absolute', inset: 0,
-          background: 'radial-gradient(circle at 50% 0%, rgba(94,234,212,0.10), transparent 60%)',
+          background: 'radial-gradient(circle at 50% 0%, var(--teal-12), transparent 60%)',
           pointerEvents: 'none'
         }}></div>
       )}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-        <span className="mono" style={{
-          fontSize: 11, letterSpacing: '.22em',
+        <span className="mono-label mono-label--wide" style={{
           color: hover ? 'var(--teal)' : 'var(--fg-faint)',
           transition: 'color 220ms'
         }}>{n}</span>
-        <span className="mono" style={{
-          fontSize: 10, color: 'var(--fg-faint)',
+        <span className="mono-label mono-label--sm" style={{
           opacity: hover ? 1 : 0.5,
           transition: 'opacity 220ms'
         }}>FLAG</span>
@@ -457,8 +452,8 @@ function DiagCard({ n, t, d, tx }) {
         fontSize: 'clamp(14px, 1.05vw, 16px)', lineHeight: 1.55, maxWidth: '36ch'
       }}>{d}</p>
       <div style={{ flex: 1 }} />
-      <div className="mono" style={{
-        fontSize: 11, letterSpacing: '.14em',
+      <div className="mono-label" style={{
+        letterSpacing: '.14em',
         color: hover ? 'var(--teal)' : 'var(--fg-faint)',
         borderTop: '1px solid var(--line-soft)',
         paddingTop: 14,
@@ -532,11 +527,7 @@ function Belief() {
         }}>
           {/* LEFT — 4 questions */}
           <div data-reveal style={{ '--rd': '120ms' }}>
-            <div className="mono" style={{
-              fontSize: 11, letterSpacing: '.18em',
-              textTransform: 'uppercase', color: 'var(--teal)',
-              marginBottom: 28
-            }}>// the four questions a page must answer</div>
+            <div className="mono-label mono-label--teal" style={{ marginBottom: 28 }}>// the four questions a page must answer</div>
             <ul style={{
               listStyle: 'none', padding: 0, margin: 0,
               display: 'flex', flexDirection: 'column', gap: 14
@@ -617,8 +608,8 @@ function System() {
       <div style={{
         position: 'absolute', inset: 0,
         background: `
-          linear-gradient(rgba(94,234,212,0.04) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(94,234,212,0.04) 1px, transparent 1px)
+          linear-gradient(var(--teal-04) 1px, transparent 1px),
+          linear-gradient(90deg, var(--teal-04) 1px, transparent 1px)
         `,
         backgroundSize: '64px 64px',
         maskImage: 'radial-gradient(ellipse 80% 70% at 50% 50%, black, transparent 80%)',
@@ -699,10 +690,7 @@ function System() {
             '--rd': '320ms',
             display: 'flex', flexDirection: 'column'
           }}>
-            <div className="mono" style={{
-              fontSize: 11, letterSpacing: '.18em', textTransform: 'uppercase',
-              color: 'var(--fg-faint)', marginBottom: 18
-            }}>// the stack</div>
+            <div className="mono-label" style={{ marginBottom: 18 }}>// the stack</div>
             <ul style={{
               flex: 1,
               listStyle: 'none', padding: 0, margin: 0,
@@ -768,10 +756,10 @@ function SystemNode({ l, d, k, i, total }) {
         position: 'relative',
         width: isCore ? 64 : 44, height: isCore ? 64 : 44,
         borderRadius: '50%',
-        background: isCore ? 'rgba(94,234,212,0.12)' : 'transparent',
+        background: isCore ? 'var(--teal-12)' : 'transparent',
         border: `1px solid ${isOut ? 'var(--green)' : 'var(--teal)'}`,
         boxShadow: isCore
-          ? '0 0 40px -2px rgba(94,234,212,0.55), inset 0 0 16px rgba(94,234,212,0.3)'
+          ? '0 0 40px -2px var(--teal-55), inset 0 0 16px rgba(94,234,212,0.3)'
           : `0 0 18px -4px ${isOut ? 'var(--green)' : 'var(--teal)'}`,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         animation: isCore ? 'pulse 3s ease-in-out infinite' : 'none'
@@ -788,9 +776,8 @@ function SystemNode({ l, d, k, i, total }) {
         color: isCore ? 'var(--fg)' : 'var(--fg-dim)',
         textAlign: 'center'
       }}>{l}</div>
-      <div className="mono" style={{
-        fontSize: 10, color: 'var(--fg-faint)',
-        letterSpacing: '.1em', textAlign: 'center',
+      <div className="mono-label mono-label--sm" style={{
+        textAlign: 'center',
         maxWidth: 90, lineHeight: 1.4
       }}>{d}</div>
     </div>
@@ -844,16 +831,13 @@ function SystemRow({ l, d, k, i, total }) {
         }}>
           {l}
           {isCore && (
-            <span className="mono" style={{
-              fontSize: 10, color: 'var(--teal)',
-              letterSpacing: '.18em', textTransform: 'uppercase'
-            }}>// core</span>
+            <span className="mono-label mono-label--sm mono-label--teal" style={{ letterSpacing: '.18em' }}>// core</span>
           )}
         </div>
-        <div className="mono" style={{
-          fontSize: 11,
+        <div className="mono-label" style={{
           color: isCore ? 'var(--fg-dim)' : 'var(--fg-faint)',
-          letterSpacing: '.14em'
+          letterSpacing: '.14em',
+          textTransform: 'none'
         }}>{d}</div>
       </div>
     </div>
@@ -906,9 +890,9 @@ function Process() {
           transition: width 320ms ease, opacity 320ms ease;
         }
         .process-card:hover {
-          border-color: rgba(94,234,212,0.32);
+          border-color: var(--teal-32);
           transform: translateY(-3px);
-          box-shadow: 0 30px 80px -30px rgba(0,0,0,0.6), 0 0 0 1px rgba(94,234,212,0.10);
+          box-shadow: 0 30px 80px -30px rgba(0,0,0,0.6), 0 0 0 1px var(--teal-12);
         }
         .process-card:hover::before { width: 80px; opacity: 1; }
         @media (max-width: 900px) {
@@ -947,10 +931,7 @@ function Process() {
                 }}>
                   /{s.n}
                 </span>
-                <span className="mono" style={{
-                  fontSize: 10.5, color: 'var(--fg-faint)',
-                  letterSpacing: '.18em', textTransform: 'uppercase'
-                }}>
+                <span className="mono-label">
                   {s.duration}
                 </span>
               </div>
@@ -985,7 +966,8 @@ function Process() {
           lineHeight: 1.55, color: 'var(--fg-dim)',
           letterSpacing: '-0.005em'
         }}>
-          Total timeline · Landing Page <span style={{ color: 'var(--fg)' }}>5-7 days</span> · Funnel <span style={{ color: 'var(--fg)' }}>1-4 weeks</span>.
+          Total timeline · Landing Page <span style={{ color: 'var(--fg)' }}>5-7 days</span> · Funnel <span style={{ color: 'var(--fg)' }}>1-4 weeks</span>.<br/>
+          <span style={{ color: 'var(--fg-faint)' }}>While most studios are still on draft 1, your site is already live.</span>
         </p>
       </div>
     </section>
@@ -1043,8 +1025,8 @@ function Investment() {
           overflow: hidden;
         }
         .tier-card.is-highlight {
-          border-color: rgba(94,234,212,0.32);
-          background: linear-gradient(180deg, rgba(94,234,212,0.04), rgba(94,234,212,0.012));
+          border-color: var(--teal-32);
+          background: linear-gradient(180deg, var(--teal-04), rgba(94,234,212,0.012));
         }
         .tier-card.is-highlight::before {
           content: '';
@@ -1055,7 +1037,7 @@ function Investment() {
         .tier-card:hover {
           border-color: var(--teal);
           transform: translateY(-3px);
-          box-shadow: 0 30px 80px -30px rgba(0,0,0,0.6), 0 0 0 1px rgba(94,234,212,0.12);
+          box-shadow: 0 30px 80px -30px rgba(0,0,0,0.6), 0 0 0 1px var(--teal-12);
         }
         @media (max-width: 900px) {
           .tier-grid { grid-template-columns: 1fr !important; gap: 18px !important; }
@@ -1080,9 +1062,7 @@ function Investment() {
         }}>
           {tiers.map((t, i) => (
             <div key={t.label} className={`tier-card ${t.highlight ? 'is-highlight' : ''}`} data-reveal style={{ '--rd': `${i * 120}ms` }}>
-              <div className="mono" style={{
-                fontSize: 11, color: t.highlight ? 'var(--teal)' : 'var(--fg-faint)',
-                letterSpacing: '.22em', textTransform: 'uppercase',
+              <div className={`mono-label mono-label--wide ${t.highlight ? 'mono-label--teal' : ''}`} style={{
                 marginBottom: 24
               }}>
                 {String(i + 1).padStart(2, '0')} / 02 · {t.label}
@@ -1090,7 +1070,7 @@ function Investment() {
 
               <div style={{ marginBottom: 14 }}>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 4 }}>
-                  <span className="mono" style={{ fontSize: 11, color: 'var(--fg-faint)', letterSpacing: '.14em' }}>
+                  <span className="mono-label" style={{ letterSpacing: '.14em' }}>
                     FROM
                   </span>
                   <span className="mono" style={{
@@ -1110,12 +1090,10 @@ function Investment() {
                   }}>
                     {t.starting}
                   </span>
-                  <span className="mono" style={{
-                    fontSize: 10, letterSpacing: '.18em',
-                    textTransform: 'uppercase',
-                    color: 'var(--teal)',
+                  <span className="mono-label mono-label--sm mono-label--teal" style={{
+                    letterSpacing: '.18em',
                     padding: '4px 8px',
-                    border: '1px solid rgba(94,234,212,0.4)',
+                    border: '1px solid var(--teal-40)',
                     borderRadius: 3
                   }}>
                     Launch Offer
@@ -1140,7 +1118,7 @@ function Investment() {
                 {t.features.map((f) => (
                   <li key={f.text} style={{
                     display: 'flex', alignItems: 'flex-start', gap: 12,
-                    fontSize: 14.5, color: 'var(--fg-dim)', lineHeight: 1.45
+                    fontSize: 14, color: 'var(--fg-dim)', lineHeight: 1.45
                   }}>
                     <span style={{
                       width: 5, height: 5, borderRadius: '50%',
@@ -1168,10 +1146,7 @@ function Investment() {
                 borderTop: '1px solid var(--line)',
                 borderBottom: '1px solid var(--line)'
               }}>
-                <span className="mono" style={{
-                  fontSize: 11, color: 'var(--fg-faint)',
-                  letterSpacing: '.18em', textTransform: 'uppercase'
-                }}>
+                <span className="mono-label">
                   Total value
                 </span>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
@@ -1212,8 +1187,132 @@ function Investment() {
           Final price depends on pages, integrations, and copy needs.<br/>
           50% upfront · 50% on launch · 2 rounds of revisions included.
         </p>
+
+        {/* mini FAQ */}
+        <FAQ />
       </div>
     </section>
+  );
+}
+
+function FAQ() {
+  const [open, setOpen] = React.useState(null);
+  const items = [
+    {
+      q: 'How long does this actually take?',
+      a: 'Landing pages: 5-7 days. Funnels: 1-4 weeks. Most projects start within a week of our chat. AI handles the volume so I can focus on craft — your site is live while studios are still on draft 1.'
+    },
+    {
+      q: 'Can you write the copy, or do I need to provide it?',
+      a: 'Either works. If you have copy ready, I\'ll design around it. If not, I write it — trained in conversion frameworks (AIDA, PAS, StoryBrand) and powered by AI for fast iteration. Add-on $300-$1,500 depending on scope.'
+    },
+    {
+      q: 'What if I don\'t like the design?',
+      a: 'You won\'t see anything until I think it\'s right. Then we iterate — 2 rounds of revisions included. Nothing gets built until you say go. I\'d rather you love it than rush a launch.'
+    },
+    {
+      q: 'Do you use templates or build from scratch?',
+      a: 'From scratch. Every page is custom designed and coded for your brand. No themes, no template plugins. That\'s why pages feel unique and load fast.'
+    },
+    {
+      q: 'Will I own the design files?',
+      a: '100%. You get the design files, the source code, the hosting credentials. If you ever want to work with another designer, you take everything with you. No vendor lock-in.'
+    },
+    {
+      q: 'Do you provide hosting?',
+      a: 'I deploy to Vercel (industry-standard, free for most landing pages) on your own account. You own the hosting. I set it up for you — domain, SSL, deployment, all included in the build.'
+    },
+    {
+      q: 'Can you build on WordPress or Webflow?',
+      a: 'No — and that\'s intentional. I build custom using modern tools (React, AI-assisted code, Vercel hosting). They load faster, look more unique, and convert better than WordPress templates. If you specifically need WordPress, I\'ll refer you to a great developer. For everything else — custom is the right call.'
+    },
+    {
+      q: 'Do you use AI to design or build my page?',
+      a: 'Yes — and I\'m proud of it. AI is my Photoshop. I use it to iterate faster on copy, explore visual directions, and write clean code in days instead of weeks. But every strategic decision — positioning, flow, conversion logic — is mine. You\'re paying for taste, judgment, and care. Not the tool.'
+    }
+  ];
+
+  return (
+    <div data-reveal style={{
+      marginTop: 'clamp(60px, 7vw, 96px)'
+    }}>
+      <style>{`
+        .faq-item {
+          border-top: 1px solid var(--line);
+          transition: border-color 280ms ease;
+        }
+        .faq-item:last-child { border-bottom: 1px solid var(--line); }
+        .faq-item.is-open { border-top-color: var(--teal-40); }
+        .faq-item.is-open + .faq-item { border-top-color: var(--teal-40); }
+        .faq-q {
+          width: 100%; background: none; border: none; cursor: pointer;
+          padding: 22px 0;
+          display: flex; align-items: center; justify-content: space-between;
+          gap: 24px; text-align: left;
+          font-family: var(--f-display);
+          font-size: clamp(17px, 1.5vw, 21px);
+          line-height: 1.4; letter-spacing: -0.01em;
+          color: var(--fg);
+          transition: color 240ms ease;
+        }
+        .faq-q:hover { color: var(--teal); }
+        .faq-icon {
+          flex-shrink: 0;
+          width: 28px; height: 28px;
+          display: inline-flex; align-items: center; justify-content: center;
+          color: var(--teal);
+          position: relative;
+          transition: transform 320ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .faq-icon::before, .faq-icon::after {
+          content: ''; position: absolute;
+          background: currentColor;
+          transition: transform 320ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .faq-icon::before { width: 14px; height: 1.5px; }
+        .faq-icon::after  { width: 1.5px; height: 14px; }
+        .faq-item.is-open .faq-icon::after { transform: scaleY(0); }
+        .faq-a {
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 360ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .faq-item.is-open .faq-a { max-height: 400px; }
+        .faq-a-inner {
+          padding: 0 0 24px;
+          padding-right: clamp(0px, 8vw, 80px);
+          font-family: var(--f-display);
+          font-size: clamp(15px, 1.2vw, 17px);
+          line-height: 1.6; color: var(--fg-dim);
+          letter-spacing: -0.005em;
+        }
+      `}</style>
+
+      <div className="mono-label mono-label--teal mono-label--wide" style={{ marginBottom: 20 }}>
+        ▌ Common Questions
+      </div>
+
+      <div>
+        {items.map((it, i) => {
+          const isOpen = open === i;
+          return (
+            <div key={it.q} className={`faq-item ${isOpen ? 'is-open' : ''}`}>
+              <button
+                className="faq-q"
+                onClick={() => setOpen(isOpen ? null : i)}
+                aria-expanded={isOpen}
+              >
+                <span>{it.q}</span>
+                <span className="faq-icon" aria-hidden="true"></span>
+              </button>
+              <div className="faq-a" aria-hidden={!isOpen}>
+                <div className="faq-a-inner">{it.a}</div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 
@@ -1255,7 +1354,7 @@ function About() {
               <div style={{
                 position: 'absolute', left: 0, right: 0,
                 height: 60, top: '-60px',
-                background: 'linear-gradient(to bottom, transparent, rgba(94,234,212,0.12), transparent)',
+                background: 'linear-gradient(to bottom, transparent, var(--teal-12), transparent)',
                 animation: 'scan 5s linear infinite',
                 pointerEvents: 'none',
                 mixBlendMode: 'screen'
@@ -1273,35 +1372,42 @@ function About() {
               <p style={{
                 fontSize: 'clamp(18px, 1.4vw, 22px)',
                 lineHeight: 1.55, color: 'var(--fg-dim)',
-                maxWidth: '50ch', margin: '0 0 16px'
+                maxWidth: '50ch', margin: '0 0 24px'
               }}>
-                I study how businesses get attention,
-                build trust, and guide people toward action.
+                I study how businesses get attention, build trust,
+                and guide people toward action. That is how
+                I approach landing pages.
               </p>
               <p style={{
-                fontSize: 'clamp(18px, 1.4vw, 22px)',
-                lineHeight: 1.55, color: 'var(--fg-dim)',
-                maxWidth: '50ch', margin: '0 0 16px'
+                fontSize: 'clamp(20px, 1.6vw, 26px)',
+                lineHeight: 1.4, color: 'var(--fg)',
+                maxWidth: '46ch', margin: '0 0 18px',
+                letterSpacing: '-0.015em'
               }}>
-                That is how I approach landing pages.
+                Not just <span style={{ color: 'var(--fg-faint)' }}>visually.</span>{' '}
+                <span className="serif" style={{ color: 'var(--teal)' }}>Strategically.</span>{' '}
+                Not the <span style={{ color: 'var(--fg-faint)' }}>cheapest.</span>{' '}
+                Not the <span style={{ color: 'var(--fg-faint)' }}>biggest.</span>
               </p>
-              <p style={{
+
+              <p data-reveal style={{
+                '--rd': '180ms',
                 fontSize: 'clamp(20px, 1.6vw, 26px)',
                 lineHeight: 1.4, color: 'var(--fg)',
                 maxWidth: '40ch', margin: '0 0 28px',
                 letterSpacing: '-0.015em'
               }}>
-                Not just <span style={{ color: 'var(--fg-faint)' }}>visually.</span>{' '}
-                <span className="serif" style={{ color: 'var(--teal)' }}>Strategically.</span>
+                Just the one who cares like <span className="serif" style={{ color: 'var(--teal)' }}>it&apos;s mine.</span>
               </p>
             </div>
 
-            {/* second portrait — fills remaining space, bottom-aligns with left portrait */}
+            {/* second portrait — locked aspect ratio so chibi figures never compress */}
             <div data-reveal data-about-photo style={{
               '--rd': '260ms',
-              flex: 1,
-              minHeight: 200,
-              width: '100%',
+              marginTop: 'auto',
+              alignSelf: 'flex-start',
+              aspectRatio: '21 / 10',
+              width: '92%',
               position: 'relative',
               overflow: 'hidden',
               background: 'transparent',
@@ -1313,7 +1419,8 @@ function About() {
                 style={{
                   position: 'absolute', inset: 0,
                   width: '100%', height: '100%',
-                  objectFit: 'cover',
+                  objectFit: 'contain',
+                  objectPosition: 'center',
                   display: 'block'
                 }}
               />
@@ -1321,7 +1428,7 @@ function About() {
               <div style={{
                 position: 'absolute', left: 0, right: 0,
                 height: 60, top: '-60px',
-                background: 'linear-gradient(to bottom, transparent, rgba(94,234,212,0.10), transparent)',
+                background: 'linear-gradient(to bottom, transparent, var(--teal-12), transparent)',
                 animation: 'scan 6s linear infinite',
                 pointerEvents: 'none',
                 mixBlendMode: 'screen'
@@ -1347,7 +1454,7 @@ function Contact() {
       {/* ambient glow */}
       <div style={{
         position: 'absolute', inset: 0,
-        background: 'radial-gradient(ellipse 60% 60% at 50% 50%, rgba(94,234,212,0.10), transparent 65%)'
+        background: 'radial-gradient(ellipse 60% 60% at 50% 50%, var(--teal-12), transparent 65%)'
       }}></div>
 
       {/* dust particles */}
@@ -1373,53 +1480,78 @@ function Contact() {
       <div className="container" style={{ position: 'relative', textAlign: 'center' }}>
         <div className="eyebrow" data-reveal style={{
           marginBottom: 'clamp(32px, 5vw, 60px)', justifyContent: 'center', display: 'inline-flex'
-        }}>11 — From here, action</div>
+        }}>11 — Let&apos;s Build</div>
 
         <h2 data-reveal style={{
-          margin: '0 auto', maxWidth: '18ch',
+          margin: '0 auto', maxWidth: '20ch',
           textAlign: 'center',
           fontFamily: 'var(--f-display)', fontWeight: 400,
-          fontSize: 'clamp(60px, 8.8vw, 148px)',
-          lineHeight: 0.92, letterSpacing: '-0.045em'
+          fontSize: 'clamp(48px, 7.2vw, 120px)',
+          lineHeight: 0.96, letterSpacing: '-0.045em'
         }}>
-          Clarity changes <br/>how people <span className="serif" style={{ color: 'var(--teal)' }}>Respond.</span>
+          Ready to turn visitors <br/>
+          into <span className="serif" style={{ color: 'var(--teal)' }}>paying clients?</span>
         </h2>
 
-        <div data-reveal style={{ '--rd': '180ms', marginTop: 80 }}>
-          <ul style={{
-            listStyle: 'none', padding: 0, margin: 0,
-            display: 'flex', justifyContent: 'center', gap: 40, flexWrap: 'wrap',
-            fontSize: 'clamp(26px, 2vw, 32px)', color: 'var(--fg-dim)'
-          }}>
-            <li>Clear <span className="serif" style={{ color: 'var(--teal)' }}>Message.</span></li>
-            <li>Clear <span className="serif" style={{ color: 'var(--teal)' }}>Trust.</span></li>
-            <li>Clear <span className="serif" style={{ color: 'var(--teal)' }}>Direction.</span></li>
-          </ul>
-        </div>
-
-        <p className="serif" data-reveal style={{
-          '--rd': '320ms',
-          marginTop: 80,
-          fontSize: 'clamp(24px, 2.4vw, 38px)',
-          color: 'var(--fg-dim)', letterSpacing: '-0.01em'
+        <p data-reveal style={{
+          '--rd': '180ms',
+          margin: '40px auto 0', maxWidth: '52ch',
+          fontFamily: 'var(--f-display)',
+          fontSize: 'clamp(17px, 1.4vw, 21px)',
+          lineHeight: 1.55, color: 'var(--fg-dim)',
+          letterSpacing: '-0.005em'
         }}>
-          That is what good pages do.
+          Send a quick message. We chat for 30 minutes,
+          I scope your project, and you get a custom quote.
+          No commitment.
         </p>
+
+        <ul data-reveal style={{
+          '--rd': '300ms',
+          listStyle: 'none', padding: 0,
+          margin: '40px auto 0', maxWidth: '38ch',
+          display: 'flex', flexDirection: 'column', gap: 14,
+          textAlign: 'left'
+        }}>
+          {[
+            'Free 30-min discovery chat',
+            'Custom quote within 24 hours',
+            'Start within 1 week'
+          ].map((item) => (
+            <li key={item} style={{
+              display: 'flex', alignItems: 'center', gap: 14,
+              fontFamily: 'var(--f-display)',
+              fontSize: 'clamp(16px, 1.3vw, 19px)',
+              color: 'var(--fg)', lineHeight: 1.4
+            }}>
+              <span style={{
+                width: 18, height: 18, flexShrink: 0,
+                border: '1px solid var(--teal)',
+                display: 'inline-flex', alignItems: 'center', justifyContent: 'center'
+              }}>
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="var(--teal)" strokeWidth="1.6" strokeLinecap="square">
+                  <polyline points="1.5 5 4 7.5 8.5 2.5"/>
+                </svg>
+              </span>
+              {item}
+            </li>
+          ))}
+        </ul>
 
         <div data-reveal style={{
           '--rd': '460ms',
-          marginTop: 80,
+          marginTop: 56,
           display: 'flex', justifyContent: 'center', gap: 14, flexWrap: 'wrap', alignItems: 'center'
         }}>
           <a className="btn btn-primary" href="https://m.me/ayenchong.design" target="_blank" rel="noopener noreferrer">
-            Let&apos;s Build Yours <span className="arrow"></span>
+            Message me on Messenger <span className="arrow"></span>
           </a>
-          <a className="btn btn-ghost" href="#work">View Work</a>
+          <a className="btn btn-ghost" href="#investment">View Pricing</a>
         </div>
 
         <div data-reveal style={{
           '--rd': '600ms',
-          marginTop: 80,
+          marginTop: 64,
           fontFamily: 'var(--f-mono)', fontSize: 12,
           letterSpacing: '.22em', textTransform: 'uppercase',
           color: 'var(--fg-faint)'

@@ -73,6 +73,15 @@
     --red:       oklch(0.68 0.22 25);
     --amber:     oklch(0.82 0.16 80);
 
+    /* teal opacity scale — replaces hardcoded rgba(94,234,212,X) */
+    --teal-04:   rgba(94,234,212,0.04);
+    --teal-08:   rgba(94,234,212,0.08);
+    --teal-12:   rgba(94,234,212,0.12);
+    --teal-18:   rgba(94,234,212,0.18);
+    --teal-32:   rgba(94,234,212,0.32);
+    --teal-40:   rgba(94,234,212,0.40);
+    --teal-55:   rgba(94,234,212,0.55);
+
     --glass:     rgba(255,255,255,0.024);
     --glass-2:   rgba(255,255,255,0.04);
     --glass-bd:  rgba(255,255,255,0.08);
@@ -81,6 +90,16 @@
     --f-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
     --f-serif:   'Instrument Serif', 'Times New Roman', serif;
     --f-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+    /* spacing scale — for new code; existing magic numbers stay until refactor */
+    --sp-1: 4px;
+    --sp-2: 8px;
+    --sp-3: 12px;
+    --sp-4: 16px;
+    --sp-5: 24px;
+    --sp-6: 36px;
+    --sp-7: 56px;
+    --sp-8: 80px;
   }
 
   * { box-sizing: border-box; }
@@ -158,6 +177,21 @@
     content: ""; width: 22px; height: 1px; background: var(--teal);
     display: inline-block; opacity: .7;
   }
+
+  /* ─── mono label utility (consolidates 15+ inline patterns) ─── */
+  .mono-label {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg-faint);
+  }
+  .mono-label--teal { color: var(--teal); }
+  .mono-label--dim  { color: var(--fg-dim); }
+  .mono-label--fg   { color: var(--fg); }
+  .mono-label--lg   { font-size: 13px; letter-spacing: 0.22em; }
+  .mono-label--sm   { font-size: 10px; letter-spacing: 0.14em; }
+  .mono-label--wide { letter-spacing: 0.22em; }
 
   .container { max-width: 1480px; margin: 0 auto; padding: 0 56px; }
   @media (max-width: 900px) { .container { padding: 0 28px; } }

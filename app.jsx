@@ -84,7 +84,7 @@ function Nav() {
         </div>
         <div className="nav-meta">
           <span style={{ color: 'var(--teal)' }}>●</span>
-          <span>Available · 2026</span>
+          <span>2 slots available · 2026</span>
           <span style={{ opacity: .6 }}>{time} GMT+8</span>
         </div>
         <button
@@ -99,7 +99,7 @@ function Nav() {
           position: 'absolute',
           left: 0, right: 0, bottom: 0,
           height: 2,
-          background: 'rgba(94,234,212,0.12)',
+          background: 'var(--teal-12)',
           pointerEvents: 'none'
         }}>
           <div ref={progressRef} style={{
@@ -123,7 +123,7 @@ function Nav() {
           ))}
         </nav>
         <div className="mm-foot">
-          <span className="pill">Available · 2026</span>
+          <span className="pill">2 slots available · 2026</span>
           <span style={{ opacity: .6 }}>{time} GMT+8 — Singapore</span>
           <span style={{ opacity: .6 }}>hello@ayen.studio</span>
         </div>
@@ -229,7 +229,7 @@ function Footer() {
           background:
             linear-gradient(135deg, rgba(94,234,212,0.10), rgba(94,234,212,0.02)) padding-box,
             linear-gradient(135deg, var(--teal), rgba(94,234,212,0.25)) border-box;
-          box-shadow: 0 0 16px -4px rgba(94,234,212,0.4);
+          box-shadow: 0 0 16px -4px var(--teal-40);
         }
       `}</style>
 

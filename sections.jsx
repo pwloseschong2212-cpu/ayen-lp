@@ -997,15 +997,20 @@ function Investment() {
     {
       label: 'Funnel',
       starting: '$1,500',
-      original: '$4,800',
+      original: '$3,000',
       blurb: 'Multi-page conversion flow · custom-built for your offer.',
-      features: [
-        { text: '2-10 pages, designed end-to-end',   value: '$2,000' },
-        { text: 'Stripe payment + automation',       value: '$500' },
-        { text: 'Email automation setup',            value: '$800' },
-        { text: 'CRM / form-logic integration',      value: '$600' },
-        { text: 'Copywriting available',             value: '$700' },
-        { text: '1-4 week turnaround',               value: '$200' }
+      included: [
+        '2-3 pages, designed end-to-end',
+        'Mobile-responsive design',
+        'Platform handoff (Stripe / ClickFunnels / GHL etc)',
+        '1-4 week turnaround'
+      ],
+      addons: [
+        'Extra pages',
+        'Stripe payment + automation',
+        'Email automation setup',
+        'CRM / form-logic integration',
+        'Copywriting'
       ],
       cta: 'Get a quote',
       highlight: true
@@ -1110,60 +1115,112 @@ function Investment() {
                 {t.blurb}
               </p>
 
-              <ul style={{
-                listStyle: 'none', padding: 0, margin: '0 0 24px',
-                display: 'flex', flexDirection: 'column', gap: 10,
-                flex: 1
-              }}>
-                {t.features.map((f) => (
-                  <li key={f.text} style={{
-                    display: 'flex', alignItems: 'flex-start', gap: 12,
-                    fontSize: 14, color: 'var(--fg-dim)', lineHeight: 1.45
+              {t.features && (
+                <>
+                  <ul style={{
+                    listStyle: 'none', padding: 0, margin: '0 0 24px',
+                    display: 'flex', flexDirection: 'column', gap: 10,
+                    flex: 1
                   }}>
-                    <span style={{
-                      width: 5, height: 5, borderRadius: '50%',
-                      background: t.highlight ? 'var(--teal)' : 'var(--fg-faint)',
-                      marginTop: 8, flexShrink: 0
-                    }}></span>
-                    <span style={{ flex: 1 }}>{f.text}</span>
-                    <span className="mono" style={{
-                      fontSize: 14, color: 'var(--fg-dim)',
-                      textDecoration: 'line-through',
-                      textDecorationColor: 'var(--fg-faint)',
-                      letterSpacing: '.05em',
-                      flexShrink: 0
-                    }}>
-                      {f.value}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+                    {t.features.map((f) => (
+                      <li key={f.text} style={{
+                        display: 'flex', alignItems: 'flex-start', gap: 12,
+                        fontSize: 14, color: 'var(--fg-dim)', lineHeight: 1.45
+                      }}>
+                        <span style={{
+                          width: 5, height: 5, borderRadius: '50%',
+                          background: t.highlight ? 'var(--teal)' : 'var(--fg-faint)',
+                          marginTop: 8, flexShrink: 0
+                        }}></span>
+                        <span style={{ flex: 1 }}>{f.text}</span>
+                        <span className="mono" style={{
+                          fontSize: 14, color: 'var(--fg-dim)',
+                          textDecoration: 'line-through',
+                          textDecorationColor: 'var(--fg-faint)',
+                          letterSpacing: '.05em',
+                          flexShrink: 0
+                        }}>
+                          {f.value}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
 
-              {/* total value summary */}
-              <div style={{
-                display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                padding: '14px 0', marginBottom: 24,
-                borderTop: '1px solid var(--line)',
-                borderBottom: '1px solid var(--line)'
-              }}>
-                <span className="mono-label">
-                  Total value
-                </span>
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
-                  <span className="mono" style={{
-                    fontSize: 13, color: 'var(--fg-faint)',
-                    textDecoration: 'line-through'
+                  {/* total value summary */}
+                  <div style={{
+                    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                    padding: '14px 0', marginBottom: 24,
+                    borderTop: '1px solid var(--line)',
+                    borderBottom: '1px solid var(--line)'
                   }}>
-                    {t.original}
-                  </span>
-                  <span style={{
-                    fontFamily: 'var(--f-display)', fontWeight: 500,
-                    fontSize: 18, color: t.highlight ? 'var(--teal)' : 'var(--fg)'
+                    <span className="mono-label">
+                      Total value
+                    </span>
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
+                      <span className="mono" style={{
+                        fontSize: 13, color: 'var(--fg-faint)',
+                        textDecoration: 'line-through'
+                      }}>
+                        {t.original}
+                      </span>
+                      <span style={{
+                        fontFamily: 'var(--f-display)', fontWeight: 500,
+                        fontSize: 18, color: t.highlight ? 'var(--teal)' : 'var(--fg)'
+                      }}>
+                        {t.starting}
+                      </span>
+                    </div>
+                  </div>
+                </>
+              )}
+
+              {t.included && (
+                <div style={{ flex: 1, marginBottom: 24 }}>
+                  <div className="mono-label" style={{ marginBottom: 14, color: 'var(--teal)' }}>
+                    ▌ Included
+                  </div>
+                  <ul style={{
+                    listStyle: 'none', padding: 0, margin: '0 0 28px',
+                    display: 'flex', flexDirection: 'column', gap: 10
                   }}>
-                    {t.starting}
-                  </span>
+                    {t.included.map((item) => (
+                      <li key={item} style={{
+                        display: 'flex', alignItems: 'flex-start', gap: 12,
+                        fontSize: 14, color: 'var(--fg-dim)', lineHeight: 1.45
+                      }}>
+                        <span style={{
+                          width: 5, height: 5, borderRadius: '50%',
+                          background: 'var(--teal)',
+                          marginTop: 8, flexShrink: 0
+                        }}></span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mono-label" style={{ marginBottom: 14 }}>
+                    ▌ Scale up (custom quote)
+                  </div>
+                  <ul style={{
+                    listStyle: 'none', padding: 0, margin: 0,
+                    display: 'flex', flexDirection: 'column', gap: 10
+                  }}>
+                    {t.addons.map((item) => (
+                      <li key={item} style={{
+                        display: 'flex', alignItems: 'flex-start', gap: 12,
+                        fontSize: 14, color: 'var(--fg-faint)', lineHeight: 1.45
+                      }}>
+                        <span style={{
+                          fontFamily: 'var(--f-mono)', fontSize: 14,
+                          color: 'var(--fg-faint)', flexShrink: 0,
+                          marginTop: -1
+                        }}>+</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </div>
+              )}
 
               <a
                 className={`btn ${t.highlight ? 'btn-primary' : 'btn-ghost'}`}

@@ -1211,10 +1211,6 @@ function FAQ() {
       a: 'You see a working live preview within 5 days — real animations, real interactions, on your phone too. We iterate together on the actual site, not on flat mockups. 2 revisions included. Nothing goes public until you approve.'
     },
     {
-      q: 'Do you use templates or build from scratch?',
-      a: 'From scratch. Every page is custom designed and coded for your brand. No themes, no template plugins. That\'s why pages feel unique and load fast.'
-    },
-    {
       q: 'Will I own the design files?',
       a: '100%. You get the design files, the source code, the hosting credentials. If you ever want to work with another designer, you take everything with you. No vendor lock-in.'
     },
@@ -1227,8 +1223,8 @@ function FAQ() {
       a: 'No — and that\'s intentional. I build custom using modern tools (React, AI-assisted code, Vercel hosting). They load faster, look more unique, and convert better than WordPress templates. If you specifically need WordPress, I\'ll refer you to a great developer. For everything else — custom is the right call.'
     },
     {
-      q: 'Do you use AI to design or build my page?',
-      a: 'Yes — and I\'m proud of it. AI is my Photoshop. I use it to iterate faster on copy, explore visual directions, and write clean code in days instead of weeks. But every strategic decision — positioning, flow, conversion logic — is mine. You\'re paying for taste, judgment, and care. Not the tool.'
+      q: 'I already use ClickFunnels / GoHighLevel / Kajabi. Can you work with my existing funnel?',
+      a: 'Yes. I build a custom landing page on Vercel that integrates with your existing platform — your visitors land on a high-converting page, then flow into your existing checkout, email, and CRM. We connect via webhook, redirect, or embed. You keep all your automation; you just get a much better-converting entry point. Standard $500 landing page + $300-$600 add-on for funnel integration depending on complexity.'
     }
   ];
 

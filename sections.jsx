@@ -59,9 +59,10 @@ function Hero({ videoOn }) {
             <span className="serif" style={{ color: 'var(--teal)' }}>Means nothing</span><br/>
             without action.
           </h1>
-          <p className="body-l" data-reveal style={{ '--rd': '120ms', marginBottom: 36, maxWidth: '46ch' }}>
-            I design landing pages and funnels that turn visitors
-            into paying clients — starting from $500.
+          <p className="body-l" data-reveal style={{ '--rd': '120ms', marginBottom: 36, maxWidth: '50ch' }}>
+            I build funnel systems that turn cold traffic
+            into booked calls — for coaches, consultants,
+            and experts selling what they know.
           </p>
           <div data-reveal style={{ '--rd': '220ms', display: 'flex', gap: 14, flexWrap: 'wrap', alignItems: 'center' }} className="hero-cta-row">
             <a className="btn btn-primary" href="#investment">
@@ -77,11 +78,11 @@ function Hero({ videoOn }) {
             display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '6px 10px'
           }}>
             <span style={{ width: 16, height: 1, background: 'var(--line)' }}></span>
-            <span style={{ whiteSpace: 'nowrap' }}>Landing Page Design</span>
-            <span style={{ opacity: 0.6 }}>·</span>
-            <span style={{ whiteSpace: 'nowrap' }}>Conversion Flow</span>
-            <span style={{ opacity: 0.6 }}>·</span>
             <span style={{ whiteSpace: 'nowrap' }}>Funnel Strategy</span>
+            <span style={{ opacity: 0.6 }}>·</span>
+            <span style={{ whiteSpace: 'nowrap' }}>Conversion Design</span>
+            <span style={{ opacity: 0.6 }}>·</span>
+            <span style={{ whiteSpace: 'nowrap' }}>System Build</span>
           </div>
         </div>
       </div>
@@ -330,21 +331,21 @@ function Leak() {
 // ─────────────────────────────────────────────────────────────────────────
 function Diagnosis() {
   const cards = [
-    { n: '01', t: 'Unclear message',
-      d: 'Visitors leave within 5 seconds because they cannot decide what the page is about.',
-      tx: '+ message → ambiguous', col: 1, row: 1, span: 1 },
-    { n: '02', t: 'Weak flow',
-      d: 'Sections do not build on each other. Trust resets between every block.',
-      tx: '+ flow → no narrative', col: 2, row: 1, span: 1 },
-    { n: '03', t: 'Generic copy',
-      d: 'Copy could describe any business. Nothing belongs only to you.',
-      tx: '+ copy → interchangeable', col: 3, row: 1, span: 1 },
-    { n: '04', t: 'Weak CTA',
-      d: 'The action lacks weight, context, or a reason to choose now over later.',
-      tx: '+ cta → unanchored', col: 1, row: 2, span: 2 },
-    { n: '05', t: 'No follow-up path',
-      d: 'A page that ends is a page that forgets you. Nothing carries the relationship forward.',
-      tx: '+ retention → none', col: 3, row: 2, span: 1 }
+    { n: '01', t: 'Unclear positioning',
+      d: 'Visitors leave in 5 seconds because they cannot decide who this is for or what makes you different.',
+      tx: '+ positioning → blurred', col: 1, row: 1, span: 1 },
+    { n: '02', t: 'Broken trust sequence',
+      d: 'Sections do not build on each other. Trust resets between every block instead of compounding.',
+      tx: '+ trust → resets', col: 2, row: 1, span: 1 },
+    { n: '03', t: 'Generic offer',
+      d: 'The offer could belong to any expert in your niche. Nothing makes choosing you feel obvious.',
+      tx: '+ offer → interchangeable', col: 3, row: 1, span: 1 },
+    { n: '04', t: 'Soft CTA',
+      d: 'The action lacks weight, context, or a reason to choose now over "let me think about it."',
+      tx: '+ cta → no urgency', col: 1, row: 2, span: 2 },
+    { n: '05', t: 'No follow-up system',
+      d: 'A funnel that ends at the page is a funnel that forgets you. Nothing carries the relationship forward.',
+      tx: '+ system → ends at page', col: 3, row: 2, span: 1 }
   ];
   return (
     <section className="pad-y-xl" id="approach">
@@ -590,7 +591,7 @@ function Belief() {
 function System() {
   const nodes = [
     { l: 'Traffic',        d: 'social, ads, search',     k: 'in'   },
-    { l: 'Landing Page',   d: 'first impression',         k: 'core' },
+    { l: 'Funnel',         d: 'pages, flow, conversion',  k: 'core' },
     { l: 'Trust',          d: 'proof + transparency',     k: 'mid'  },
     { l: 'Lead',           d: 'qualified intent',         k: 'mid'  },
     { l: 'Follow Up',      d: 'sequence + nurture',       k: 'mid'  },
@@ -1074,35 +1075,16 @@ function Investment() {
               </div>
 
               <div style={{ marginBottom: 14 }}>
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 4 }}>
-                  <span className="mono-label" style={{ letterSpacing: '.14em' }}>
-                    FROM
-                  </span>
-                  <span className="mono" style={{
-                    fontSize: 14, color: 'var(--fg-faint)',
-                    textDecoration: 'line-through',
-                    textDecorationColor: 'var(--fg-faint)'
-                  }}>
-                    {t.original}
-                  </span>
+                <div className="mono-label" style={{ letterSpacing: '.14em', marginBottom: 4 }}>
+                  FROM
                 </div>
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: 12 }}>
-                  <span style={{
-                    fontFamily: 'var(--f-display)', fontWeight: 400,
-                    fontSize: 'clamp(48px, 5.4vw, 76px)',
-                    lineHeight: 1, letterSpacing: '-0.04em',
-                    color: 'var(--fg)'
-                  }}>
-                    {t.starting}
-                  </span>
-                  <span className="mono-label mono-label--sm mono-label--teal" style={{
-                    letterSpacing: '.18em',
-                    padding: '4px 8px',
-                    border: '1px solid var(--teal-40)',
-                    borderRadius: 3
-                  }}>
-                    Launch Offer
-                  </span>
+                <div style={{
+                  fontFamily: 'var(--f-display)', fontWeight: 400,
+                  fontSize: 'clamp(48px, 5.4vw, 76px)',
+                  lineHeight: 1, letterSpacing: '-0.04em',
+                  color: 'var(--fg)'
+                }}>
+                  {t.starting}
                 </div>
               </div>
 
@@ -1133,44 +1115,9 @@ function Investment() {
                           marginTop: 8, flexShrink: 0
                         }}></span>
                         <span style={{ flex: 1 }}>{f.text}</span>
-                        <span className="mono" style={{
-                          fontSize: 14, color: 'var(--fg-dim)',
-                          textDecoration: 'line-through',
-                          textDecorationColor: 'var(--fg-faint)',
-                          letterSpacing: '.05em',
-                          flexShrink: 0
-                        }}>
-                          {f.value}
-                        </span>
                       </li>
                     ))}
                   </ul>
-
-                  {/* total value summary */}
-                  <div style={{
-                    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                    padding: '14px 0', marginBottom: 24,
-                    borderTop: '1px solid var(--line)',
-                    borderBottom: '1px solid var(--line)'
-                  }}>
-                    <span className="mono-label">
-                      Total value
-                    </span>
-                    <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
-                      <span className="mono" style={{
-                        fontSize: 13, color: 'var(--fg-faint)',
-                        textDecoration: 'line-through'
-                      }}>
-                        {t.original}
-                      </span>
-                      <span style={{
-                        fontFamily: 'var(--f-display)', fontWeight: 500,
-                        fontSize: 18, color: t.highlight ? 'var(--teal)' : 'var(--fg)'
-                      }}>
-                        {t.starting}
-                      </span>
-                    </div>
-                  </div>
                 </>
               )}
 

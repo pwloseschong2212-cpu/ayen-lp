@@ -7,59 +7,51 @@
 const WORK = [
   {
     n: '/01',
-    name: 'ELEVATE',
-    kind: 'Course Funnel',
-    year: '2025',
-    tags: ['Course Funnel', 'Hero', 'Authority'],
-    headline: 'Build a business that changes your life.',
-    sub: 'A cinematic course page that sells the transformation, not the curriculum. Authority earned in the first frame.',
-    metric: '+148%',
-    metricLabel: 'qualified signups',
-    palette: { bg: '#0e0c08', fg: '#f4ecd8', accent: 'oklch(0.85 0.12 80)' },
-    type: 'editorial',
-    image: 'assets/work-elevate.jpg'
+    name: 'LEAK SCANNER',
+    kind: 'Diagnostic Funnel',
+    tags: ['Lead Magnet', 'Quiz Logic', 'No-Friction'],
+    headline: 'A 3-minute scan that finds where leads die.',
+    sub: 'No email gate, no pitch — a free diagnostic that maps the funnel leak in plain language. Built to convert curious visitors into self-qualified leads.',
+    palette: { bg: '#0a0d14', fg: '#eef2ff', accent: 'oklch(0.72 0.18 240)' },
+    type: 'corporate',
+    image: 'assets/work-leakscanner.png',
+    url: 'https://conversion-leak-scanner.vercel.app/'
   },
   {
     n: '/02',
-    name: 'OBSIDIAN',
-    kind: 'SaaS Demo Funnel',
-    year: '2025',
-    tags: ['Product Demo', 'Funnel', 'Enterprise'],
-    headline: "Run your business. We'll handle the complexity.",
-    sub: 'A dashboard that sells itself. Replaced feature lists with a single screen that did the talking.',
-    metric: '−63%',
-    metricLabel: 'time-to-demo-booked',
-    palette: { bg: '#0a0b14', fg: '#eef0ff', accent: 'oklch(0.72 0.18 280)' },
-    type: 'corporate',
-    image: 'assets/work-obsidian.jpg'
+    name: 'MERIDIAN',
+    kind: 'Application Funnel',
+    tags: ['High-Ticket', 'Qualifier', 'Authority'],
+    headline: 'Executive coaching that filters tire-kickers.',
+    sub: 'Built for a $1M+ ARR audience: minimalist, data-driven, application-gated. Proof beats persuasion — every line earns the next.',
+    palette: { bg: '#0c0e12', fg: '#f5f5f0', accent: 'oklch(0.85 0.10 80)' },
+    type: 'editorial',
+    image: 'assets/work-meridian.png',
+    url: 'https://meridian-vslfunnel-by-ayen.netlify.app/'
   },
   {
     n: '/03',
-    name: 'NORTH STUDIO',
-    kind: 'Lead Magnet Funnel',
-    year: '2026',
-    tags: ['Opt-in', 'Editorial', 'Trust'],
-    headline: 'Content people actually care about.',
-    sub: 'A free guide page that felt earned, not pushed. Email signup that read like an invitation.',
-    metric: '4.2×',
-    metricLabel: 'opt-in conversion lift',
-    palette: { bg: '#f5f1ea', fg: '#1a1814', accent: 'oklch(0.40 0.05 60)' },
-    type: 'cinematic',
-    image: 'assets/work-northstudio.jpg'
+    name: 'ATHLETE OS',
+    kind: 'Quiz Funnel',
+    tags: ['Quiz Logic', 'Segmentation', 'Identity-Match'],
+    headline: 'Find your training archetype in 90 seconds.',
+    sub: 'A diagnostic quiz that segments athletes into 4 archetypes. The quiz does the qualifying, so the booked call always converts.',
+    palette: { bg: '#0a0d10', fg: '#f4f4ec', accent: 'oklch(0.78 0.18 30)' },
+    type: 'product',
+    image: 'assets/work-athleteos.png',
+    url: 'https://athlete-os-quizfunnel-by-ayen.netlify.app/'
   },
   {
     n: '/04',
-    name: 'ASCEND VISION',
-    kind: 'Application Funnel',
-    year: '2024',
-    tags: ['Positioning', 'Qualifier', 'Premium'],
-    headline: "Clients don't come from luck. They come from positioning.",
-    sub: 'An application funnel that filtered tire-kickers and made premium pricing feel obvious.',
-    metric: '+39%',
-    metricLabel: 'application-to-call rate',
-    palette: { bg: '#0a0d1a', fg: '#eef0f8', accent: 'oklch(0.70 0.18 265)' },
-    type: 'product',
-    image: 'assets/work-ascendvision.jpg'
+    name: 'SOLSHINE',
+    kind: 'Lead Funnel',
+    tags: ['Local Service', 'Trust', 'Quote Request'],
+    headline: 'Solar leads that show up for the assessment.',
+    sub: 'Local-service lead funnel built on trust signals — testimonials, certifications, 24h response. Low-intent topic turned into a no-friction quote request.',
+    palette: { bg: '#0a1010', fg: '#f0f5f0', accent: 'oklch(0.82 0.16 145)' },
+    type: 'cinematic',
+    image: 'assets/work-solshine.png',
+    url: 'https://solshine-leadfunnel-by-ayen.netlify.app/'
   }
 ];
 
@@ -754,6 +746,30 @@ function LayoutSticky() {
               <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                 {c.tags.map(t => <span key={t} className="chip">{t}</span>)}
               </div>
+              {c.url && (
+                <a
+                  href={c.url}
+                  target="_blank" rel="noopener noreferrer"
+                  className="view-site-link"
+                  style={{
+                    display: 'inline-flex', alignItems: 'center', gap: 10,
+                    marginTop: 28,
+                    fontFamily: 'var(--f-mono)', fontSize: 11,
+                    letterSpacing: '.22em', textTransform: 'uppercase',
+                    color: 'var(--teal)', textDecoration: 'none',
+                    paddingBottom: 6,
+                    borderBottom: '1px solid var(--teal-40)',
+                    transition: 'border-color 240ms ease, gap 240ms ease'
+                  }}
+                >
+                  View live site
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="square">
+                    <path d="M5 1 H13 V9"/>
+                    <path d="M13 1 L4 10"/>
+                    <path d="M11 7 V13 H1 V3 H7"/>
+                  </svg>
+                </a>
+              )}
             </div>
           ))}
         </div>

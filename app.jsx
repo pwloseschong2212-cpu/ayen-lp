@@ -136,20 +136,42 @@ function Nav() {
 // Progress rail (right side)
 // ─────────────────────────────────────────────────────────────────────────
 function ProgressRail() {
-  const [p, setP] = useState(0);
-  useEffect(() => {
-    const on = () => {
-      const max = document.documentElement.scrollHeight - (window.__lockedVh || window.innerHeight);
-      setP(max > 0 ? window.scrollY / max : 0);
-    };
-    window.addEventListener('scroll', on, { passive: true });
-    on();
-    return () => window.removeEventListener('scroll', on);
-  }, []);
   const sections = [
     'Hero', 'Problem', 'Leak', 'Diagnosis', 'Belief',
     'System', 'Work', 'Process', 'Pricing', 'About', 'Contact'
   ];
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  useEffect(() => {
+    let raf = null;
+    const update = () => {
+      raf = null;
+      const els = document.querySelectorAll('main > section');
+      if (!els.length) return;
+      const vh = window.__lockedVh || window.innerHeight;
+      const center = vh / 2;
+      let best = 0, bestDist = Infinity;
+      els.forEach((el, i) => {
+        const r = el.getBoundingClientRect();
+        const elCenter = r.top + r.height / 2;
+        // clamp: if section is taller than viewport, use viewport-center as proxy
+        const proxy = (r.top < 0 && r.bottom > vh) ? center : elCenter;
+        const dist = Math.abs(proxy - center);
+        if (dist < bestDist) { bestDist = dist; best = i; }
+      });
+      setActiveIdx(best);
+    };
+    const onScroll = () => { if (raf == null) raf = requestAnimationFrame(update); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (raf != null) cancelAnimationFrame(raf);
+    };
+  }, []);
+
   return (
     <div className="progress-rail" style={{
       position: 'fixed', right: 22, top: '50%', transform: 'translateY(-50%)',
@@ -157,8 +179,7 @@ function ProgressRail() {
       pointerEvents: 'none'
     }}>
       {sections.map((s, i) => {
-        const seg = i / (sections.length - 1);
-        const active = Math.abs(p - seg) < 1 / (sections.length * 2);
+        const active = i === activeIdx;
         return (
           <div key={s} style={{
             display: 'flex', alignItems: 'center', gap: 10,

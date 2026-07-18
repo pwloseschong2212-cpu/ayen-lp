@@ -7,51 +7,51 @@
 const WORK = [
   {
     n: '/01',
-    name: 'PLAYROOM',
-    kind: 'Service Funnel',
-    tags: ['Local Brand', 'Multi-Offer', 'Booking-Led'],
-    headline: 'A family business that books out weekends.',
-    sub: 'Playful brand site for a children\'s party host — services, shop, and bookings under one warm scroll. Personality leading the conversion.',
-    palette: { bg: '#fef6ea', fg: '#1a1410', accent: 'oklch(0.72 0.18 30)' },
-    type: 'cinematic',
-    image: 'assets/work-playroom.png',
-    url: 'https://patryshas-playroom.vercel.app/'
+    name: 'RED BEAN',
+    kind: 'Webinar Funnel',
+    tags: ['Event', 'Trust', 'WhatsApp'],
+    headline: 'Free seminar that filled the room in weeks.',
+    sub: 'Bilingual-audience event page for a business-strategy seminar in KL/PJ. Local trust anchors + WhatsApp-first fast-close — designed for a market that trusts humans over ads.',
+    palette: { bg: '#f8f2ea', fg: '#1a1410', accent: 'oklch(0.65 0.22 25)' },
+    type: 'product',
+    image: 'assets/work-redbean.png',
+    url: 'https://redbean-webinar.vercel.app/'
   },
   {
     n: '/02',
-    name: 'MERIDIAN',
-    kind: 'Application Funnel',
-    tags: ['High-Ticket', 'Qualifier', 'Authority'],
-    headline: 'Executive coaching that filters tire-kickers.',
-    sub: 'Built for a $1M+ ARR audience: minimalist, data-driven, application-gated. Proof beats persuasion — every line earns the next.',
-    palette: { bg: '#0c0e12', fg: '#f5f5f0', accent: 'oklch(0.85 0.10 80)' },
-    type: 'editorial',
-    image: 'assets/work-meridian.png',
-    url: 'https://meridian-vslfunnel-by-ayen.vercel.app/'
+    name: 'BUTTERFLY',
+    kind: 'Booking Funnel',
+    tags: ['Spirit', 'Messenger', 'Cinematic'],
+    headline: 'A niche spiritual service that feels premium.',
+    sub: "Cosmic booking page for a psychic art reader — cinematic visual language, gentle copy, Messenger-first CTA. Turned a hard-to-explain niche into a warm 'call-to-book' experience.",
+    palette: { bg: '#150a24', fg: '#f2ecf5', accent: 'oklch(0.75 0.14 300)' },
+    type: 'cinematic',
+    image: 'assets/work-butterfly.png',
+    url: 'https://butterfly-gnome.vercel.app/'
   },
   {
     n: '/03',
-    name: 'ATHLETE OS',
-    kind: 'Quiz Funnel',
-    tags: ['Quiz Logic', 'Segmentation', 'Identity-Match'],
-    headline: 'Find your training archetype in 90 seconds.',
-    sub: 'A diagnostic quiz that segments athletes into 4 archetypes. The quiz does the qualifying, so the booked call always converts.',
-    palette: { bg: '#0a0d10', fg: '#f4f4ec', accent: 'oklch(0.78 0.18 30)' },
-    type: 'product',
-    image: 'assets/work-athleteos.png',
-    url: 'https://athlete-os-quizfunnel-by-ayen.vercel.app/'
-  },
-  {
-    n: '/04',
     name: 'SOLSHINE',
     kind: 'Lead Funnel',
-    tags: ['Local Service', 'Trust', 'Quote Request'],
+    tags: ['Local', 'Trust', 'Quote'],
     headline: 'Solar leads that show up for the assessment.',
     sub: 'Local-service lead funnel built on trust signals — testimonials, certifications, 24h response. Low-intent topic turned into a no-friction quote request.',
     palette: { bg: '#0a1010', fg: '#f0f5f0', accent: 'oklch(0.82 0.16 145)' },
     type: 'cinematic',
     image: 'assets/work-solshine.png',
     url: 'https://solshine-leadfunnel-by-ayen.vercel.app/'
+  },
+  {
+    n: '/04',
+    name: 'ATHLETE OS',
+    kind: 'Quiz Funnel',
+    tags: ['Quiz', 'Segment', 'Identity'],
+    headline: 'Find your training archetype in 90 seconds.',
+    sub: 'A diagnostic quiz that segments athletes into 4 archetypes. The quiz does the qualifying, so the booked call always converts.',
+    palette: { bg: '#0a0d10', fg: '#f4f4ec', accent: 'oklch(0.78 0.18 30)' },
+    type: 'product',
+    image: 'assets/work-athleteos.png',
+    url: 'https://athlete-os-quizfunnel-by-ayen.vercel.app/'
   }
 ];
 

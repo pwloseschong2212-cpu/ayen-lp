@@ -608,21 +608,39 @@
 
   <div id="root"></div>
 
-  <!-- lock viewport height on load (fixes IG/FB in-app browser jumps) -->
+  <!-- lock viewport height on load (fixes IG/FB in-app browser jumps + iOS Safari zero-height bug) -->
   <script>
     (function() {
       var locked = false;
-      function lockVh() {
+      function tryLock() {
         if (locked) return;
         var h = window.innerHeight;
+        // guard: reject garbage values (0, tiny, or NaN). real mobile viewports are >= 320px.
+        if (!h || h < 300) return;
         document.documentElement.style.setProperty('--app-vh', (h * 0.01) + 'px');
         window.__lockedVh = h;
         locked = true;
       }
-      lockVh();
+
+      // try multiple times — first paint, DOM ready, and full load
+      tryLock();
+      if (typeof requestAnimationFrame === 'function') requestAnimationFrame(tryLock);
+      window.addEventListener('DOMContentLoaded', tryLock, { once: true });
+      window.addEventListener('load', tryLock, { once: true });
+
+      // bfcache restore (iOS back button, tab switch)
+      window.addEventListener('pageshow', function(e) {
+        if (e.persisted) {
+          locked = false;
+          tryLock();
+        }
+      });
+
+      // orientation change — re-lock with new dimensions
       window.addEventListener('orientationchange', function() {
         locked = false;
-        setTimeout(lockVh, 120);
+        setTimeout(tryLock, 120);
+        setTimeout(tryLock, 320);
       });
     })();
   </script>

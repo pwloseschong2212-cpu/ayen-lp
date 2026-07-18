@@ -7,15 +7,15 @@
 const WORK = [
   {
     n: '/01',
-    name: 'LEAK SCANNER',
-    kind: 'Diagnostic Funnel',
-    tags: ['Lead Magnet', 'Quiz Logic', 'No-Friction'],
-    headline: 'A 3-minute scan that finds where leads die.',
-    sub: 'No email gate, no pitch — a free diagnostic that maps the funnel leak in plain language. Built to convert curious visitors into self-qualified leads.',
-    palette: { bg: '#0a0d14', fg: '#eef2ff', accent: 'oklch(0.72 0.18 240)' },
-    type: 'corporate',
-    image: 'assets/work-leakscanner.png',
-    url: 'https://conversion-leak-scanner.vercel.app/'
+    name: 'PLAYROOM',
+    kind: 'Service Funnel',
+    tags: ['Local Brand', 'Multi-Offer', 'Booking-Led'],
+    headline: 'A family business that books out weekends.',
+    sub: 'Playful brand site for a children\'s party host — services, shop, and bookings under one warm scroll. Personality leading the conversion.',
+    palette: { bg: '#fef6ea', fg: '#1a1410', accent: 'oklch(0.72 0.18 30)' },
+    type: 'cinematic',
+    image: 'assets/work-playroom.png',
+    url: 'https://patryshas-playroom.vercel.app/'
   },
   {
     n: '/02',
@@ -27,7 +27,7 @@ const WORK = [
     palette: { bg: '#0c0e12', fg: '#f5f5f0', accent: 'oklch(0.85 0.10 80)' },
     type: 'editorial',
     image: 'assets/work-meridian.png',
-    url: 'https://meridian-vslfunnel-by-ayen.netlify.app/'
+    url: 'https://meridian-vslfunnel-by-ayen.vercel.app/'
   },
   {
     n: '/03',
@@ -39,7 +39,7 @@ const WORK = [
     palette: { bg: '#0a0d10', fg: '#f4f4ec', accent: 'oklch(0.78 0.18 30)' },
     type: 'product',
     image: 'assets/work-athleteos.png',
-    url: 'https://athlete-os-quizfunnel-by-ayen.netlify.app/'
+    url: 'https://athlete-os-quizfunnel-by-ayen.vercel.app/'
   },
   {
     n: '/04',
@@ -51,7 +51,7 @@ const WORK = [
     palette: { bg: '#0a1010', fg: '#f0f5f0', accent: 'oklch(0.82 0.16 145)' },
     type: 'cinematic',
     image: 'assets/work-solshine.png',
-    url: 'https://solshine-leadfunnel-by-ayen.netlify.app/'
+    url: 'https://solshine-leadfunnel-by-ayen.vercel.app/'
   }
 ];
 

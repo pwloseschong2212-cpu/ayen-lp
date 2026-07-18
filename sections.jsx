@@ -57,7 +57,7 @@ function Hero({ videoOn }) {
             lineHeight: 1, letterSpacing: '-0.035em'
           }}>
             Attention<br/>
-            <span className="serif" style={{ color: 'var(--teal)' }}>Means nothing</span><br/>
+            <span className="serif" style={{ color: 'var(--teal)' }}>means nothing</span><br/>
             without action.
           </h1>
           <p className="body-l" data-reveal style={{ '--rd': '120ms', marginBottom: 36, maxWidth: '50ch' }}>
@@ -160,7 +160,7 @@ function Problem() {
               fontSize: 'clamp(36px, 5.4vw, 84px)',
               lineHeight: 1, letterSpacing: '-0.04em'
             }}>
-              You may already have <span className="serif" style={{ color: 'var(--teal)' }}>Attention.</span>
+              You may already have <span className="serif" style={{ color: 'var(--teal)' }}>attention.</span>
             </h2>
 
             <div data-reveal data-punchline-line style={{
@@ -184,7 +184,8 @@ function Problem() {
               marginTop: 28,
               fontSize: 'clamp(17px, 1.4vw, 22px)',
               lineHeight: 1.4, color: 'var(--fg-faint)',
-              maxWidth: '32ch',
+              letterSpacing: '0.03em', wordSpacing: '0.02em',
+              maxWidth: '44ch',
               fontStyle: 'italic'
             }}>
               Not because your offer is bad.<br/>
@@ -360,7 +361,7 @@ function Diagnosis() {
             <div className="eyebrow" data-reveal style={{ marginBottom: 'clamp(32px, 5vw, 60px)' }}>04 — Diagnosis</div>
             <h2 className="display-lg" data-reveal style={{ margin: 0 }}>
               The same five symptoms,<br/>
-              over <span className="serif" style={{ color: 'var(--teal)' }}>And over.</span>
+              over <span className="serif" style={{ color: 'var(--teal)' }}>and over.</span>
             </h2>
           </div>
           <div data-reveal style={{ '--rd': '120ms', position: 'relative' }}>
@@ -539,7 +540,7 @@ function Belief() {
                 <li key={q} className="serif" style={{
                   fontSize: 'clamp(26px, 2.6vw, 40px)',
                   lineHeight: 1.15, color: 'var(--fg)',
-                  letterSpacing: '-0.02em',
+                  letterSpacing: '0.03em', wordSpacing: '0.02em',
                   display: 'flex', alignItems: 'baseline', gap: 18
                 }}>
                   <span className="mono" style={{
@@ -577,8 +578,8 @@ function Belief() {
               maxWidth: '18ch',
               position: 'relative'
             }}>
-              When things feel <span className="serif" style={{ color: 'var(--teal)' }}>Clear,</span><br/>
-              people move <span className="serif" style={{ color: 'var(--teal)' }}>Faster.</span>
+              When things feel <span className="serif" style={{ color: 'var(--teal)' }}>clear,</span><br/>
+              people move <span className="serif" style={{ color: 'var(--teal)' }}>faster.</span>
             </div>
           </div>
         </div>
@@ -645,7 +646,7 @@ function System() {
           fontSize: 'clamp(36px, 5.4vw, 88px)',
           lineHeight: 1, letterSpacing: '-0.04em'
         }}>
-          I design <span className="serif" style={{ color: 'var(--teal)' }}>The path</span> from
+          I design <span className="serif" style={{ color: 'var(--teal)' }}>the path</span> from
           <br/>Attention to Action
         </h2>
 
@@ -738,7 +739,8 @@ function System() {
         }}>
           Not just <span style={{ color: 'var(--fg-faint)' }}>how the page looks.</span><br/>
           But what people <span style={{ color: 'var(--teal)' }}>understand</span>,<br/>
-          what they <span style={{ color: 'var(--teal)' }}>trust</span>, and what they <span style={{ color: 'var(--teal)' }}>do next.</span>
+          what they <span style={{ color: 'var(--teal)' }}>trust</span>,<br/>
+          and what they <span style={{ color: 'var(--teal)' }}>do next.</span>
         </p>
       </div>
     </section>
@@ -861,7 +863,7 @@ function Process() {
     {
       n: '02',
       label: 'Design',
-      duration: '3 — 14 days',
+      duration: '1 — 5 days',
       body: 'I send mockups, you give feedback, we iterate. 2 rounds of revisions included. Nothing gets built until you approve.'
     },
     {
@@ -969,7 +971,7 @@ function Process() {
           lineHeight: 1.55, color: 'var(--fg-dim)',
           letterSpacing: '-0.005em'
         }}>
-          Total timeline · Landing Page <span style={{ color: 'var(--fg)' }}>5-7 days</span> · Funnel <span style={{ color: 'var(--fg)' }}>1-4 weeks</span>.<br/>
+          Total timeline · Landing Page <span style={{ color: 'var(--fg)' }}>1-3 days</span> · Funnel <span style={{ color: 'var(--fg)' }}>5-7 days</span>.<br/>
           <span style={{ color: 'var(--fg-faint)' }}>While most studios are still on draft 1, your site is already live.</span>
         </p>
       </div>
@@ -992,7 +994,7 @@ function Investment() {
         { text: 'Basic SEO (meta · OG · sitemap)',  value: '$200' },
         { text: 'Analytics setup',                   value: '$150' },
         { text: '1 CTA / form integration',          value: '$100' },
-        { text: '5-7 day turnaround',                value: '$250' }
+        { text: '1-3 day turnaround',                value: '$250' }
       ],
       cta: 'Start a page',
       highlight: false
@@ -1006,7 +1008,7 @@ function Investment() {
         '2-3 pages, designed end-to-end',
         'Mobile-responsive design',
         'Platform handoff (Stripe / ClickFunnels / GHL etc)',
-        '1-4 week turnaround'
+        '5-7 day turnaround'
       ],
       addons: [
         'Extra pages',
@@ -1061,7 +1063,7 @@ function Investment() {
           margin: '0 0 clamp(40px, 4vw, 60px)', maxWidth: '20ch'
         }}>
           Honest pricing.<br/>
-          <span className="serif" style={{ color: 'var(--teal)' }}>No surprise invoices.</span>
+          <span className="serif" style={{ color: 'var(--teal)' }}>no surprise invoices.</span>
         </h2>
 
         <div className="tier-grid" style={{
@@ -1206,7 +1208,7 @@ function FAQ() {
   const items = [
     {
       q: 'How long does this actually take?',
-      a: 'Landing pages: 5-7 days. Funnels: 1-4 weeks. Most projects start within a week of our chat. AI handles the volume so I can focus on craft — your site is live while studios are still on draft 1.'
+      a: 'Landing pages: 1-3 days. Funnels: 5-7 days. Most projects start within a week of our chat. AI handles the volume so I can focus on craft — your site is live while studios are still on draft 1.'
     },
     {
       q: 'Can you write the copy, or do I need to provide it?',
@@ -1214,7 +1216,7 @@ function FAQ() {
     },
     {
       q: 'What if I don\'t like the design?',
-      a: 'You see a working live preview within 5 days — real animations, real interactions, on your phone too. We iterate together on the actual site, not on flat mockups. 2 revisions included. Nothing goes public until you approve.'
+      a: 'You see a working live preview within 1-3 days — real animations, real interactions, on your phone too. We iterate together on the actual site, not on flat mockups. 2 revisions included. Nothing goes public until you approve.'
     },
     {
       q: 'Will I own the design files?',
@@ -1367,7 +1369,7 @@ function About() {
           {/* body — flex column so photo can fill remaining space and bottom-align with left portrait */}
           <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
             <h2 className="display-lg" data-reveal style={{ margin: '0 0 32px', maxWidth: '20ch' }}>
-              I design pages that help people <span className="serif" style={{ color: 'var(--teal)' }}>Understand.</span>
+              I design pages that help people <span className="serif" style={{ color: 'var(--teal)' }}>understand.</span>
             </h2>
 
             <div data-reveal style={{ '--rd': '120ms' }}>
@@ -1387,7 +1389,7 @@ function About() {
                 letterSpacing: '-0.015em'
               }}>
                 Not just <span style={{ color: 'var(--fg-faint)' }}>visually.</span>{' '}
-                <span className="serif" style={{ color: 'var(--teal)' }}>Strategically.</span>{' '}
+                <span className="serif" style={{ color: 'var(--teal)' }}>strategically.</span>{' '}
                 Not the <span style={{ color: 'var(--fg-faint)' }}>cheapest.</span>{' '}
                 Not the <span style={{ color: 'var(--fg-faint)' }}>biggest.</span>
               </p>
@@ -1491,8 +1493,9 @@ function Contact() {
           fontSize: 'clamp(48px, 7.2vw, 120px)',
           lineHeight: 0.96, letterSpacing: '-0.045em'
         }}>
-          Ready to turn visitors <br/>
-          into <span className="serif" style={{ color: 'var(--teal)' }}>paying clients?</span>
+          Ready to turn <br/>
+          visitors into <br/>
+          <span className="serif" style={{ color: 'var(--teal)' }}>paying clients?</span>
         </h2>
 
         <p data-reveal style={{

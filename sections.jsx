@@ -863,7 +863,7 @@ function Process() {
     {
       n: '02',
       label: 'Design',
-      duration: '1 — 5 days',
+      duration: '3 — 7 days',
       body: 'I send mockups, you give feedback, we iterate. 2 rounds of revisions included. Nothing gets built until you approve.'
     },
     {
@@ -971,8 +971,9 @@ function Process() {
           lineHeight: 1.55, color: 'var(--fg-dim)',
           letterSpacing: '-0.005em'
         }}>
-          Total timeline · Landing Page <span style={{ color: 'var(--fg)' }}>1-3 days</span> · Funnel <span style={{ color: 'var(--fg)' }}>5-7 days</span>.<br/>
-          <span style={{ color: 'var(--fg-faint)' }}>While most studios are still on draft 1, your site is already live.</span>
+          Total timeline · Landing Page <span style={{ color: 'var(--fg)' }}>3-5 days</span> · Funnel <span style={{ color: 'var(--fg)' }}>7-10 days</span>.
+          <span style={{ color: 'var(--fg-faint)' }}> While most studios are still on draft 1,</span><br/>
+          <span className="serif" style={{ color: 'var(--teal)', letterSpacing: '0.03em', wordSpacing: '0.02em' }}>your site is already live.</span>
         </p>
       </div>
     </section>
@@ -994,7 +995,7 @@ function Investment() {
         { text: 'Basic SEO (meta · OG · sitemap)',  value: '$200' },
         { text: 'Analytics setup',                   value: '$150' },
         { text: '1 CTA / form integration',          value: '$100' },
-        { text: '1-3 day turnaround',                value: '$250' }
+        { text: '3-5 day turnaround',                value: '$250' }
       ],
       cta: 'Start a page',
       highlight: false
@@ -1008,7 +1009,7 @@ function Investment() {
         '2-3 pages, designed end-to-end',
         'Mobile-responsive design',
         'Platform handoff (Stripe / ClickFunnels / GHL etc)',
-        '5-7 day turnaround'
+        '7-10 day turnaround'
       ],
       addons: [
         'Extra pages',
@@ -1208,7 +1209,7 @@ function FAQ() {
   const items = [
     {
       q: 'How long does this actually take?',
-      a: 'Landing pages: 1-3 days. Funnels: 5-7 days. Most projects start within a week of our chat. AI handles the volume so I can focus on craft — your site is live while studios are still on draft 1.'
+      a: 'Landing pages: 3-5 days. Funnels: 7-10 days. Most projects start within a week of our chat. AI handles the volume so I can focus on craft — your site is live while studios are still on draft 1.'
     },
     {
       q: 'Can you write the copy, or do I need to provide it?',
@@ -1216,7 +1217,7 @@ function FAQ() {
     },
     {
       q: 'What if I don\'t like the design?',
-      a: 'You see a working live preview within 1-3 days — real animations, real interactions, on your phone too. We iterate together on the actual site, not on flat mockups. 2 revisions included. Nothing goes public until you approve.'
+      a: 'You see a working live preview within 3-5 days — real animations, real interactions, on your phone too. We iterate together on the actual site, not on flat mockups. 2 revisions included. Nothing goes public until you approve.'
     },
     {
       q: 'Will I own the design files?',

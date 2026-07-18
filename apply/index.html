@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Apply — Free Landing Page Program · Ayen</title>
+<meta name="description" content="A custom landing page in exchange for one honest testimonial. By application only." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+/* =====================================================================
+   /apply — hero cloned from ayenchong.com (video bg, corner frame,
+   1480 container, custom crosshair cursor). Form lives in a modal.
+   Edit CAMPAIGN + STATUS in <script>.
+   ===================================================================== */
+:root{
+  --bg:oklch(0.13 0.012 200);
+  --bg-2:oklch(0.10 0.012 200);
+  --surface:oklch(0.155 0.012 200);
+  --line:oklch(0.26 0.012 200);
+  --line-2:oklch(0.34 0.012 200);
+  --fg:oklch(0.96 0.005 200);
+  --fg-2:oklch(0.78 0.008 200);
+  --fg-3:oklch(0.58 0.010 200);
+  --accent:oklch(0.86 0.16 180);
+  --accent-ink:oklch(0.13 0.012 200);
+  --accent-dim:oklch(0.86 0.16 180 / .10);
+  --teal:rgb(94,234,212);            /* exact teal used on the main site */
+  --danger:oklch(0.72 0.16 25);
+  --sans:'Space Grotesk',ui-sans-serif,system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,monospace;
+  --serif:'Instrument Serif','Times New Roman',serif;
+  --maxw:1480px;                     /* main-site hero container */
+  --hx:clamp(22px,5vw,56px);         /* main-site hero side padding */
+  --nav-h:70px;
+}
+*{box-sizing:border-box;margin:0;padding:0;touch-action:manipulation}
+html{scroll-behavior:smooth}
+html,body{overflow-x:clip}
+body{
+  min-height:100vh;min-height:100dvh;background:var(--bg);color:var(--fg);
+  font-family:var(--sans);font-size:16px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+button,input,textarea{font:inherit;color:inherit}
+::selection{background:var(--accent);color:var(--accent-ink)}
+
+/* type primitives (exact to site) */
+.eyebrow{font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);display:inline-flex;align-items:center;gap:12px}
+.eyebrow::before{content:'';width:26px;height:1px;background:var(--accent);opacity:.8}
+.h1{font-family:var(--sans);font-weight:400;font-size:clamp(38px,5.6vw,72px);line-height:1.02;letter-spacing:-0.042em}
+.h2{font-family:var(--sans);font-weight:400;font-size:clamp(30px,4.6vw,44px);line-height:1.04;letter-spacing:-0.035em}
+.serif{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--accent);letter-spacing:-0.01em}
+.lead{font-size:clamp(16px,1.7vw,18px);line-height:1.6;color:var(--fg-2)}
+
+/* ===== custom cursor (fine pointers only; toggled by JS) ===== */
+.cursor-on,.cursor-on *{cursor:none !important}
+#cDot,#cRing{position:fixed;left:0;top:0;z-index:99999;pointer-events:none;will-change:transform;display:none}
+#cDot{width:6px;height:6px;border-radius:50%;background:var(--teal);
+  box-shadow:0 0 8px var(--teal),0 0 16px rgba(94,234,212,.6)}
+#cRing{width:32px;height:32px;z-index:99998;opacity:.55;
+  transition:width .26s cubic-bezier(.2,.7,.1,1),height .26s cubic-bezier(.2,.7,.1,1),opacity .22s}
+#cRing .ln-h{position:absolute;left:0;right:0;top:50%;height:1px;background:var(--teal);transform:translateY(-50%);opacity:.5}
+#cRing .ln-v{position:absolute;top:0;bottom:0;left:50%;width:1px;background:var(--teal);transform:translateX(-50%);opacity:.5}
+#cRing i{position:absolute;width:7px;height:7px}
+#cRing .tl{top:0;left:0;border-top:1px solid var(--teal);border-left:1px solid var(--teal)}
+#cRing .tr{top:0;right:0;border-top:1px solid var(--teal);border-right:1px solid var(--teal)}
+#cRing .bl{bottom:0;left:0;border-bottom:1px solid var(--teal);border-left:1px solid var(--teal)}
+#cRing .br{bottom:0;right:0;border-bottom:1px solid var(--teal);border-right:1px solid var(--teal)}
+#cRing.grow{width:52px;height:52px;opacity:.9}
+
+/* ===== top nav (over hero, like main site) ===== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--nav-h);display:flex;align-items:center;
+  justify-content:space-between;padding:0 var(--hx);border-bottom:1px solid oklch(0.86 0.16 180 / .10);
+  background:oklch(0.10 0.012 200 / .35);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.brand{font-family:var(--sans);font-size:17px;font-weight:500;letter-spacing:-0.01em;display:flex;align-items:center;gap:8px}
+.brand .sub{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-3);font-weight:400}
+.nav-links{display:flex;gap:30px}
+.nav-links a{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-2);
+  position:relative;padding:6px 0;transition:color .16s}
+.nav-links a:hover{color:var(--fg)}
+.nav-links a::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--accent);
+  transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-clock{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-2);
+  display:flex;align-items:center;gap:9px;white-space:nowrap}
+.nav-clock .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 9px var(--accent);
+  animation:pulse 2.6s ease-in-out infinite}
+.nav-clock.closed .dot{background:var(--fg-3);box-shadow:none;animation:none}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ===== hero (cloned) ===== */
+.hero{position:relative;overflow:hidden;min-height:100vh;min-height:100dvh;display:flex;align-items:center;
+  background:oklch(0.10 0.012 200);padding-top:var(--nav-h)}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
+.hero-ov1{position:absolute;inset:0;background:linear-gradient(rgba(8,12,14,.45) 0%,rgba(8,12,14,.25) 30%,rgba(8,12,14,.7) 70%,oklch(0.13 0.012 200) 100%)}
+.hero-ov2{position:absolute;inset:0;background:radial-gradient(80% 60% at 70% 30%,rgba(94,234,212,.08),transparent 60%)}
+.hero-corner{position:absolute;width:28px;height:28px;z-index:5}
+.hero-corner.tl{top:88px;left:var(--hx);border-top:1px solid var(--accent);border-left:1px solid var(--accent)}
+.hero-corner.tr{top:88px;right:var(--hx);border-top:1px solid var(--accent);border-right:1px solid var(--accent)}
+.hero-corner.bl{bottom:88px;left:var(--hx);border-bottom:1px solid var(--accent);border-left:1px solid var(--accent)}
+.hero-corner.br{bottom:88px;right:var(--hx);border-bottom:1px solid var(--accent);border-right:1px solid var(--accent)}
+.side-label{position:absolute;right:calc(var(--hx) + 40px);top:50%;transform:translateY(-50%);z-index:5;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--fg-3);
+  display:flex;align-items:center;gap:12px}
+.side-label::after{content:'';width:34px;height:1px;background:var(--line-2)}
+.hero-inner{position:relative;z-index:6;width:100%;max-width:var(--maxw);margin:0 auto;padding:0 var(--hx)}
+.hero-inner .h1{margin-top:28px;max-width:24ch}
+.hero-inner .lead{margin-top:28px;max-width:52ch}
+.hero-inner .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:38px}
+.hero-inner .meta{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--fg-3);
+  margin-top:30px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.hero-inner .meta .on{color:var(--accent)}
+.scroll-cue{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:6;display:flex;flex-direction:column;
+  align-items:center;gap:9px;font-family:var(--mono);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--fg-3)}
+.scroll-cue .bar{width:1px;height:34px;background:linear-gradient(var(--accent),transparent);animation:drop 1.8s ease-in-out infinite}
+@keyframes drop{0%{transform:scaleY(.3);transform-origin:top;opacity:.4}50%{transform:scaleY(1);opacity:1}100%{transform:scaleY(.3);transform-origin:bottom;opacity:.4}}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-weight:500;font-size:12px;
+  letter-spacing:.14em;text-transform:uppercase;padding:15px 26px;border-radius:999px;border:1px solid transparent;
+  cursor:pointer;transition:transform .14s ease,background .2s,color .2s,border-color .2s}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--accent);color:var(--accent-ink)}
+.btn-primary:hover{background:var(--fg)}
+.btn-ghost{background:transparent;color:var(--fg);border-color:var(--line-2)}
+.btn-ghost:hover{border-color:var(--fg)}
+
+/* ===== steps (below the fold) ===== */
+.steps-sec{padding:clamp(72px,11vw,120px) 0;border-top:1px solid var(--line)}
+.steps-wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--hx)}
+.steps-head .h2{margin-top:18px}
+.steps{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(22px,2.8vw,40px);margin-top:clamp(52px,6vw,72px)}
+.steps::before{content:'';position:absolute;top:6px;left:3px;right:3px;height:1px;
+  background:linear-gradient(90deg,var(--accent),var(--line-2) 85%);opacity:.55}
+.step{position:relative;padding-top:34px}
+.step::before{content:'';position:absolute;top:0;left:0;width:13px;height:13px;border-radius:50%;
+  background:var(--bg);border:1.5px solid var(--accent);box-shadow:0 0 12px var(--accent-dim)}
+.step:first-child::before{background:var(--accent);box-shadow:0 0 14px var(--accent)}
+.step .num{display:block;font-family:var(--sans);font-weight:400;font-size:clamp(40px,3.6vw,56px);
+  line-height:1;letter-spacing:-0.03em;color:var(--accent);opacity:.30}
+.step .n{display:none}
+.step h3{font-family:var(--sans);font-weight:400;font-size:20px;letter-spacing:-0.02em;margin-top:16px}
+.step h3 .hnum{display:none}
+.step p{color:var(--fg-2);font-size:14px;line-height:1.55;margin-top:9px}
+
+/* footer */
+.foot{border-top:1px solid var(--line);padding:34px 0;text-align:center}
+.foot p{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-3)}
+.foot a{color:var(--fg-2)}.foot a:hover{color:var(--accent)}
+
+/* ===== modal ===== */
+.modal{position:fixed;inset:0;z-index:80;display:none;align-items:flex-start;justify-content:center;
+  padding:clamp(16px,5vh,64px) 16px;overflow-y:auto;overscroll-behavior:contain}
+.modal.open{display:flex}
+.modal-backdrop{position:fixed;inset:0;background:oklch(0.07 0.012 200 / .74);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.modal-card{position:relative;z-index:1;width:100%;max-width:540px;background:var(--surface);border:1px solid var(--line-2);
+  border-radius:20px;padding:clamp(26px,4vw,40px);box-shadow:0 30px 80px oklch(0.05 0.012 200 / .6);
+  animation:rise .28s cubic-bezier(.2,.7,.2,1)}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.modal-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;border:1px solid var(--line-2);
+  background:var(--bg-2);color:var(--fg-2);font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;transition:all .16s}
+.modal-close:hover{color:var(--fg);border-color:var(--fg-3)}
+.modal-head{text-align:center;margin-bottom:26px;padding:0 8px}
+.modal-head .eyebrow{justify-content:center}.modal-head .eyebrow::before{display:none}
+.modal-head .h2{margin-top:14px}
+.modal-head p{color:var(--fg-2);margin-top:12px;font-size:14.5px}
+.fgroup{margin-bottom:22px}
+.flabel{display:block;font-family:var(--sans);font-size:14px;font-weight:500;letter-spacing:0;text-transform:none;color:var(--fg);margin-bottom:10px}
+.flabel .req{color:var(--accent)}
+.fhint{display:block;font-family:var(--sans);font-size:13px;color:var(--fg-3);margin:-5px 0 11px;text-transform:none;letter-spacing:0;line-height:1.5}
+.finput,.ftext{width:100%;background:var(--bg-2);border:1px solid var(--line-2);border-radius:11px;padding:14px 15px;font-size:16px;color:var(--fg);transition:border-color .18s,box-shadow .18s}
+.finput::placeholder,.ftext::placeholder{color:var(--fg-3)}
+.finput:focus,.ftext:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim)}
+.ftext{min-height:88px;resize:vertical;line-height:1.55}
+.choices{display:flex;flex-wrap:wrap;gap:8px}
+.choice input{position:absolute;opacity:0;width:0;height:0}
+.choice span{display:inline-flex;align-items:center;gap:8px;padding:10px 15px;border:1px solid var(--line-2);border-radius:999px;font-size:13.5px;color:var(--fg-2);cursor:pointer;transition:all .16s;user-select:none}
+.choice span::before{content:'';width:8px;height:8px;border-radius:50%;border:1px solid var(--fg-3);flex:none}
+.choice input:checked + span{border-color:var(--accent);color:var(--fg);background:var(--accent-dim)}
+.choice input:checked + span::before{background:var(--accent);border-color:var(--accent);box-shadow:0 0 7px var(--accent)}
+.choice input:focus-visible + span{box-shadow:0 0 0 3px var(--accent-dim)}
+.otherbox{margin-top:12px;display:none}.otherbox.show{display:block}
+.err{color:var(--danger);font-size:12.5px;margin-top:8px;display:none}.err.show{display:block}
+.submit-row{margin-top:30px}.submit-row .btn{width:100%;justify-content:center;padding:16px 26px}
+.form-foot{font-family:var(--sans);font-size:12.5px;letter-spacing:0;text-transform:none;color:var(--fg-2);text-align:center;margin-top:18px}
+.state{display:none;text-align:center;padding:12px 0 6px}.state.show{display:block}
+.state .big{width:56px;height:56px;border-radius:50%;background:var(--accent-dim);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 22px}
+.state p{color:var(--fg-2);margin-top:14px;font-size:15px}
+
+@media (max-width:900px){ .nav-links{display:none} }
+@media (max-width:760px){ .side-label{display:none} .steps{grid-template-columns:repeat(2,1fr);gap:34px 22px} .steps::before{display:none} }
+@media (max-width:560px){
+  .steps{grid-template-columns:1fr;gap:30px}
+  .step{padding-top:0;padding-left:28px}
+  .step::before{top:5px;left:0;width:11px;height:11px}
+  /* connecting spine down the nodes */
+  .step:not(:last-child)::after{content:'';position:absolute;left:5px;top:20px;bottom:-30px;width:1px;
+    background:var(--line-2);opacity:.7}
+  .step .num,.step .n{display:none}                       /* drop big number + STEP label */
+  .step h3{margin-top:0;font-size:18px}
+  .step h3 .hnum{display:inline;color:var(--accent);opacity:.85;margin-right:9px}   /* "01 Apply" */
+  .step p{margin-top:6px}
+}
+@media (max-width:540px){
+  .hero-inner .cta-row{flex-direction:column;align-items:stretch}.hero-inner .cta-row .btn{justify-content:center}
+  .nav-clock .full{display:none}
+  .hero-corner{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- custom cursor -->
+<div id="cDot"></div>
+<div id="cRing"><div class="ln-h"></div><div class="ln-v"></div><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i></div>
+
+<!-- nav (over hero) -->
+<header class="nav">
+  <div class="brand">Ayen <span class="sub">/ Landing Pages</span></div>
+  <div class="nav-clock" id="navClock"><span class="dot"></span><span id="clockText">2 SPOTS AVAILABLE</span></div>
+</header>
+
+<!-- ===== HERO (cloned) ===== -->
+<section class="hero">
+  <video class="hero-bg" id="heroVideo" autoplay muted loop playsinline
+         poster="https://ayenchong.com/assets/hero-poster.jpg">
+    <source src="https://ayenchong.com/assets/hero.mp4" type="video/mp4" />
+  </video>
+  <div class="hero-ov1"></div>
+  <div class="hero-ov2"></div>
+  <span class="hero-corner tl"></span><span class="hero-corner tr"></span>
+  <span class="hero-corner bl"></span><span class="hero-corner br"></span>
+  <span class="side-label" id="sideLabel">01 · Apply</span>
+
+  <div class="hero-inner">
+    <span class="eyebrow" id="heroEyebrow"></span>
+    <h1 class="h1" id="heroTitle"></h1>
+    <p class="lead" id="heroLead"></p>
+    <div class="cta-row">
+      <button class="btn btn-primary" id="openBtn" type="button">Apply →</button>
+      <a href="https://ayenchong.com" target="_blank" rel="noopener" class="btn btn-ghost">See my work ↗</a>
+    </div>
+    <p class="meta" id="heroMeta"></p>
+  </div>
+
+  <div class="scroll-cue"><span>Scroll</span><span class="bar"></span></div>
+</section>
+
+<!-- ===== steps ===== -->
+<section class="steps-sec">
+  <div class="steps-wrap">
+    <div class="steps-head">
+      <span class="eyebrow">02 · How it works</span>
+      <h2 class="h2">Four steps. <span class="serif">No catch.</span></h2>
+    </div>
+    <div class="steps" id="stepGrid"></div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="steps-wrap"><p>Ayen · Landing Pages · <a href="https://ayenchong.com" target="_blank" rel="noopener">ayenchong.com</a></p></div>
+</footer>
+
+<!-- ===== modal ===== -->
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" type="button" data-close aria-label="Close">×</button>
+    <div class="modal-head">
+      <span class="eyebrow">Apply</span>
+      <h2 class="h2" id="modalTitle">Tell me about<br><span class="serif">your business.</span></h2>
+      <p id="modalSub">Takes about two minutes.<br>I read every one myself.</p>
+    </div>
+
+    <form id="applyForm" novalidate>
+      <div class="fgroup">
+        <label class="flabel" for="f_name">Your name <span class="req">*</span></label>
+        <input class="finput" id="f_name" name="name" type="text" placeholder="First name is fine" autocomplete="name" />
+        <span class="err">Please add your name.</span>
+      </div>
+      <div class="fgroup">
+        <label class="flabel" for="f_email">Your email <span class="req">*</span></label>
+        <input class="finput" id="f_email" name="email" type="email" placeholder="you@email.com" autocomplete="email" inputmode="email" />
+        <span class="err">Please add a valid email.</span>
+      </div>
+      <div class="fgroup">
+        <label class="flabel" for="f_social">Instagram or website <span class="req">*</span></label>
+        <span class="fhint">One link where I can see you or your brand.</span>
+        <input class="finput" id="f_social" name="social" type="text" placeholder="@yourhandle · facebook.com/... · or yoursite.com" />
+        <span class="err">Please share a link or handle.</span>
+      </div>
+      <div class="fgroup">
+        <label class="flabel" for="f_selling">What do you do, and what are you selling? <span class="req">*</span></label>
+        <textarea class="ftext" id="f_selling" name="selling" placeholder="e.g. I'm a business coach selling a $1.5k 8-week program for female founders."></textarea>
+        <span class="err">A sentence or two is perfect.</span>
+      </div>
+      <div class="fgroup">
+        <label class="flabel">Biggest challenge right now? <span class="req">*</span></label>
+        <div class="choices" data-choice="challenge">
+          <label class="choice"><input type="radio" name="challenge" value="Getting leads"><span>Getting leads</span></label>
+          <label class="choice"><input type="radio" name="challenge" value="Getting bookings"><span>Getting bookings</span></label>
+          <label class="choice"><input type="radio" name="challenge" value="Explaining my offer"><span>Explaining my offer</span></label>
+          <label class="choice"><input type="radio" name="challenge" value="Low conversion"><span>Low conversion</span></label>
+          <label class="choice"><input type="radio" name="challenge" value="Building my first funnel"><span>First funnel</span></label>
+          <label class="choice"><input type="radio" name="challenge" value="Other" id="challengeOther"><span>Other</span></label>
+        </div>
+        <div class="otherbox" id="challengeOtherBox">
+          <input class="finput" type="text" name="challenge_other" placeholder="Tell me in a few words" />
+        </div>
+        <span class="err">Pick the closest one.</span>
+      </div>
+      <div class="fgroup">
+        <label class="flabel">If you love it — honest testimonial + let me feature it as a case study? <span class="req">*</span></label>
+        <div class="choices" data-choice="deal">
+          <label class="choice"><input type="radio" name="deal" value="Yes, happy to"><span>Yes, happy to</span></label>
+          <label class="choice"><input type="radio" name="deal" value="Let's talk about it"><span>Let's talk about it</span></label>
+        </div>
+        <span class="err">Pick one.</span>
+      </div>
+      <div class="submit-row">
+        <button type="submit" class="btn btn-primary" id="submitBtn">Submit application →</button>
+      </div>
+      <p class="form-foot">~2 minutes · Reviewed personally</p>
+    </form>
+
+    <form id="waitForm" style="display:none">
+      <div class="fgroup">
+        <label class="flabel" for="w_name">Your name <span class="req">*</span></label>
+        <input class="finput" id="w_name" name="name" type="text" placeholder="First name is fine" />
+        <span class="err">Please add your name.</span>
+      </div>
+      <div class="fgroup">
+        <label class="flabel" for="w_email">Your email <span class="req">*</span></label>
+        <input class="finput" id="w_email" name="email" type="email" placeholder="you@email.com" inputmode="email" />
+        <span class="err">Please add a valid email.</span>
+      </div>
+      <div class="submit-row">
+        <button type="submit" class="btn btn-primary" id="waitBtn">Join the waiting list →</button>
+      </div>
+      <p class="form-foot">I'll message you when the next round opens</p>
+    </form>
+
+    <div class="state" id="successState">
+      <div class="big">✓</div>
+      <h2 class="h2">Got it — <span class="serif">thank you.</span></h2>
+      <p id="successMsg">I read every application myself. If it's a fit, I'll reach out through the details you gave.</p>
+    </div>
+    <div class="state" id="failState">
+      <div class="big" style="background:oklch(0.72 0.16 25 / .12);color:var(--danger)">!</div>
+      <h2 class="h2">That didn't send.</h2>
+      <p>Something went wrong on my end. Please DM me on the post and I'll send a direct link.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   CONFIG — edit only this block per campaign.
+   ===================================================================== */
+const CAMPAIGN = {
+  eyebrow: "Ayen — Free Landing Page Program / 2026",
+  title:   'A custom landing<br>page, <span class="serif">built for you.</span>',
+  lead:    "I'm building landing pages for 3 coaches and consultants — the same system I run for paying clients. All I ask back is one honest testimonial, only if you love it.",
+  spotsTotal: 3,
+  location: "Singapore",
+  sideLabel: "01 · Apply",
+  steps: [
+    { n:"Step 01", h:"Apply",       p:"Fill the short form.<br>About two minutes." },
+    { n:"Step 02", h:"Selected",    p:"I pick the best fits.<br>Reach out directly." },
+    { n:"Step 03", h:"We build",    p:"Share your offer.<br>I design and build the page." },
+    { n:"Step 04", h:"Testimonial", p:"Love it? Leave an honest testimonial.<br>That's the deal." },
+  ],
+};
+const STATUS = "open";   // "open" | "closed"
+// Paste your Google Apps Script Web App URL (see apps-script-endpoint.gs).
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbwxY68MTJm3gNBrr1qiMmAkSleDolmv0anaUN0406v7IgQVP2j4axhyNjEhv7EX6lCZ/exec";
+/* ===================================================================== */
+
+const $ = id => document.getElementById(id);
+(function render(){
+  const open = STATUS === "open", n = CAMPAIGN.spotsTotal;
+  $('heroEyebrow').textContent = CAMPAIGN.eyebrow;
+  $('heroTitle').innerHTML = CAMPAIGN.title;
+  $('heroLead').textContent = CAMPAIGN.lead;
+  $('sideLabel').textContent = CAMPAIGN.sideLabel;
+  $('navClock').classList.toggle('closed', !open);
+  $('heroMeta').innerHTML = open
+    ? `<span class="on">● ${n} spots open</span>`
+    : `<span>Applications closed</span>`;
+  $('openBtn').textContent = open ? "Apply →" : "Join waiting list →";
+  $('stepGrid').innerHTML = CAMPAIGN.steps.map((s,i) =>
+    `<div class="step"><span class="num">0${i+1}</span><span class="n">${s.n}</span><h3><span class="hnum">0${i+1}</span>${s.h}</h3><p>${s.p}</p></div>`).join('');
+  if(!open){
+    $('applyForm').style.display='none'; $('waitForm').style.display='block';
+    $('modalTitle').innerHTML='This round is <span class="serif">full.</span>';
+    $('modalSub').textContent="Join the list — first to know when spots reopen.";
+  }
+  // live clock — "N SPOTS AVAILABLE · 2026 HH:MM GMT+8"
+  const spotTxt = open ? `${n} SPOTS AVAILABLE` : "APPLICATIONS CLOSED";
+  function tick(){
+    const now=new Date();
+    const utc=now.getTime()+now.getTimezoneOffset()*60000;
+    const g8=new Date(utc+8*3600000);
+    const hh=String(g8.getHours()).padStart(2,'0'), mm=String(g8.getMinutes()).padStart(2,'0');
+    $('clockText').innerHTML=`${spotTxt} <span class="full">· 2026 ${hh}:${mm} GMT+8</span>`;
+  }
+  tick(); setInterval(tick,15000);
+})();
+
+/* ===== custom crosshair cursor (fine pointers only) ===== */
+(function cursor(){
+  if(!matchMedia('(pointer:fine)').matches) return;
+  const dot=$('cDot'), ring=$('cRing');
+  dot.style.display=ring.style.display='block';
+  document.documentElement.classList.add('cursor-on');
+  let mx=innerWidth/2,my=innerHeight/2, rx=mx,ry=my;
+  addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;
+    dot.style.transform=`translate(${mx-3}px,${my-3}px)`;},{passive:true});
+  (function loop(){ rx+=(mx-rx)*.2; ry+=(my-ry)*.2;
+    ring.style.transform=`translate(${rx-16}px,${ry-16}px)`; requestAnimationFrame(loop); })();
+  const hoverSel='a,button,.choice span,input,textarea,label,[data-close]';
+  document.addEventListener('mouseover',e=>{ if(e.target.closest(hoverSel)) ring.classList.add('grow'); });
+  document.addEventListener('mouseout',e=>{ if(e.target.closest(hoverSel)) ring.classList.remove('grow'); });
+})();
+
+/* ===== modal ===== */
+const modal=$('modal'); let lastFocus=null;
+function openModal(){ lastFocus=document.activeElement; modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
+  document.documentElement.style.overflow='hidden';
+  const f=modal.querySelector('input,textarea,button'); if(f)setTimeout(()=>f.focus(),50); }
+function closeModal(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true');
+  document.documentElement.style.overflow=''; if(lastFocus)lastFocus.focus(); }
+$('openBtn').addEventListener('click',openModal);
+modal.addEventListener('click',e=>{ if(e.target.hasAttribute('data-close'))closeModal(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&modal.classList.contains('open'))closeModal(); });
+
+/* ===== validation + submit ===== */
+function showErr(el,show){const g=el.closest('.fgroup');if(!g)return;const e=g.querySelector('.err');if(e)e.classList.toggle('show',show);}
+function isEmail(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);}
+/* reveal "Other" text box on the challenge question */
+const challengeOther=$('challengeOther'), challengeOtherBox=$('challengeOtherBox');
+if(challengeOther){
+  document.querySelectorAll('input[name="challenge"]').forEach(r=>r.addEventListener('change',()=>{
+    challengeOtherBox.classList.toggle('show',challengeOther.checked);
+    if(!challengeOther.checked){const b=challengeOtherBox.querySelector('input');b.value='';b.style.borderColor='';}
+  }));
+}
+function validate(form){
+  let ok=true,first=null;
+  form.querySelectorAll('input.finput,textarea.ftext').forEach(el=>{
+    if(el.name==='challenge_other') return;                 // handled separately
+    const bad=!el.value.trim()||(el.type==='email'&&el.value.trim()&&!isEmail(el.value.trim()));
+    showErr(el,bad); if(bad){ok=false;first=first||el;} });
+  form.querySelectorAll('.choices').forEach(g=>{
+    const checked=form.querySelector(`input[name="${g.getAttribute('data-choice')}"]:checked`);
+    showErr(g,!checked); if(!checked){ok=false;first=first||g;} });
+  // "Other" requires a note
+  if(challengeOther&&challengeOther.checked){
+    const b=challengeOtherBox.querySelector('input');
+    const bad=!b.value.trim(); b.style.borderColor=bad?'var(--danger)':'';
+    if(bad){ok=false;first=first||b;}
+  }
+  if(first)first.scrollIntoView({behavior:'smooth',block:'center'});
+  return ok;
+}
+document.addEventListener('input',e=>{if(e.target.classList&&(e.target.classList.contains('finput')||e.target.classList.contains('ftext')))showErr(e.target,false);});
+document.addEventListener('change',e=>{if(e.target.type==='radio'){const g=e.target.closest('.choices');if(g)showErr(g,false);}});
+function collect(form){
+  const d={_submittedAt:new Date().toISOString(),_campaign:CAMPAIGN.eyebrow,_type:form.id};
+  new FormData(form).forEach((v,k)=>d[k]=v);
+  if(d.challenge==='Other'&&d.challenge_other) d.challenge='Other: '+d.challenge_other;
+  delete d.challenge_other;
+  return d;
+}
+async function send(data){
+  if(!ENDPOINT||ENDPOINT.startsWith('PASTE_')){console.warn('ENDPOINT not set — payload:',data);return true;}
+  try{await fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(data)});return true;}
+  catch(err){console.error(err);return false;}
+}
+function wire(formId,btnId){
+  const form=$(formId); if(!form)return;
+  form.addEventListener('submit',async e=>{
+    e.preventDefault(); if(!validate(form))return;
+    const btn=$(btnId),label=btn.textContent; btn.disabled=true;btn.textContent='Sending…';
+    const ok=await send(collect(form)); btn.disabled=false;btn.textContent=label;
+    $('applyForm').style.display='none'; $('waitForm').style.display='none'; document.querySelector('.modal-head').style.display='none';
+    if(ok){ if(formId==='waitForm')$('successMsg').textContent="You're on the list. I'll message you the moment the next round opens.";
+      $('successState').classList.add('show'); }
+    else{ $('failState').classList.add('show'); }
+    modal.scrollTop=0;
+  });
+}
+wire('applyForm','submitBtn'); wire('waitForm','waitBtn');
+</script>
+</body>
+</html>

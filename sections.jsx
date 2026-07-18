@@ -21,7 +21,8 @@ function Hero({ videoOn }) {
           style={{
             position: 'absolute', inset: 0, width: '100%', height: '100%',
             objectFit: 'cover', opacity: .55,
-            filter: 'saturate(1.1) contrast(1.05) hue-rotate(-6deg)'
+            filter: 'saturate(1.1) contrast(1.05) hue-rotate(-6deg)',
+            pointerEvents: 'none'
           }}>
           <source src="assets/hero.mp4" type="video/mp4" />
         </video>
@@ -288,7 +289,8 @@ function Leak() {
           position: 'absolute', inset: 0,
           width: '100%', height: '100%',
           objectFit: 'cover',
-          objectPosition: 'center'
+          objectPosition: 'center',
+          pointerEvents: 'none'
         }}>
       </video>
 
